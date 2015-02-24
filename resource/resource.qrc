@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/ic_backrewind_48px.png</file>
+        <file>icons/ic_close_48px.png</file>
+        <file>icons/ic_fastforward_48px.png</file>
+        <file>icons/ic_openfolder_48px.png</file>
+        <file>icons/ic_pause_48px.png</file>
+        <file>icons/ic_play_48px.png</file>
+        <file>icons/ic_preference_48px.png</file>
+        <file>icons/ic_resize_48px.png</file>
+        <file>icon.ico</file>
+        <file>icon.png</file>
+    </qresource>
+</RCC>
