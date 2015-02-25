@@ -211,6 +211,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->setAttribute(Qt::WA_Hover, true);
 
+    ui->bottomWidgets->setAttribute(Qt::WA_NoMousePropagation); // fix window disappear problem
+
     this->loadPref();
     setAcceptDrops(true);
 }
