@@ -23,7 +23,8 @@ HEADERS  += src/configdialog.h \
     src/mainwindow.h \
     src/pages.h \
     src/prefpage.h \
-    src/srtengine.h
+    src/srtengine.h \
+    src/prefconstants.h
 
 FORMS    += \
     resource/ui/mainwindow.ui

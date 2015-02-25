@@ -22,6 +22,7 @@
 #include "QDragEnterEvent"
 #include "QDropEvent"
 #include "QMimeData"
+#include "prefconstants.h"
 
 long long MainWindow::getAdjustInterval(){
     qDebug() << settings.value("gen/adjust").toInt();
@@ -150,11 +151,12 @@ void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason)
 void MainWindow::loadPref(){
     qDebug() << settings.value("general/dir").toString();
 
-    QColor color = QColor::fromRgba(settings.value("appearance/bgcolor").toUInt());
+    QColor bgColor = QColor::fromRgb(settings.value("appearance/bgColor", QVariant::fromValue(PrefConstants::BG_COLOR)).toUInt());
+    int bgAlpha = settings.value("appearance/bgAlpha", QVariant::fromValue(PrefConstants::BG_ALPHA)).toInt();
 
-    QString bgColor = QString("background-color:rgba(%1,%2,%3,%4)").arg(QString::number(color.red()),QString::number(color.green()),QString::number(color.blue()),QString::number(color.alpha()));
-    qDebug() << bgColor;
-    this->setStyleSheet(bgColor);
+    QString bgColorStr = QString("background-color:rgba(%1,%2,%3,%4)").arg(QString::number(bgColor.red()),QString::number(bgColor.green()),QString::number(bgColor.blue()),QString::number(bgAlpha));
+    qDebug() << bgColorStr;
+    this->setStyleSheet(bgColorStr);
 
     QFont f;
     f.fromString(settings.value("appearance/font").toString());

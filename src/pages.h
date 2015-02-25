@@ -52,6 +52,7 @@ public slots:
 private:
     QLabel *fontLabel;
     QColor bgColor;
+    QSlider *bgAlphaSlider;
 };
 
 #endif

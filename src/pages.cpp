@@ -20,6 +20,7 @@
 #include <QPlainTextEdit>
 #include "prefpage.h"
 #include "QLineEdit"
+#include "prefconstants.h"
 
 
 void GeneralPage::load(){
@@ -85,24 +86,26 @@ GeneralPage::GeneralPage(QWidget *parent)
 }
 
 void AppearancePage::openColorDialog(){
-    QColor color = QColorDialog::getColor (bgColor, 0, tr("Select Color"), QColorDialog::ShowAlphaChannel);
+    QColor color = QColorDialog::getColor (bgColor, 0, tr("Select Color"));
     if (color.isValid()){
         //QSettings settings;
         bgColor = color;
-        qDebug() << color.rgba();
+        qDebug() << color.rgb();
     }
 
 }
 
 void AppearancePage::load(){
-    bgColor = QColor::fromRgba(settings.value("appearance/bgcolor").toUInt());
+    bgColor = QColor::fromRgb(settings.value("appearance/bgColor", QVariant::fromValue(PrefConstants::BG_COLOR)).toUInt());
+    bgAlphaSlider->setValue(settings.value("appearance/bgAlpha", QVariant::fromValue(PrefConstants::BG_ALPHA)).toInt());
     fontLabel->setText(settings.value("appearance/font").toString());
 }
 
 
 void AppearancePage::save(){
     settings.setValue("appearance/font", fontLabel->text());
-    settings.setValue("appearance/bgcolor", bgColor.rgba());
+    settings.setValue("appearance/bgColor", bgColor.rgb());
+    settings.setValue("appearance/bgAlpha", bgAlphaSlider->value());
 }
 
 void AppearancePage::openFontDialog(){
@@ -123,6 +126,9 @@ AppearancePage::AppearancePage(QWidget *parent)
     : PrefPage(parent)
 {
     QGroupBox *windowAppearanceGroup = new QGroupBox(tr("Window"));
+    QLabel *bgAlphaLabel = new QLabel(tr("Tranparency: "));
+    bgAlphaSlider = new QSlider(Qt::Horizontal);
+    bgAlphaSlider->setRange(PrefConstants::BG_ALPHA_MIN, 255);
     QPushButton *colorButton = new QPushButton(tr("Color"));
     connect(colorButton, SIGNAL(clicked()), this, SLOT(openColorDialog()));
 
@@ -133,9 +139,13 @@ AppearancePage::AppearancePage(QWidget *parent)
     QPushButton *chooseFontButton = new QPushButton(tr("choose Font"));
     connect(chooseFontButton, SIGNAL(clicked()), this, SLOT(openFontDialog()));
 
+    QHBoxLayout *bgAlphaLayout = new QHBoxLayout;
+    bgAlphaLayout->addWidget(bgAlphaLabel);
+    bgAlphaLayout->addWidget(bgAlphaSlider);
 
     QVBoxLayout *windowAppearanceLayout = new QVBoxLayout;
     windowAppearanceLayout->addWidget(colorButton);
+    windowAppearanceLayout->addLayout(bgAlphaLayout);
     windowAppearanceGroup->setLayout(windowAppearanceLayout);
 
     QVBoxLayout *fontLayout = new QVBoxLayout;
