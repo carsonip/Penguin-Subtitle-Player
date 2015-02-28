@@ -20,50 +20,51 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public slots:
+    void update();
+    void sliderMoved(int val);
+    void togglePlay();
+    void fastForward();
+    void fastBackward();
+    void iconActivated(QSystemTrayIcon::ActivationReason reason);
+    void openSettingsWindow();
+    void openFileDialog();
+
 private:
     Ui::MainWindow *ui;
 
 private:
-    void adjustTime(long long interval);
-    long long getAdjustInterval();
     void dragEnterEvent(QDragEnterEvent *e);
     void dragMoveEvent();
     void dropEvent(QDropEvent *e);
     void mousePressEvent(QMouseEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
-    void enterEvent(QEvent * event);
-    void leaveEvent(QEvent * event);
     void mouseReleaseEvent(QMouseEvent *event);
-    int m_nMouseClick_X_Coordinate;
-    int m_nMouseClick_Y_Coordinate;
+    void mouseMoveEvent(QMouseEvent *event);
+    void enterEvent(QEvent *event);
+    void leaveEvent(QEvent *event);
     void resizeEvent(QResizeEvent *event);
 
-public slots:
-    void fastForward();
-    void fastBackward();
-    void update();
-    void openFileDialog();
-    void sliderMoved(int);
-    void togglePlay();
-    void iconActivated(QSystemTrayIcon::ActivationReason reason);
-    void openSettingsWindow();
+    void loadPref();
+    void setup();
+    void setPlay(bool play);
+    QString getSubtitle(bool sliderMoved);
+    QString getEncoding();
+    void adjustTime(long long interval);
+    long long getAdjustInterval();
 
 
 private:
+    int m_nMouseClick_X_Coordinate;
+    int m_nMouseClick_Y_Coordinate;
     long long int currentTime = 0LL;
     const long long int INTERVAL = 200LL;
+    const long long int SLIDER_RATIO = 1000LL;
     SrtEngine *engine = 0;
     QTimer *timer = 0;
-    const long long int SLIDER_RATIO = 1000LL;
-    void setup();
-    void setPlay(bool);
     bool isPlaying = false;
-    QString getEncoding();
     QSystemTrayIcon *trayIcon;
     QMenu *menu;
     QSettings settings;
-    void loadPref();
-    QString getSubtitle(bool sliderMoved);
 };
 
 #endif // MAINWINDOW_H
