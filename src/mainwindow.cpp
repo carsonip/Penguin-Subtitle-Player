@@ -324,7 +324,12 @@ QString MainWindow::getEncoding()
     codecNames.sort();
     codecNames.removeDuplicates();
 
-    QString encoding = QInputDialog::getItem(0,  tr("Select Encoding"),tr("Select Encoding"), codecNames, 0, false, &ok);
+    QString defaultEncoding = PrefConstants::ENCODING;
+    int defaultEncodingIndex = codecNames.indexOf(defaultEncoding);
+    if (defaultEncodingIndex == -1)
+        defaultEncodingIndex = 0;
+
+    QString encoding = QInputDialog::getItem(0,  tr("Select Encoding"),tr("Select Encoding"), codecNames, defaultEncodingIndex, false, &ok);
     if (ok)
         return encoding;
 
