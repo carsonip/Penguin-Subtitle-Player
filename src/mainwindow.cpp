@@ -320,7 +320,10 @@ QString MainWindow::getEncoding()
     for (QList<QByteArray>::const_iterator it = codecs.constBegin(); it != codecs.constEnd(); it++) {
         codecNames.push_back(it->constData());
     }
-    //codecNames.sort();
+
+    codecNames.sort();
+    codecNames.removeDuplicates();
+
     QString encoding = QInputDialog::getItem(0,  tr("Select Encoding"),tr("Select Encoding"), codecNames, 0, false, &ok);
     if (ok)
         return encoding;
