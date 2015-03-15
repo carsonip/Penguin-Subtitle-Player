@@ -87,7 +87,7 @@
         </property>
         <property name="text">
          <string>Penguin Subtitle Player
-open source, cross platform</string>
+open-source, cross-platform</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
