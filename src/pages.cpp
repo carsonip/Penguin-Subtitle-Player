@@ -19,22 +19,22 @@
 #include <QFontDialog>
 #include <QPlainTextEdit>
 #include <QPainter>
+#include <QSpinBox>
 #include "prefpage.h"
 #include "QLineEdit"
 #include "prefconstants.h"
 
 
 void GeneralPage::load(){
-   // qDebug() << settings.value("gen/dir").toString();
     dirEdit->setPlainText(settings.value("gen/dir").toString());
-    adjustIntervalEdit->setText(settings.value("gen/adjust").toString());
+    adjustIntervalSpinBox->setValue(settings.value("gen/adjust", QVariant::fromValue(PrefConstants::ADJUST_INTERVAL)).toInt());
 }
 
 
 void GeneralPage::save(){
     //qDebug() << "configsave";
     settings.setValue("gen/dir",dirEdit->toPlainText());
-    settings.setValue("gen/adjust",adjustIntervalEdit->text());
+    settings.setValue("gen/adjust", adjustIntervalSpinBox->value());
 }
 
 void GeneralPage::openDirDialog(){
@@ -55,9 +55,9 @@ GeneralPage::GeneralPage(QWidget *parent)
     connect(dirBrowseButton, SIGNAL(clicked()), this, SLOT(openDirDialog()));
 
     QLabel *adjustIntervalLabel = new QLabel(tr("Time Adjustment Interval (ms): "));
-    adjustIntervalEdit = new QLineEdit();
-    adjustIntervalEdit->setMaxLength(9);
-    adjustIntervalEdit->setValidator( new QIntValidator(0, MAX_ADJUST_INTERVAL, this) );
+    adjustIntervalSpinBox = new QSpinBox();
+    adjustIntervalSpinBox->setSingleStep(PrefConstants::ADJUST_INTERVAL_STEP);
+    adjustIntervalSpinBox->setMaximum(PrefConstants::ADJUST_INTERVAL_MAX);
 
     QHBoxLayout *defaultDirLayout = new QHBoxLayout;
     defaultDirLayout->addWidget(defaultDirLabel);
@@ -66,7 +66,8 @@ GeneralPage::GeneralPage(QWidget *parent)
 
     QHBoxLayout *adjustIntervalLayout = new QHBoxLayout;
     adjustIntervalLayout->addWidget(adjustIntervalLabel);
-    adjustIntervalLayout->addWidget(adjustIntervalEdit);
+    adjustIntervalLayout->addWidget(adjustIntervalSpinBox);
+    adjustIntervalLayout->addStretch(1);
 
     QVBoxLayout *configLayout = new QVBoxLayout;
     configLayout->addLayout(defaultDirLayout);

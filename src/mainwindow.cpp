@@ -35,7 +35,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     Qt::WindowFlags flags = this->windowFlags();
-    //
 
     this->setWindowFlags(flags | Qt::X11BypassWindowManagerHint | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint); //
     this->setAttribute(Qt::WA_TranslucentBackground, true);
@@ -198,7 +197,7 @@ void MainWindow::openFileDialog()
 
 void MainWindow::dragEnterEvent(QDragEnterEvent *e)
 {
-    qDebug() << "dragEnterEvent";
+    //qDebug() << "dragEnterEvent";
     if (e->mimeData()->hasUrls() && e->mimeData()->urls().size()==1)
         e->acceptProposedAction();
 
@@ -206,21 +205,23 @@ void MainWindow::dragEnterEvent(QDragEnterEvent *e)
 
 void MainWindow::dragMoveEvent()
 {
-    qDebug() << "dragEvent";
+    //qDebug() << "dragEvent";
 }
 
 void MainWindow::dropEvent(QDropEvent *e)
 {
     this->hide();
-    qDebug() << "dropEvent";
+    //qDebug() << "dropEvent";
     QString path = e->mimeData()->urls()[0].toLocalFile();
-    qDebug() << "Dropped file:" << path;
+    //qDebug() << "Dropped file:" << path;
     if (!path.isNull() && path.right(4) == ".srt") {
         QString encoding = getEncoding();
 
         delete engine;
         engine = new SrtEngine(path, encoding);
-        qDebug() << "Correct File Type";
+        //
+
+        //qDebug() << "Correct File Type";
         setup();
     }
     this->show();
@@ -267,13 +268,13 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 
 void MainWindow::loadPref()
 {
-    qDebug() << settings.value("general/dir").toString();
+    //qDebug() << settings.value("general/dir").toString();
 
     QColor bgColor = QColor::fromRgb(settings.value("appearance/bgColor", QVariant::fromValue(PrefConstants::BG_COLOR)).toUInt());
     int bgAlpha = settings.value("appearance/bgAlpha", QVariant::fromValue(PrefConstants::BG_ALPHA)).toInt();
 
     QString bgColorStr = QString("background-color:rgba(%1,%2,%3,%4)").arg(QString::number(bgColor.red()),QString::number(bgColor.green()),QString::number(bgColor.blue()),QString::number(bgAlpha));
-    qDebug() << bgColorStr;
+    //qDebug() << bgColorStr;
     this->setStyleSheet(bgColorStr);
 
     QFont f;
@@ -345,7 +346,7 @@ void MainWindow::adjustTime(long long interval)
 
 long long MainWindow::getAdjustInterval()
 {
-    qDebug() << settings.value("gen/adjust").toInt();
-    return settings.value("gen/adjust").toInt();
+    //qDebug() << settings.value("gen/adjust").toInt();
+    return settings.value("gen/adjust", QVariant::fromValue(PrefConstants::ADJUST_INTERVAL)).toInt();
 
 }

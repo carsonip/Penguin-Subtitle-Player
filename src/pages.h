@@ -20,6 +20,7 @@
 #include <QPlainTextEdit>
 #include <QFileDialog>
 #include <QFontDialog>
+#include <QSpinBox>
 
 
 class GeneralPage : public PrefPage
@@ -32,9 +33,9 @@ public:
 public slots:
     void openDirDialog();
 private:
-    const int MAX_ADJUST_INTERVAL = 3600000;
     QPlainTextEdit *dirEdit;
-    QLineEdit *adjustIntervalEdit;
+    //QLineEdit *adjustIntervalEdit;
+    QSpinBox *adjustIntervalSpinBox;
 };
 
 
