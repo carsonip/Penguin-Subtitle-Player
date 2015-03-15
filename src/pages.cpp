@@ -18,6 +18,7 @@
 #include <QFileDialog>
 #include <QFontDialog>
 #include <QPlainTextEdit>
+#include <QPainter>
 #include "prefpage.h"
 #include "QLineEdit"
 #include "prefconstants.h"
@@ -88,34 +89,26 @@ GeneralPage::GeneralPage(QWidget *parent)
 void AppearancePage::openColorDialog(){
     QColor color = QColorDialog::getColor (bgColor, 0, tr("Select Color"));
     if (color.isValid()){
-        //QSettings settings;
         bgColor = color;
-        qDebug() << color.rgb();
+        paintColorButton(bgColorButton, bgColor);
     }
 
 }
 
 void AppearancePage::load(){
     bgColor = QColor::fromRgb(settings.value("appearance/bgColor", QVariant::fromValue(PrefConstants::BG_COLOR)).toUInt());
+    paintColorButton(bgColorButton, bgColor);
     bgAlphaSlider->setValue(settings.value("appearance/bgAlpha", QVariant::fromValue(PrefConstants::BG_ALPHA)).toInt());
-    fontLabel->setText(settings.value("appearance/font").toString());
+    QFont initial;
+    initial.fromString(settings.value("appearance/font").toString());
+    fontDialog->setCurrentFont(initial);
 }
 
 
 void AppearancePage::save(){
-    settings.setValue("appearance/font", fontLabel->text());
+    settings.setValue("appearance/font", fontDialog->currentFont().toString());
     settings.setValue("appearance/bgColor", bgColor.rgb());
     settings.setValue("appearance/bgAlpha", bgAlphaSlider->value());
-}
-
-void AppearancePage::openFontDialog(){
-    bool ok;
-    QFont initial;
-    initial.fromString(fontLabel->text());
-    QFont font = QFontDialog::getFont(&ok, initial);
-    if (ok){
-        fontLabel->setText(font.toString());
-    }
 }
 
 AppearancePage::~AppearancePage(){
@@ -126,31 +119,38 @@ AppearancePage::AppearancePage(QWidget *parent)
     : PrefPage(parent)
 {
     QGroupBox *windowAppearanceGroup = new QGroupBox(tr("Window"));
-    QLabel *bgAlphaLabel = new QLabel(tr("Tranparency: "));
+
+    QLabel *bgColorLabel = new QLabel(tr("Background Color: "));
+    bgColorButton = new QPushButton();
+
+    connect(bgColorButton, SIGNAL(clicked()), this, SLOT(openColorDialog()));
+
+    QHBoxLayout *bgColorLayout = new QHBoxLayout;
+    bgColorLayout->addWidget(bgColorLabel);
+    bgColorLayout->addWidget(bgColorButton);
+    bgColorLayout->addStretch(1);
+
+    QLabel *bgAlphaLabel = new QLabel(tr("Opacity: "));
     bgAlphaSlider = new QSlider(Qt::Horizontal);
     bgAlphaSlider->setRange(PrefConstants::BG_ALPHA_MIN, 255);
-    QPushButton *colorButton = new QPushButton(tr("Color"));
-    connect(colorButton, SIGNAL(clicked()), this, SLOT(openColorDialog()));
-
 
     QGroupBox *fontGroup = new QGroupBox(tr("Font"));
-
-    fontLabel = new QLabel();
-    QPushButton *chooseFontButton = new QPushButton(tr("choose Font"));
-    connect(chooseFontButton, SIGNAL(clicked()), this, SLOT(openFontDialog()));
 
     QHBoxLayout *bgAlphaLayout = new QHBoxLayout;
     bgAlphaLayout->addWidget(bgAlphaLabel);
     bgAlphaLayout->addWidget(bgAlphaSlider);
 
     QVBoxLayout *windowAppearanceLayout = new QVBoxLayout;
-    windowAppearanceLayout->addWidget(colorButton);
+    windowAppearanceLayout->addLayout(bgColorLayout);
     windowAppearanceLayout->addLayout(bgAlphaLayout);
     windowAppearanceGroup->setLayout(windowAppearanceLayout);
 
+    fontDialog = new QFontDialog();
+    fontDialog->setWindowFlags(Qt::Widget);
+    fontDialog->setOptions(QFontDialog::NoButtons | QFontDialog::DontUseNativeDialog);
+
     QVBoxLayout *fontLayout = new QVBoxLayout;
-    fontLayout->addWidget(fontLabel);
-    fontLayout->addWidget(chooseFontButton);
+    fontLayout->addWidget(fontDialog);
     fontGroup->setLayout(fontLayout);
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
@@ -161,4 +161,12 @@ AppearancePage::AppearancePage(QWidget *parent)
     setLayout(mainLayout);
 
     this->load();
+}
+
+void AppearancePage::paintColorButton(QPushButton *button, QColor color){
+    QPixmap px(64, 64);
+    QPainter pt(&px);
+    pt.setBrush(color);
+    pt.drawRect(0, 0, px.width()-1, px.height()-1);
+    button->setIcon(color.isValid() ? px : QIcon());
 }

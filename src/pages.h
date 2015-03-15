@@ -48,11 +48,12 @@ public:
     void save();
 public slots:
     void openColorDialog();
-    void openFontDialog();
 private:
-    QLabel *fontLabel;
+    void paintColorButton(QPushButton *button, QColor color);
     QColor bgColor;
     QSlider *bgAlphaSlider;
+    QFontDialog *fontDialog;
+    QPushButton *bgColorButton;
 };
 
 #endif

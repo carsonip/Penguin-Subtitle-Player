@@ -61,7 +61,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
         menu = new QMenu();
 
-        QAction *settings = new QAction("Settings", 0);
+        QAction *settings = new QAction("Preferences", 0);
         connect(settings, SIGNAL(triggered()), this, SLOT(openSettingsWindow()));
         menu->addAction(settings);
 

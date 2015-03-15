@@ -55,7 +55,7 @@ ConfigDialog::ConfigDialog()
     mainLayout->addLayout(buttonsLayout);
     setLayout(mainLayout);
 
-    setWindowTitle(tr("Config Dialog"));
+    setWindowTitle(tr("Preferences"));
 }
 
 void ConfigDialog::createIcons()
