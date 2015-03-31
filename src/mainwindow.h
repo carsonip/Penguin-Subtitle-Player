@@ -30,6 +30,9 @@ public slots:
     void openSettingsWindow();
     void openFileDialog();
 
+protected:
+    void paintEvent(QPaintEvent *event);
+
 private:
     Ui::MainWindow *ui;
 

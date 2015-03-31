@@ -23,6 +23,7 @@
 #include "QDragEnterEvent"
 #include "QDropEvent"
 #include "QMimeData"
+#include "QPainter"
 
 /*
  * Constructor and destructor
@@ -190,6 +191,17 @@ void MainWindow::openFileDialog()
     this->show();
 }
 
+/*
+ * Protected methods
+*/
+
+// fix shadowing problem in OS X
+void MainWindow::paintEvent( QPaintEvent *event)
+{
+    QPainter p( this );
+    p.setCompositionMode( QPainter::CompositionMode_Clear );
+    p.fillRect( this->rect(), Qt::transparent );
+}
 
 /*
  * Private methods
