@@ -17,8 +17,8 @@ No installation required.
 
 ## FAQ
 
-### Windows: "MSVCP120.dll is missing from your computer."
-Download and install [Visual C++ Redistributable for Visual Studio 2012](http://www.microsoft.com/download/details.aspx?id=30679)
+#### Q: "MSVCP120.dll is missing from your computer." on Windows
+A: Download and install [Visual C++ Redistributable for Visual Studio 2012](http://www.microsoft.com/download/details.aspx?id=30679)
 
 ## Contributing
 
