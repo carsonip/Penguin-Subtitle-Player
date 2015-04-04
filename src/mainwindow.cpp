@@ -35,6 +35,9 @@ MainWindow::MainWindow(QWidget *parent) :
     timer(new QTimer(this))
 {
     ui->setupUi(this);
+
+    this->setWindowIcon(QIcon(":/icon.png"));
+
     Qt::WindowFlags flags = this->windowFlags();
 
     this->setWindowFlags(flags | Qt::X11BypassWindowManagerHint | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint); //
