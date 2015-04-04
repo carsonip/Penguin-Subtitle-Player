@@ -1,6 +1,6 @@
 # Penguin Subtitle Player
 
-Penguin Subtitle Player is an open-source, cross-platform subtitle player, as an alternative to Greenfish Subtitle Player.
+Penguin Subtitle Player is an open-source, cross-platform subtitle player, as an alternative to [Greenfish Subtitle Player](http://greenfish-subtitle-player.en.softonic.com/), [JustSubsPlayer](https://justsubsplayer.codeplex.com/) and [Free Subtitle Player](http://sourceforge.net/projects/freesubtitleplayer/).
 
 With Penguin Subtitle Player, just open your favorite online streaming site, load the srt into the player, and enjoy.
 
