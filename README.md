@@ -4,6 +4,13 @@ Penguin Subtitle Player is an open-source, cross-platform subtitle player, as an
 
 With Penguin Subtitle Player, just open your favorite online streaming site, load the srt into the player, and enjoy.
 
+## Features
+
+* 700+ encoding supported (default: UTF8)
+* Drag & drop SRT file
+* Customizable layout (Frame size, Background color & Opacity, Font style)
+* Time fine tuning (Fast forward / backward with customizable time interval)
+
 ## Download
 
 Current Version: 0.1.0
