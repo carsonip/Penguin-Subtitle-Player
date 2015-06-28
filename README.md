@@ -40,9 +40,9 @@ Penguin Subtitle Player is a Qt5 project. The executables include statically com
 
 ####Compilers:
 
-Windows: VC++ 2012
-
-Linux, Mac: G++
+* Windows: VC++ 2012
+* Linux: G++
+* Mac OSX: G++
 
 Check [here](http://doc.qt.io/qt-5/deployment.html) for deployment details.
 
