@@ -6,6 +6,8 @@ You download the .srt file from any sites you like and load it into the subtitle
 
 With Penguin Subtitle Player, just open your favorite online streaming site, load the srt into the player, and enjoy.
 
+![Screenshot 1](https://a.fsdn.com/con/app/proj/penguinsubtitleplayer/screenshots/11087183_10207184638993421_1626182263_o.jpg)
+
 ## Features
 
 * 700+ encoding supported (default: UTF8)
