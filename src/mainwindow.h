@@ -48,10 +48,11 @@ private:
     void resizeEvent(QResizeEvent *event);
 
     void loadPref();
+    void load(QString path);
     void setup();
     void setPlay(bool play);
     QString getSubtitle(bool sliderMoved);
-    QString getEncoding();
+    QString getEncoding(QString preset);
     void adjustTime(long long interval);
     long long getAdjustInterval();
 

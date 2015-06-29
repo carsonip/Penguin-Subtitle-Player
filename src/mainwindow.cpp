@@ -24,6 +24,7 @@
 #include "QDropEvent"
 #include "QMimeData"
 #include "QPainter"
+#include "chardet.h"
 
 /*
  * Constructor and destructor
@@ -183,12 +184,7 @@ void MainWindow::openFileDialog()
              tr("Open SRT File"), dir, tr("SRT Files (*.srt)"));
 
     if (!path.isNull()) {
-        QString encoding = getEncoding();
-
-        delete engine;
-        engine = new SrtEngine(path, encoding);
-
-        setup();
+        load(path);
     }
 
     this->show();
@@ -230,14 +226,7 @@ void MainWindow::dropEvent(QDropEvent *e)
     QString path = e->mimeData()->urls()[0].toLocalFile();
     //qDebug() << "Dropped file:" << path;
     if (!path.isNull() && path.right(4) == ".srt") {
-        QString encoding = getEncoding();
-
-        delete engine;
-        engine = new SrtEngine(path, encoding);
-        //
-
-        //qDebug() << "Correct File Type";
-        setup();
+        load(path);
     }
     this->show();
 }
@@ -297,6 +286,17 @@ void MainWindow::loadPref()
     ui->subtitleLabel->setFont(f);
 }
 
+void MainWindow::load(QString path)
+{
+    QString chardet = charsetDetect(path);
+
+    QString encoding = getEncoding(chardet);
+
+    delete engine;
+    engine = new SrtEngine(path, encoding);
+
+    setup();
+}
 
 void MainWindow::setup()
 {
@@ -327,8 +327,10 @@ QString MainWindow::getSubtitle(bool sliderMoved)
     return subtitle;
 }
 
-QString MainWindow::getEncoding()
+QString MainWindow::getEncoding(QString preset)
 {
+    const QString AUTO_DETECT = " (Auto Detect)";
+
     bool ok;
     QStringList codecNames;
 
@@ -340,14 +342,25 @@ QString MainWindow::getEncoding()
     codecNames.sort();
     codecNames.removeDuplicates();
 
+    int encodingIndex = 0;
+
     QString defaultEncoding = PrefConstants::ENCODING;
     int defaultEncodingIndex = codecNames.indexOf(defaultEncoding);
-    if (defaultEncodingIndex == -1)
-        defaultEncodingIndex = 0;
+    if (defaultEncodingIndex >= 0) encodingIndex = defaultEncodingIndex;
 
-    QString encoding = QInputDialog::getItem(0,  tr("Select Encoding"),tr("Select Encoding"), codecNames, defaultEncodingIndex, false, &ok);
+    if (!preset.isNull() && !preset.isEmpty()){
+        // find index of case insensitive search of preset encoding
+        QStringList list = codecNames.filter(preset, Qt::CaseInsensitive);
+        if (list.size() > 0) {
+            encodingIndex = codecNames.indexOf(list[0]);
+            codecNames[encodingIndex] += AUTO_DETECT;
+        }
+    }
+
+
+    QString encoding = QInputDialog::getItem(0,  tr("Select Encoding"),tr("Select Encoding"), codecNames, encodingIndex, false, &ok);
     if (ok)
-        return encoding;
+        return encoding.replace(AUTO_DETECT, "");
 
     return "";
 }
