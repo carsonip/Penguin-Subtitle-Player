@@ -117,7 +117,7 @@ MOC_DIR = $$DESTDIR/.moc
 RCC_DIR = $$DESTDIR/.qrc
 UI_DIR = $$DESTDIR/.ui
 
-VERSION = 0.1.0
+VERSION = 0.2.0
 
 DISTFILES += \
     src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/Big5Freq.tab \
