@@ -11,6 +11,7 @@ With Penguin Subtitle Player, just open your favorite online streaming site, loa
 ## Features
 
 * 700+ encoding supported (default: UTF8)
+* Auto encoding detection
 * Drag & drop SRT file
 * Customizable layout (Frame size, Background color & Opacity, Font style)
 * Time fine tuning (Fast forward / backward with customizable time interval)
@@ -38,6 +39,9 @@ A: It is tested and confirmed working in Windows, Linux and Mac OSX for both HTM
 
 Penguin Subtitle Player is a Qt5 project. The executables include statically compiled Qt libraries.
 
+####Libraries:
+* [uchardet-enhanced](https://bitbucket.org/medoc/uchardet-enhanced): Auto charset detection. 
+
 ####Compilers:
 
 * Windows: VC++ 2012
@@ -56,6 +60,7 @@ Check [here](http://doc.qt.io/qt-5/deployment.html) for deployment details.
 
 ## History
 
+0.2.0: Added Charset Detection
 0.1.0: First beta release
 
 ## Credits
