@@ -44,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setWindowFlags(flags | Qt::X11BypassWindowManagerHint | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint); //
     this->setAttribute(Qt::WA_TranslucentBackground, true);
 
+    timer->setTimerType(Qt::PreciseTimer); // fixes subtitle delay
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
 
     connect(ui->backwardButton, SIGNAL(clicked()), this, SLOT(fastBackward()));
