@@ -60,6 +60,8 @@ Check [here](http://doc.qt.io/qt-5/deployment.html) for deployment details.
 
 ## History
 
+0.2.1: Fixed subtitle delay problem
+
 0.2.0: Added Charset Detection
 
 0.1.0: First beta release
