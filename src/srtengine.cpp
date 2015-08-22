@@ -43,9 +43,9 @@ SrtEngine::SrtEngine(QString path, QString encoding)
         content.remove(QChar('\r'));
         // Regex for capturing time information and subtitle content
         QRegularExpression patternStr("(\\d+)" + sp + nl
-            + "(\\d{1,2}):(\\d\\d):(\\d\\d),(\\d\\d\\d)" + sp
-            + "-->" + sp + "(\\d\\d):(\\d\\d):(\\d\\d),(\\d\\d\\d)" + sp
-            + "(X1:\\d.*?)??" + nl + "((.|\\n)*?)" + nl + nl);
+            + "(\\d{2}):(\\d{2}):(\\d{2}),(\\d{3})" + sp
+            + "-->" + sp + "(\\d{2}):(\\d{2}):(\\d{2}),(\\d{3})" + sp
+            + "(X1:\\d.*?)??" + nl + "([\\s\\S]*?)" + nl + nl);
 
 
         QRegularExpressionMatchIterator it = patternStr.globalMatch(content);
