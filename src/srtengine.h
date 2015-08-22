@@ -47,8 +47,7 @@ public:
     static long long calculateTime(QString h, QString m, QString s, QString ms)
     {
         // Converting time information to milliseconds
-        bool res;
-        return h.toLongLong(&res, 10) * 60 * 60 * 1000 + m.toLongLong(&res, 10) * 60 * 1000 + s.toLongLong(&res, 10) * 1000 + ms.toLongLong(&res, 10);
+        return h.toLongLong() * 60 * 60 * 1000 + m.toLongLong() * 60 * 1000 + s.toLongLong() * 1000 + ms.toLongLong();
     }
 
     static QString formatTime(long long x)
