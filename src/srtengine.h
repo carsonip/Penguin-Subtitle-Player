@@ -17,14 +17,17 @@ public:
 
     struct SubtitleItem{
         /* Structure for storing each subtitle,
+             * section stands for the source section (unique) identifer,
              * start, end stands for the starting and ending time in milliseconds,
              * text stands for the content.
             */
 
+        long section;
         long long start, end;
         QString text;
-        SubtitleItem(long long start, long long end, QString text)
+        SubtitleItem(long section, long long start, long long end, QString text)
         {
+            this->section = section;
             this->start = start;
             this->end = end;
             this->text = text;
@@ -69,8 +72,12 @@ private:
     const QString sp = "[ \\t]*";
 
     std::vector<SubtitleItem> subtitles;
+    std::vector<SubtitleItem> subtitles_invalid;
     int lastIndex = -1;
     long long finishTime = 0LL;
+
+    // Validation function used during import from SRT
+    bool validateItem(SubtitleItem currentItem, SubtitleItem previousItem);
 
 };
 

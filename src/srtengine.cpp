@@ -52,16 +52,53 @@ SrtEngine::SrtEngine(QString path, QString encoding)
         // Fetching subtitle information one by one
         while (it.hasNext()) {
             QRegularExpressionMatch m = it.next();
+            long section = m.captured(1).toLong();
             long long start = calculateTime(m.captured(2), m.captured(3), m.captured(4), m.captured(5));
             long long end = calculateTime(m.captured(6), m.captured(7), m.captured(8), m.captured(9));
             QString text = m.captured(11);
-            subtitles.push_back(SubtitleItem(start,end,text));
+
+            // Validate current subtitle section against previous:
+            SubtitleItem currentItem = SubtitleItem(section,start,end,text);
+            SubtitleItem previousItem = SubtitleItem(0,0,0,"");
+            // get previous (valid) subtitle section
+            if(subtitles.size() > 0)
+                previousItem = subtitles[subtitles.size() - 1];
+            // add current subtitle section to either valid or invalid subtitles variable
+            if (validateItem(currentItem, previousItem))
+                subtitles.push_back(currentItem);
+            else{
+                subtitles_invalid.push_back(currentItem);
+                qDebug() << "Skipping invalid subtitle item, section number: " << currentItem.section;
+            }
         }
 
     } catch(const exception& e) {
 
     }
-    qDebug() << "Number of subtitles: " << subtitles.size();
+
+    qDebug() << "Number of subtitle items imported: " << subtitles.size();
+    if(subtitles_invalid.size() > 0)
+        qDebug() << "Number of subtitle items skipped due to validation errors: " << subtitles_invalid.size();
+}
+
+bool SrtEngine::validateItem(SubtitleItem currentItem, SubtitleItem previousItem)
+{
+    // perform various validation checks on current subtitle item (section) compared to previous item
+
+    bool valid = true; // assume valid unless fails one or more of following checks
+
+    // check for current item start time before previous item start time
+    if(currentItem.start < previousItem.start)
+        valid = false;
+    /* This checks fixes getFinishTime incorrectly reporting final item end time
+     * as finish time when final item is out of time order (final item is invalid)
+     */
+
+    // check for current item end time before start time
+    if(currentItem.end < currentItem.start)
+        valid = false;
+
+    return valid;
 }
 
 SrtEngine::~SrtEngine()
