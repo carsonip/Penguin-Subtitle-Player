@@ -226,7 +226,7 @@ void MainWindow::dropEvent(QDropEvent *e)
     //qDebug() << "dropEvent";
     QString path = e->mimeData()->urls()[0].toLocalFile();
     //qDebug() << "Dropped file:" << path;
-    if (!path.isNull() && path.right(4) == ".srt") {
+    if (!path.isNull() && path.toLower().right(4) == ".srt") {
         load(path);
     }
     this->show();
