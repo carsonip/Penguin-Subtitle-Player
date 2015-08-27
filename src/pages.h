@@ -21,6 +21,8 @@
 #include <QFileDialog>
 #include <QFontDialog>
 #include <QSpinBox>
+#include <QCheckBox>
+#include <QVBoxLayout>
 
 
 class GeneralPage : public PrefPage
@@ -48,13 +50,21 @@ public:
     void load();
     void save();
 public slots:
-    void openColorDialog();
+    void openBgColorDialog();
+    void openFontShadowColorDialog();
 private:
+    QColor openColorDialog(QColor initial);
     void paintColorButton(QPushButton *button, QColor color);
     QColor bgColor;
+    QColor fontShadowColor;
     QSlider *bgAlphaSlider;
     QFontDialog *fontDialog;
     QPushButton *bgColorButton;
+    QPushButton *fontShadowColorButton;
+    QCheckBox *fontShadowEnableCbx;
+    QSpinBox *fontShadowBlurRadiusSpinBox;
+    QSpinBox *fontShadowOffsetXSpinBox;
+    QSpinBox *fontShadowOffsetYSpinBox;
 };
 
 #endif

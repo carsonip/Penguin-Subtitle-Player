@@ -24,6 +24,7 @@
 #include "QDropEvent"
 #include "QMimeData"
 #include "QPainter"
+#include "QGraphicsDropShadowEffect"
 #include "chardet.h"
 
 /*
@@ -285,6 +286,22 @@ void MainWindow::loadPref()
     QFont f;
     f.fromString(settings.value("appearance/font").toString());
     ui->subtitleLabel->setFont(f);
+
+    bool fontShadowEnable = settings.value("appearance/fontShadowEnable", QVariant::fromValue(PrefConstants::FONT_SHADOW_ENABLE)).toBool();
+    if (fontShadowEnable) {
+        QGraphicsDropShadowEffect * dse = new QGraphicsDropShadowEffect();
+        dse->setBlurRadius(settings.value("appearance/fontShadowBlurRadius", QVariant::fromValue(PrefConstants::FONT_SHADOW_BLUR_RADIUS)).toInt());
+
+        dse->setOffset(settings.value("appearance/fontShadowOffsetX", QVariant::fromValue(PrefConstants::FONT_SHADOW_OFFSET_X)).toReal(),
+                       settings.value("appearance/fontShadowOffsetY", QVariant::fromValue(PrefConstants::FONT_SHADOW_OFFSET_Y)).toReal());
+
+        QColor fontShadowColor = QColor::fromRgb(settings.value("appearance/fontShadowColor", QVariant::fromValue(PrefConstants::FONT_SHADOW_COLOR)).toUInt());
+        dse->setColor(fontShadowColor);
+
+        ui->subtitleLabel->setGraphicsEffect(dse);
+    } else {
+        ui->subtitleLabel->setGraphicsEffect(NULL);
+    }
 }
 
 void MainWindow::load(QString path)

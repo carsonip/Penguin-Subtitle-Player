@@ -23,7 +23,7 @@
 #include "prefpage.h"
 #include "QLineEdit"
 #include "prefconstants.h"
-
+#include <QCheckBox>
 
 void GeneralPage::load(){
     dirEdit->setPlainText(settings.value("gen/dir").toString());
@@ -33,7 +33,7 @@ void GeneralPage::load(){
 
 void GeneralPage::save(){
     //qDebug() << "configsave";
-    settings.setValue("gen/dir",dirEdit->toPlainText());
+    settings.setValue("gen/dir", dirEdit->toPlainText());
     settings.setValue("gen/adjust", adjustIntervalSpinBox->value());
 }
 
@@ -87,29 +87,60 @@ GeneralPage::GeneralPage(QWidget *parent)
     this->load();
 }
 
-void AppearancePage::openColorDialog(){
-    QColor color = QColorDialog::getColor (bgColor, 0, tr("Select Color"));
+QColor AppearancePage::openColorDialog(QColor initial){
+    QColor color = QColorDialog::getColor(initial, 0, tr("Select Color"));
     if (color.isValid()){
-        bgColor = color;
-        paintColorButton(bgColorButton, bgColor);
+        return color;
     }
+    return initial;
+}
 
+void AppearancePage::openBgColorDialog(){
+    bgColor = openColorDialog(bgColor);
+    paintColorButton(bgColorButton, bgColor);
+}
+
+void AppearancePage::openFontShadowColorDialog(){
+    fontShadowColor = openColorDialog(fontShadowColor);
+    paintColorButton(fontShadowColorButton, fontShadowColor);
 }
 
 void AppearancePage::load(){
+    /* Window */
     bgColor = QColor::fromRgb(settings.value("appearance/bgColor", QVariant::fromValue(PrefConstants::BG_COLOR)).toUInt());
     paintColorButton(bgColorButton, bgColor);
     bgAlphaSlider->setValue(settings.value("appearance/bgAlpha", QVariant::fromValue(PrefConstants::BG_ALPHA)).toInt());
+
+    /* Font */
     QFont initial;
     initial.fromString(settings.value("appearance/font").toString());
     fontDialog->setCurrentFont(initial);
+
+    /* Font Shadow */
+    bool isFontShadowEnable = settings.value("appearance/fontShadowEnable", QVariant::fromValue(PrefConstants::FONT_SHADOW_ENABLE)).toBool();
+    fontShadowEnableCbx->setChecked(isFontShadowEnable);
+    fontShadowColor = QColor::fromRgb(settings.value("appearance/fontShadowColor", QVariant::fromValue(PrefConstants::FONT_SHADOW_COLOR)).toUInt());
+    paintColorButton(fontShadowColorButton, fontShadowColor);
+    fontShadowBlurRadiusSpinBox->setValue(settings.value("appearance/fontShadowBlurRadius", QVariant::fromValue(PrefConstants::FONT_SHADOW_BLUR_RADIUS)).toInt());
+    fontShadowOffsetXSpinBox->setValue(settings.value("appearance/fontShadowOffsetX", QVariant::fromValue(PrefConstants::FONT_SHADOW_OFFSET_X)).toInt());
+    fontShadowOffsetYSpinBox->setValue(settings.value("appearance/fontShadowOffsetY", QVariant::fromValue(PrefConstants::FONT_SHADOW_OFFSET_Y)).toInt());
 }
 
 
 void AppearancePage::save(){
-    settings.setValue("appearance/font", fontDialog->currentFont().toString());
+    /* Window */
     settings.setValue("appearance/bgColor", bgColor.rgb());
     settings.setValue("appearance/bgAlpha", bgAlphaSlider->value());
+
+    /* Font */
+    settings.setValue("appearance/font", fontDialog->currentFont().toString());
+
+    /* Font Shadow */
+    settings.setValue("appearance/fontShadowEnable", fontShadowEnableCbx->isChecked());
+    settings.setValue("appearance/fontShadowColor", fontShadowColor.rgb());
+    settings.setValue("appearance/fontShadowBlurRadius", fontShadowBlurRadiusSpinBox->value());
+    settings.setValue("appearance/fontShadowOffsetX", fontShadowOffsetXSpinBox->value());
+    settings.setValue("appearance/fontShadowOffsetY", fontShadowOffsetYSpinBox->value());
 }
 
 AppearancePage::~AppearancePage(){
@@ -119,12 +150,14 @@ AppearancePage::~AppearancePage(){
 AppearancePage::AppearancePage(QWidget *parent)
     : PrefPage(parent)
 {
+
+    /* Window */
     QGroupBox *windowAppearanceGroup = new QGroupBox(tr("Window"));
 
     QLabel *bgColorLabel = new QLabel(tr("Background Color: "));
     bgColorButton = new QPushButton();
 
-    connect(bgColorButton, SIGNAL(clicked()), this, SLOT(openColorDialog()));
+    connect(bgColorButton, SIGNAL(clicked()), this, SLOT(openBgColorDialog()));
 
     QHBoxLayout *bgColorLayout = new QHBoxLayout;
     bgColorLayout->addWidget(bgColorLabel);
@@ -135,8 +168,6 @@ AppearancePage::AppearancePage(QWidget *parent)
     bgAlphaSlider = new QSlider(Qt::Horizontal);
     bgAlphaSlider->setRange(PrefConstants::BG_ALPHA_MIN, 255);
 
-    QGroupBox *fontGroup = new QGroupBox(tr("Font"));
-
     QHBoxLayout *bgAlphaLayout = new QHBoxLayout;
     bgAlphaLayout->addWidget(bgAlphaLabel);
     bgAlphaLayout->addWidget(bgAlphaSlider);
@@ -146,6 +177,10 @@ AppearancePage::AppearancePage(QWidget *parent)
     windowAppearanceLayout->addLayout(bgAlphaLayout);
     windowAppearanceGroup->setLayout(windowAppearanceLayout);
 
+
+    /* Subtitle Font */
+    QGroupBox *fontGroup = new QGroupBox(tr("Subtitle Font"));
+
     fontDialog = new QFontDialog();
     fontDialog->setWindowFlags(Qt::Widget);
     fontDialog->setOptions(QFontDialog::NoButtons | QFontDialog::DontUseNativeDialog);
@@ -154,9 +189,64 @@ AppearancePage::AppearancePage(QWidget *parent)
     fontLayout->addWidget(fontDialog);
     fontGroup->setLayout(fontLayout);
 
+
+    /* Subtitle Font Drop Shadow */
+    QGroupBox *fontShadowGroup = new QGroupBox(tr("Subtitle Font Shadow / Text Outline"));
+
+    /* Enable */
+    fontShadowEnableCbx = new QCheckBox(tr("Enable Shadow"));
+
+    QHBoxLayout *fontShadowEnableLayout = new QHBoxLayout;
+    fontShadowEnableLayout->addWidget(fontShadowEnableCbx);
+    fontShadowEnableLayout->addStretch(1);
+
+    /* Color */
+    QLabel *fontShadowColorLabel = new QLabel(tr("Shadow Color: "));
+    fontShadowColorButton = new QPushButton();
+    connect(fontShadowColorButton, SIGNAL(clicked()), this, SLOT(openFontShadowColorDialog()));
+
+    QHBoxLayout *fontShadowColorLayout = new QHBoxLayout;
+    fontShadowColorLayout->addWidget(fontShadowColorLabel);
+    fontShadowColorLayout->addWidget(fontShadowColorButton);
+    fontShadowColorLayout->addStretch(1);
+
+    /* Blur Radius */
+    QLabel *fontShadowBlurRadiusLabel = new QLabel(tr("Blur Radius: "));
+    fontShadowBlurRadiusSpinBox = new QSpinBox();
+    fontShadowBlurRadiusSpinBox->setSingleStep(PrefConstants::FONT_SHADOW_BLUR_RADIUS_STEP);
+    fontShadowBlurRadiusSpinBox->setMaximum(PrefConstants::FONT_SHADOW_BLUR_RADIUS_MAX);
+
+    QHBoxLayout *fontShadowBlurRadiusLayout = new QHBoxLayout;
+    fontShadowBlurRadiusLayout->addWidget(fontShadowBlurRadiusLabel);
+    fontShadowBlurRadiusLayout->addWidget(fontShadowBlurRadiusSpinBox);
+    fontShadowBlurRadiusLayout->addStretch(1);
+
+    /* Offset */
+    QLabel *fontShadowOffsetLabel = new QLabel(tr("Offset X, Y: "));
+    fontShadowOffsetXSpinBox = new QSpinBox();
+    fontShadowOffsetXSpinBox->setMinimum(-PrefConstants::FONT_SHADOW_OFFSET_LIMIT);
+    fontShadowOffsetXSpinBox->setMaximum(PrefConstants::FONT_SHADOW_OFFSET_LIMIT);
+    fontShadowOffsetYSpinBox = new QSpinBox();
+    fontShadowOffsetYSpinBox->setMinimum(-PrefConstants::FONT_SHADOW_OFFSET_LIMIT);
+    fontShadowOffsetYSpinBox->setMaximum(PrefConstants::FONT_SHADOW_OFFSET_LIMIT);
+
+    QHBoxLayout *fontShadowOffsetLayout = new QHBoxLayout;
+    fontShadowOffsetLayout->addWidget(fontShadowOffsetLabel);
+    fontShadowOffsetLayout->addWidget(fontShadowOffsetXSpinBox);
+    fontShadowOffsetLayout->addWidget(fontShadowOffsetYSpinBox);
+    fontShadowOffsetLayout->addStretch(1);
+
+    QVBoxLayout *fontShadowLayout = new QVBoxLayout;
+    fontShadowLayout->addLayout(fontShadowEnableLayout);
+    fontShadowLayout->addLayout(fontShadowColorLayout);
+    fontShadowLayout->addLayout(fontShadowBlurRadiusLayout);
+    fontShadowLayout->addLayout(fontShadowOffsetLayout);
+    fontShadowGroup->setLayout(fontShadowLayout);
+
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(windowAppearanceGroup);
     mainLayout->addWidget(fontGroup);
+    mainLayout->addWidget(fontShadowGroup);
     mainLayout->addSpacing(12);
     mainLayout->addStretch(1);
     setLayout(mainLayout);
