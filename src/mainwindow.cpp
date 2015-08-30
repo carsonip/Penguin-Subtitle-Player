@@ -84,12 +84,19 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->bottomWidgets->setAttribute(Qt::WA_NoMousePropagation); // fix window disappear problem
 
+    bool isRememberWindowPosAndSize = settings.value("appearance/rememberWindowPosAndSize", QVariant::fromValue(PrefConstants::REMEMBER_WINDOW_POS_AND_SIZE)).toBool();
+    if (isRememberWindowPosAndSize) this->loadPosAndSize();
+
     this->loadPref();
     setAcceptDrops(true);
 }
 
 MainWindow::~MainWindow()
 {
+    settings.setValue("appearance/windowX", this->x());
+    settings.setValue("appearance/windowY", this->y());
+    settings.setValue("appearance/windowWidth", this->width());
+    settings.setValue("appearance/windowHeight", this->height());
     delete menu;
     delete trayIcon;
     delete engine;
@@ -271,6 +278,14 @@ void MainWindow::resizeEvent(QResizeEvent *event)
     if (engine) ui->subtitleLabel->setText(getSubtitle(false));
 }
 
+void MainWindow::loadPosAndSize()
+{
+    int x = settings.value("appearance/windowX", QVariant::fromValue(PrefConstants::WINDOW_X)).toInt();
+    int y = settings.value("appearance/windowY", QVariant::fromValue(PrefConstants::WINDOW_Y)).toInt();
+    int w = settings.value("appearance/windowWidth", QVariant::fromValue(PrefConstants::WINDOW_WIDTH)).toInt();
+    int h = settings.value("appearance/windowHeight", QVariant::fromValue(PrefConstants::WINDOW_HEIGHT)).toInt();
+    this->setGeometry(x,y,w,h);
+}
 
 void MainWindow::loadPref()
 {

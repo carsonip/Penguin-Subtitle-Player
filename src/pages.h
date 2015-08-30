@@ -64,6 +64,7 @@ private:
     QPushButton *bgColorButton;
     QPushButton *fontColorButton;
     QPushButton *fontShadowColorButton;
+    QCheckBox *rememberWindowPosAndSizeCbx;
     QCheckBox *fontShadowEnableCbx;
     QSpinBox *fontShadowBlurRadiusSpinBox;
     QSpinBox *fontShadowOffsetXSpinBox;

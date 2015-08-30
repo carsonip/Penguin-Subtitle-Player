@@ -112,6 +112,8 @@ void AppearancePage::openFontShadowColorDialog(){
 
 void AppearancePage::load(){
     /* Window */
+    bool isRememberWindowPosAndSize = settings.value("appearance/rememberWindowPosAndSize", QVariant::fromValue(PrefConstants::REMEMBER_WINDOW_POS_AND_SIZE)).toBool();
+    rememberWindowPosAndSizeCbx->setChecked(isRememberWindowPosAndSize);
     bgColor = QColor::fromRgb(settings.value("appearance/bgColor", QVariant::fromValue(PrefConstants::BG_COLOR)).toUInt());
     paintColorButton(bgColorButton, bgColor);
     bgAlphaSlider->setValue(settings.value("appearance/bgAlpha", QVariant::fromValue(PrefConstants::BG_ALPHA)).toInt());
@@ -137,6 +139,7 @@ void AppearancePage::load(){
 
 void AppearancePage::save(){
     /* Window */
+    settings.setValue("appearance/rememberWindowPosAndSize", rememberWindowPosAndSizeCbx->isChecked());
     settings.setValue("appearance/bgColor", bgColor.rgb());
     settings.setValue("appearance/bgAlpha", bgAlphaSlider->value());
 
@@ -163,6 +166,8 @@ AppearancePage::AppearancePage(QWidget *parent)
     /* Window */
     QGroupBox *windowAppearanceGroup = new QGroupBox(tr("Window"));
 
+    rememberWindowPosAndSizeCbx = new QCheckBox(tr("Remember last position and size"));
+
     QLabel *bgColorLabel = new QLabel(tr("Background Color: "));
     bgColorButton = new QPushButton();
 
@@ -182,6 +187,7 @@ AppearancePage::AppearancePage(QWidget *parent)
     bgAlphaLayout->addWidget(bgAlphaSlider);
 
     QVBoxLayout *windowAppearanceLayout = new QVBoxLayout;
+    windowAppearanceLayout->addWidget(rememberWindowPosAndSizeCbx);
     windowAppearanceLayout->addLayout(bgColorLayout);
     windowAppearanceLayout->addLayout(bgAlphaLayout);
     windowAppearanceGroup->setLayout(windowAppearanceLayout);

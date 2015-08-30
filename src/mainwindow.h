@@ -47,6 +47,7 @@ private:
     void leaveEvent(QEvent *event);
     void resizeEvent(QResizeEvent *event);
 
+    void loadPosAndSize();
     void loadPref();
     void load(QString path);
     void setup();
