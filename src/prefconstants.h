@@ -19,6 +19,7 @@ namespace PrefConstants {
     const static int FONT_SHADOW_OFFSET_X = 0;
     const static int FONT_SHADOW_OFFSET_Y = 0;
     const static int FONT_SHADOW_OFFSET_LIMIT = 100;
+    const static int FONT_COLOR = 4294967295; //white
 }
 
 #endif // PREFCONSTANTS_H

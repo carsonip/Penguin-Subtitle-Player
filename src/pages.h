@@ -51,15 +51,18 @@ public:
     void save();
 public slots:
     void openBgColorDialog();
+    void openFontColorDialog();
     void openFontShadowColorDialog();
 private:
     QColor openColorDialog(QColor initial);
     void paintColorButton(QPushButton *button, QColor color);
     QColor bgColor;
+    QColor fontColor;
     QColor fontShadowColor;
     QSlider *bgAlphaSlider;
     QFontDialog *fontDialog;
     QPushButton *bgColorButton;
+    QPushButton *fontColorButton;
     QPushButton *fontShadowColorButton;
     QCheckBox *fontShadowEnableCbx;
     QSpinBox *fontShadowBlurRadiusSpinBox;

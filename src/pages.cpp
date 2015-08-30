@@ -100,6 +100,11 @@ void AppearancePage::openBgColorDialog(){
     paintColorButton(bgColorButton, bgColor);
 }
 
+void AppearancePage::openFontColorDialog(){
+    fontColor = openColorDialog(fontColor);
+    paintColorButton(fontColorButton, fontColor);
+}
+
 void AppearancePage::openFontShadowColorDialog(){
     fontShadowColor = openColorDialog(fontShadowColor);
     paintColorButton(fontShadowColorButton, fontShadowColor);
@@ -112,6 +117,9 @@ void AppearancePage::load(){
     bgAlphaSlider->setValue(settings.value("appearance/bgAlpha", QVariant::fromValue(PrefConstants::BG_ALPHA)).toInt());
 
     /* Font */
+    fontColor = QColor::fromRgb(settings.value("appearance/fontColor", QVariant::fromValue(PrefConstants::FONT_COLOR)).toUInt());
+    paintColorButton(fontColorButton, fontColor);
+
     QFont initial;
     initial.fromString(settings.value("appearance/font").toString());
     fontDialog->setCurrentFont(initial);
@@ -133,6 +141,7 @@ void AppearancePage::save(){
     settings.setValue("appearance/bgAlpha", bgAlphaSlider->value());
 
     /* Font */
+    settings.setValue("appearance/fontColor", fontColor.rgb());
     settings.setValue("appearance/font", fontDialog->currentFont().toString());
 
     /* Font Shadow */
@@ -181,11 +190,21 @@ AppearancePage::AppearancePage(QWidget *parent)
     /* Subtitle Font */
     QGroupBox *fontGroup = new QGroupBox(tr("Subtitle Font"));
 
+    QLabel *fontColorLabel = new QLabel(tr("Font Color: "));
+    fontColorButton = new QPushButton();
+    connect(fontColorButton, SIGNAL(clicked()), this, SLOT(openFontColorDialog()));
+
+    QHBoxLayout *fontColorLayout = new QHBoxLayout;
+    fontColorLayout->addWidget(fontColorLabel);
+    fontColorLayout->addWidget(fontColorButton);
+    fontColorLayout->addStretch(1);
+
     fontDialog = new QFontDialog();
     fontDialog->setWindowFlags(Qt::Widget);
     fontDialog->setOptions(QFontDialog::NoButtons | QFontDialog::DontUseNativeDialog);
 
     QVBoxLayout *fontLayout = new QVBoxLayout;
+    fontLayout->addLayout(fontColorLayout);
     fontLayout->addWidget(fontDialog);
     fontGroup->setLayout(fontLayout);
 

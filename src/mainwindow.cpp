@@ -283,6 +283,10 @@ void MainWindow::loadPref()
     //qDebug() << bgColorStr;
     this->setStyleSheet(bgColorStr);
 
+    QColor fontColor = QColor::fromRgb(settings.value("appearance/fontColor", QVariant::fromValue(PrefConstants::FONT_COLOR)).toUInt());
+    ui->subtitleLabel->setStyleSheet(QString("background-color:transparent;"
+                                     "color:rgba(%1,%2,%3)").arg(QString::number(fontColor.red()),QString::number(fontColor.green()),QString::number(fontColor.blue())));
+
     QFont f;
     f.fromString(settings.value("appearance/font").toString());
     ui->subtitleLabel->setFont(f);

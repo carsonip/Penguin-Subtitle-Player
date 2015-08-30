@@ -83,7 +83,7 @@
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color:transparent; color:#FFFFFF;</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>Penguin Subtitle Player
