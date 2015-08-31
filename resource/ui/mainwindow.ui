@@ -156,6 +156,12 @@ open-source, cross-platform</string>
          </item>
          <item>
           <widget class="QPushButton" name="backwardButton">
+           <property name="minimumSize">
+            <size>
+             <width>42</width>
+             <height>42</height>
+            </size>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -199,6 +205,12 @@ open-source, cross-platform</string>
          </item>
          <item>
           <widget class="QPushButton" name="forwardButton">
+           <property name="minimumSize">
+            <size>
+             <width>42</width>
+             <height>42</height>
+            </size>
+           </property>
            <property name="text">
             <string/>
            </property>
