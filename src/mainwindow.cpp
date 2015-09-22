@@ -59,13 +59,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     if (QSystemTrayIcon::isSystemTrayAvailable()) {
-        trayIcon = new QSystemTrayIcon();
+        trayIcon = new QSystemTrayIcon(this);
         trayIcon->setIcon(QIcon(":/icon.png"));
 
         connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
                 this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
 
-        menu = new QMenu();
+        menu = new QMenu(this);
 
         QAction *settings = new QAction("Preferences", 0);
         connect(settings, SIGNAL(triggered()), this, SLOT(openSettingsWindow()));
@@ -97,10 +97,7 @@ MainWindow::~MainWindow()
     settings.setValue("appearance/windowY", this->y());
     settings.setValue("appearance/windowWidth", this->width());
     settings.setValue("appearance/windowHeight", this->height());
-    delete menu;
-    delete trayIcon;
     delete engine;
-    delete timer;
     delete ui;
 }
 
