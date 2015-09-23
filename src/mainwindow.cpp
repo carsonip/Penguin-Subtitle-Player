@@ -59,13 +59,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     if (QSystemTrayIcon::isSystemTrayAvailable()) {
-        trayIcon = new QSystemTrayIcon(this);
+        QSystemTrayIcon *trayIcon = new QSystemTrayIcon(this);
         trayIcon->setIcon(QIcon(":/icon.png"));
 
         connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
                 this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
 
-        menu = new QMenu(this);
+        QMenu *menu = new QMenu(this);
 
         QAction *settings = new QAction("Preferences", 0);
         connect(settings, SIGNAL(triggered()), this, SLOT(openSettingsWindow()));
