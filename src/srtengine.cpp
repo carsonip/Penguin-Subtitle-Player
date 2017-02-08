@@ -110,10 +110,13 @@ QString SrtEngine::currentSubtitle(long long time, bool sliderMoved)
 {
     // Fetch the suitable subtitle content for current time
 
+    if (subtitles.size() == 0)
+        return "";
+
     if(!sliderMoved && time >= finishTime)
         return "";
 
-    if(lastIndex != -1){
+    if(lastIndex != -1 && !sliderMoved){
         //  Linear search for next subtitle from last subtitle if slide bar is not manually set
         for (int i = lastIndex, len = subtitles.size(); i < len; i++) {
             SubtitleItem item = subtitles[i];
@@ -121,24 +124,24 @@ QString SrtEngine::currentSubtitle(long long time, bool sliderMoved)
                 return item.text;
         }
     }else{
-        // Binary Search for if slide bar is manually set
-
-        int l = 0, m, h = subtitles.size() - 1;
-        while (l <= h) {
-            m = (l + h) / 2;
-            SubtitleItem item = subtitles[m];
-
-            if(time > item.end)
-                l = m + 1;
-            else
-                h = m - 1;
-        }
-        for (int i = max(0, l - 3), len = min(l + 3, (int)subtitles.size()); i < len; i++)
-            if (time >= subtitles[i].start && time <= subtitles[i].end) {
-                lastIndex = i;
-                return subtitles[i].text;
+        // Binary Search for initialization or if slide bar is manually set
+        int lo = 0, hi = subtitles.size() - 1;
+        while (lo < hi) {
+            int mid = lo + (hi - lo) / 2;
+            SubtitleItem item = subtitles[mid];
+            if (time >= item.start && time <= item.end){
+                lo = mid;
+                break;
+            } else if (time > item.end) {
+                lo = mid + 1;
+            } else {
+                hi = mid;
             }
-
+        }
+        if (time >= subtitles[lo].start && time <= subtitles[lo].end){
+            lastIndex = lo;
+            return subtitles[lo].text;
+        }
         lastIndex = -1;
 
     }
