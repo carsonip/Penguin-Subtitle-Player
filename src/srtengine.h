@@ -74,7 +74,6 @@ private:
     std::vector<SubtitleItem> subtitles;
     std::vector<SubtitleItem> subtitles_invalid;
     int lastIndex = -1;
-    long long finishTime = 0LL;
 
     // Validation function used during import from SRT
     bool validateItem(SubtitleItem currentItem, SubtitleItem previousItem);

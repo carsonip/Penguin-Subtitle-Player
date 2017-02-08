@@ -113,7 +113,7 @@ QString SrtEngine::currentSubtitle(long long time, bool sliderMoved)
     if (subtitles.size() == 0)
         return "";
 
-    if(!sliderMoved && time >= finishTime)
+    if(!sliderMoved && time >= this->getFinishTime())
         return "";
 
     if(lastIndex != -1 && !sliderMoved){
@@ -151,9 +151,8 @@ QString SrtEngine::currentSubtitle(long long time, bool sliderMoved)
 long long SrtEngine::getFinishTime()
 {
     // Fetch the end time of last subtitle
-    if (finishTime == 0LL && subtitles.size() > 0)
-        finishTime = subtitles[subtitles.size() - 1].end;
+    if (subtitles.size() == 0) return 0LL;
 
-    return finishTime;
+    return subtitles[subtitles.size() - 1].end;
 }
 
