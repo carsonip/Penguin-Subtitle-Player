@@ -76,7 +76,11 @@ Check [here](http://doc.qt.io/qt-5/deployment.html) for deployment details.
   * MinGW (Windows): ```mingw32-make```
 4. You should see the executable under ```build/debug``` or ```build/release```
 
-In case you would like to deploy a version which does not require Qt libraries in the client's system, consider statically build Qt then qmake with the static option.
+In case you would like to deploy a version which does not require Qt libraries in the client's system, consider statically build Qt then `qmake` with the `static` option, or change the config line in `PenguinSubtitlePlayer.pro` to
+```
+CONFIG += static \
+          c++11
+```
 
 ## Contributing
 

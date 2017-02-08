@@ -100,8 +100,7 @@ HEADERS  += src/configdialog.h \
 FORMS    += \
     resource/ui/mainwindow.ui
 
-CONFIG += static \
-        c++11
+CONFIG += c++11
 
 RESOURCES += \
     resource/resource.qrc
