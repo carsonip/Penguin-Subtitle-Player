@@ -25,6 +25,7 @@
 #include "QMimeData"
 #include "QPainter"
 #include "QGraphicsDropShadowEffect"
+#include "QDesktopWidget"
 #include "chardet.h"
 
 /*
@@ -85,7 +86,18 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->bottomWidgets->setAttribute(Qt::WA_NoMousePropagation); // fix window disappear problem
 
     bool isRememberWindowPosAndSize = settings.value("appearance/rememberWindowPosAndSize", QVariant::fromValue(PrefConstants::REMEMBER_WINDOW_POS_AND_SIZE)).toBool();
-    if (isRememberWindowPosAndSize) this->loadPosAndSize();
+    if (isRememberWindowPosAndSize) {
+        this->loadPosAndSize();
+    } else {
+        this->setGeometry(
+            QStyle::alignedRect(
+                Qt::LeftToRight,
+                Qt::AlignCenter,
+                this->size(),
+                qApp->desktop()->availableGeometry()
+            )
+        );
+    }
 
     this->loadPref();
     setAcceptDrops(true);
