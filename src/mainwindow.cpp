@@ -335,6 +335,8 @@ void MainWindow::load(QString path)
 void MainWindow::setup()
 {
     currentTime = 0;
+    this->ui->subtitleLabel->setText(getSubtitle(false));
+    this->ui->timeLabel->setText((SrtEngine::millisToTimeString(currentTime) + " / " + SrtEngine::millisToTimeString(engine->getFinishTime())));
     this->ui->horizontalSlider->setRange(0, (int) (engine->getFinishTime() / SLIDER_RATIO));
     this->ui->horizontalSlider->setEnabled(true);
     setPlay(true);
