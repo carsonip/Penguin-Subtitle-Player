@@ -12,6 +12,7 @@ class ConfigDialog : public QDialog
     Q_OBJECT
 
 public:
+    void load();
     ConfigDialog();
 
 public slots:
@@ -19,7 +20,6 @@ public slots:
     void save();
 
 private:
-    void load();
     void createIcons();
 
     QListWidget *contentsWidget;

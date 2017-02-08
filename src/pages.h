@@ -29,11 +29,12 @@ class GeneralPage : public PrefPage
 {
             Q_OBJECT
 public:
-    GeneralPage(QWidget *parent = 0);
+    GeneralPage(QWidget *parent = 0, ConfigDialog *configDialog = 0);
     void load();
     void save();
 public slots:
     void openDirDialog();
+    void resetSettings();
 private:
     QPlainTextEdit *dirEdit;
     //QLineEdit *adjustIntervalEdit;
@@ -45,7 +46,7 @@ class AppearancePage : public PrefPage
 {
     Q_OBJECT
 public:
-    AppearancePage(QWidget *parent = 0);
+    AppearancePage(QWidget *parent = 0, ConfigDialog *configDialog = 0);
     ~AppearancePage();
     void load();
     void save();

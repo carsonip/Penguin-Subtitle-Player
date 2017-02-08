@@ -9,7 +9,10 @@
 #include <QDebug>
 
 void ConfigDialog::load(){
-
+    QList<PrefPage*> list = pagesWidget->findChildren<PrefPage*>();
+    for (PrefPage *page : list){
+        page->load();
+    }
 }
 
 void ConfigDialog::save(){
@@ -27,8 +30,8 @@ ConfigDialog::ConfigDialog()
     contentsWidget->setMaximumWidth(128);
 
     pagesWidget = new QStackedWidget;
-    pagesWidget->addWidget(new GeneralPage);
-    pagesWidget->addWidget(new AppearancePage);
+    pagesWidget->addWidget(new GeneralPage(pagesWidget, this));
+    pagesWidget->addWidget(new AppearancePage(pagesWidget, this));
 
     QPushButton *closeButton = new QPushButton(tr("Cancel"));
     QPushButton *okButton = new QPushButton(tr("OK"));

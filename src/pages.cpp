@@ -24,6 +24,7 @@
 #include "QLineEdit"
 #include "prefconstants.h"
 #include <QCheckBox>
+#include "configdialog.h"
 
 void GeneralPage::load(){
     dirEdit->setPlainText(settings.value("gen/dir").toString());
@@ -42,8 +43,13 @@ void GeneralPage::openDirDialog(){
     if (!path.isNull()) dirEdit->setPlainText(path);
 }
 
-GeneralPage::GeneralPage(QWidget *parent)
-    : PrefPage(parent)
+void GeneralPage::resetSettings(){
+    settings.clear();
+    this->configDialog->load();
+}
+
+GeneralPage::GeneralPage(QWidget *parent, ConfigDialog *configDialog)
+    : PrefPage(parent, configDialog)
 {
     QGroupBox *filesGroup = new QGroupBox(tr("Files"));
 
@@ -69,6 +75,9 @@ GeneralPage::GeneralPage(QWidget *parent)
     adjustIntervalLayout->addWidget(adjustIntervalSpinBox);
     adjustIntervalLayout->addStretch(1);
 
+    QPushButton *resetButton = new QPushButton(tr("Reset All Preferences"));
+    connect(resetButton, SIGNAL(clicked()), this, SLOT(resetSettings()));
+
     QVBoxLayout *configLayout = new QVBoxLayout;
     configLayout->addLayout(defaultDirLayout);
     filesGroup->setLayout(configLayout);
@@ -81,6 +90,8 @@ GeneralPage::GeneralPage(QWidget *parent)
     mainLayout->addWidget(filesGroup);
     mainLayout->addStretch(1);
     mainLayout->addWidget(adjustGroup);
+    mainLayout->addStretch(1);
+    mainLayout->addWidget(resetButton);
     mainLayout->addStretch(1);
     setLayout(mainLayout);
 
@@ -159,8 +170,8 @@ AppearancePage::~AppearancePage(){
 
 }
 
-AppearancePage::AppearancePage(QWidget *parent)
-    : PrefPage(parent)
+AppearancePage::AppearancePage(QWidget *parent, ConfigDialog *configDialog)
+    : PrefPage(parent, configDialog)
 {
 
     /* Window */
