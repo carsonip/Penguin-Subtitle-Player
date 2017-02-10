@@ -55,7 +55,9 @@ SOURCES += src/configdialog.cpp \
     src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsSJISProber.cpp \
     src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsUniversalDetector.cpp \
     src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsUTF8Prober.cpp \
-    src/chardet.cpp
+    src/chardet.cpp \
+    src/parsers/srtparser.cpp \
+    src/parsers/ssaparser.cpp
 
 HEADERS  += src/configdialog.h \
     src/mainwindow.h \
@@ -95,7 +97,10 @@ HEADERS  += src/configdialog.h \
     src/libcharsetdetect/nspr-emu/prmem.h \
     src/libcharsetdetect/nspr-emu/prtypes.h \
     src/libcharsetdetect/nspr-emu/obsolete/protypes.h \
-    src/chardet.h
+    src/chardet.h \
+    src/parser.h \
+    src/parsers/srtparser.h \
+    src/parsers/ssaparser.h
 
 FORMS    += \
     resource/ui/mainwindow.ui
