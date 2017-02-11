@@ -132,3 +132,21 @@ DISTFILES += \
     src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/GB2312Freq.tab \
     src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/JISFreq.tab \
     src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/Makefile.in
+
+test { # the following files will be included for Unit test build
+    message(Test build)
+
+    QT += testlib #needed for QtTest
+    SOURCES -= src/main.cpp
+
+    HEADERS += \
+    src/test/parsers/testssaparser.h \
+    src/test/tests.h
+
+    SOURCES += \
+    src/test/parsers/testssaparser.cpp \
+    src/test/main.cpp \
+    src/test/tests.cpp
+} else {
+    message(Normal build) #we will just show this message for Debug/Release build
+}
