@@ -65,6 +65,26 @@ public:
     // Fetch the end time of last subtitle
     long long getFinishTime();
 
+    static bool validateItem(SubtitleItem currentItem, SubtitleItem previousItem)
+    {
+        // perform various validation checks on current subtitle item (section) compared to previous item
+
+        bool valid = true; // assume valid unless fails one or more of following checks
+
+        // check for current item start time before previous item start time
+        if(currentItem.start < previousItem.start)
+            valid = false;
+        /* This checks fixes getFinishTime incorrectly reporting final item end time
+         * as finish time when final item is out of time order (final item is invalid)
+         */
+
+        // check for current item end time before start time
+        if(currentItem.end < currentItem.start)
+            valid = false;
+
+        return valid;
+    }
+
 private:
 
     // Specifying new line character and tabs in regex
@@ -74,9 +94,6 @@ private:
     std::vector<SubtitleItem> subtitles;
     std::vector<SubtitleItem> subtitles_invalid;
     int lastIndex = -1;
-
-    // Validation function used during import from SRT
-    bool validateItem(SubtitleItem currentItem, SubtitleItem previousItem);
 
 };
 
