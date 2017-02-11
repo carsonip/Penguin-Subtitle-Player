@@ -50,7 +50,8 @@ std::vector<Engine::SubtitleItem> SsaParser::parseFile(QFile &f,
 
         long long start = timeFromStr(columns[startIndex]);
         long long end = timeFromStr(columns[endIndex]);
-        QString text = formatText(columns.mid(textIndex).join(","));
+        QString text =
+            formatText(QStringList(columns.mid(textIndex)).join(","));
         subtitles.push_back(Engine::SubtitleItem(0, start, end, text));
     }
 
