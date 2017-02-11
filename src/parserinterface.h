@@ -4,6 +4,7 @@
 #include "engine.h"
 #include <QFile>
 #include <QString>
+#include <QStringList>
 #include <vector>
 
 class ParserInterface {
