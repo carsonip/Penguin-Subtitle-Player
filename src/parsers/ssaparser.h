@@ -1,13 +1,17 @@
 #ifndef SSAPARSER_H
 #define SSAPARSER_H
 
-#include "../parser.h"
+#include "../parserinterface.h"
 #include <QRegularExpression>
 
-class SsaParser : public Parser{
+class SsaParser : public ParserInterface{
 
 public:
     std::vector<SrtEngine::SubtitleItem> parseFile(QFile &f, QString encoding);
+    QStringList getExtensions() {
+        return QStringList{".ssa", ".ass"};
+    }
+
 private:
     static long long timeFromStr(QString timeStr) {
         QRegularExpression patternStr("(\\d):(\\d{2}):(\\d{2}).(\\d{2})");

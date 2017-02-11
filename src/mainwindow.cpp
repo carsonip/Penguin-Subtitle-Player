@@ -27,6 +27,7 @@
 #include "QGraphicsDropShadowEffect"
 #include "QDesktopWidget"
 #include "chardet.h"
+#include "parser.h"
 
 /*
  * Constructor and destructor
@@ -199,7 +200,7 @@ void MainWindow::openFileDialog()
     QString dir = settings.value("gen/dir").toString();
     if (!QDir(dir).exists()) dir = "";
     QString path = QFileDialog::getOpenFileName(0,
-             tr("Open SRT File"), dir, tr("SRT Files (*.srt)"));
+             tr("Open Subtitle File"), dir, tr("Subtitle Files") + " (" + Parser().getFileDialogExt() + ")");
 
     if (!path.isNull()) {
         load(path);
@@ -243,7 +244,10 @@ void MainWindow::dropEvent(QDropEvent *e)
     //qDebug() << "dropEvent";
     QString path = e->mimeData()->urls()[0].toLocalFile();
     //qDebug() << "Dropped file:" << path;
-    if (!path.isNull() && path.toLower().right(4) == ".srt") {
+    int index = path.lastIndexOf(".");
+    QString ext = index == -1 ? "" : path.mid(index);
+
+    if (!path.isNull() && index != -1 && Parser().hasParser(ext)) {
         load(path);
     }
     this->show();

@@ -11,8 +11,7 @@
 #include<QTextCodec>
 #include <QRegularExpression>
 
-#include "parsers/srtparser.h"
-#include "parsers/ssaparser.h"
+#include"parser.h"
 
 using namespace std;
 
@@ -22,14 +21,13 @@ SrtEngine::SrtEngine(QString path, QString encoding)
     if (path.isEmpty())
         return;
 
-    try {
-        if (f.fileName().endsWith(".srt", Qt::CaseInsensitive)) {
-            parser = new SrtParser();
-        } else if (f.fileName().endsWith(".ssa", Qt::CaseInsensitive) || f.fileName().endsWith(".ass", Qt::CaseInsensitive)) {
-            parser = new SsaParser();
-        }
+    QFile f(path);
+    if (!f.open(QFile::ReadOnly | QFile::Text))
+        throw std::invalid_argument("File IO Error");
 
-    } catch(const exception& e) {
+    try {
+        subtitles = Parser().parseFile(f, encoding);
+    } catch (const exception& e) {
 
     }
 
