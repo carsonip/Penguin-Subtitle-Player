@@ -17,7 +17,35 @@ private:
         return SrtEngine::calculateTime(m.captured(1), m.captured(2), m.captured(3), m.captured(4) + "0");
     }
     static QString formatText(QString text) {
-        text = text.replace(QRegExp("\\\\N"), "<br>");
+        // ASS Tags:
+        // http://docs.aegisub.org/3.2/ASS_Tags/
+
+        // soft line break and hard line break
+        text = text.replace(QRegularExpression("\\\\n"), "<br>");
+        text = text.replace(QRegularExpression("\\\\N"), "<br>");
+
+        // ignore hard space
+        text = text.replace(QRegularExpression("\\\\h"), "");
+
+        // italics
+        text = text.replace(QRegularExpression("\\{\\\\i1\\}"), "<i>");
+        text = text.replace(QRegularExpression("\\{\\\\i0\\}"), "</i>");
+
+        // bold
+        text = text.replace(QRegularExpression("\\{\\\\b0\\}"), "</b>");
+        text = text.replace(QRegularExpression("\\{\\\\b\\d+?\\}"), "<b>");
+
+        // underline
+        text = text.replace(QRegularExpression("\\{\\\\u1\\}"), "<u>");
+        text = text.replace(QRegularExpression("\\{\\\\u0\\}"), "</u>");
+
+        // strikeout
+        text = text.replace(QRegularExpression("\\{\\\\s1\\}"), "<s>");
+        text = text.replace(QRegularExpression("\\{\\\\s0\\}"), "</s>");
+
+        // ignore and remove all other tags
+        text = text.replace(QRegularExpression("\\{\\\\*?\\}"), "");
+
         return text;
     }
 };
