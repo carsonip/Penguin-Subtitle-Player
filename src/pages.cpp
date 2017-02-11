@@ -1,56 +1,59 @@
 #include "pages.h"
-#include <QGroupBox>
-#include <QLabel>
-#include <QComboBox>
-#include <QHBoxLayout>
-#include <QVBoxLayout>
+#include "QLineEdit"
+#include "configdialog.h"
+#include "prefconstants.h"
+#include "prefpage.h"
 #include <QCheckBox>
-#include <QPushButton>
-#include <QListWidget>
-#include <QListWidgetItem>
-#include <QLineEdit>
-#include <QDateTimeEdit>
-#include <QSpinBox>
+#include <QCheckBox>
 #include <QColorDialog>
+#include <QComboBox>
+#include <QDateTimeEdit>
 #include <QDebug>
-#include <QSettings>
-#include <QTextEdit>
 #include <QFileDialog>
 #include <QFontDialog>
-#include <QPlainTextEdit>
+#include <QGroupBox>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QLineEdit>
+#include <QListWidget>
+#include <QListWidgetItem>
 #include <QPainter>
+#include <QPlainTextEdit>
+#include <QPushButton>
+#include <QSettings>
 #include <QSpinBox>
-#include "prefpage.h"
-#include "QLineEdit"
-#include "prefconstants.h"
-#include <QCheckBox>
-#include "configdialog.h"
+#include <QSpinBox>
+#include <QTextEdit>
+#include <QVBoxLayout>
 
-void GeneralPage::load(){
+void GeneralPage::load() {
     dirEdit->setPlainText(settings.value("gen/dir").toString());
-    adjustIntervalSpinBox->setValue(settings.value("gen/adjust", QVariant::fromValue(PrefConstants::ADJUST_INTERVAL)).toInt());
+    adjustIntervalSpinBox->setValue(
+        settings
+            .value("gen/adjust",
+                   QVariant::fromValue(PrefConstants::ADJUST_INTERVAL))
+            .toInt());
 }
 
-
-void GeneralPage::save(){
-    //qDebug() << "configsave";
+void GeneralPage::save() {
+    // qDebug() << "configsave";
     settings.setValue("gen/dir", dirEdit->toPlainText());
     settings.setValue("gen/adjust", adjustIntervalSpinBox->value());
 }
 
-void GeneralPage::openDirDialog(){
+void GeneralPage::openDirDialog() {
     QString path = QFileDialog::getExistingDirectory();
-    if (!path.isNull()) dirEdit->setPlainText(path);
+    if (!path.isNull())
+        dirEdit->setPlainText(path);
 }
 
-void GeneralPage::resetSettings(){
+void GeneralPage::resetSettings() {
     settings.clear();
     this->configDialog->load();
 }
 
 GeneralPage::GeneralPage(QWidget *parent, ConfigDialog *configDialog)
-    : PrefPage(parent, configDialog)
-{
+    : PrefPage(parent, configDialog) {
     QGroupBox *filesGroup = new QGroupBox(tr("Files"));
 
     QGroupBox *adjustGroup = new QGroupBox(tr("Adjustment"));
@@ -60,7 +63,8 @@ GeneralPage::GeneralPage(QWidget *parent, ConfigDialog *configDialog)
     QPushButton *dirBrowseButton = new QPushButton(tr("Browse"));
     connect(dirBrowseButton, SIGNAL(clicked()), this, SLOT(openDirDialog()));
 
-    QLabel *adjustIntervalLabel = new QLabel(tr("Time Adjustment Interval (ms): "));
+    QLabel *adjustIntervalLabel =
+        new QLabel(tr("Time Adjustment Interval (ms): "));
     adjustIntervalSpinBox = new QSpinBox();
     adjustIntervalSpinBox->setSingleStep(PrefConstants::ADJUST_INTERVAL_STEP);
     adjustIntervalSpinBox->setMaximum(PrefConstants::ADJUST_INTERVAL_MAX);
@@ -98,39 +102,56 @@ GeneralPage::GeneralPage(QWidget *parent, ConfigDialog *configDialog)
     this->load();
 }
 
-QColor AppearancePage::openColorDialog(QColor initial){
+QColor AppearancePage::openColorDialog(QColor initial) {
     QColor color = QColorDialog::getColor(initial, 0, tr("Select Color"));
-    if (color.isValid()){
+    if (color.isValid()) {
         return color;
     }
     return initial;
 }
 
-void AppearancePage::openBgColorDialog(){
+void AppearancePage::openBgColorDialog() {
     bgColor = openColorDialog(bgColor);
     paintColorButton(bgColorButton, bgColor);
 }
 
-void AppearancePage::openFontColorDialog(){
+void AppearancePage::openFontColorDialog() {
     fontColor = openColorDialog(fontColor);
     paintColorButton(fontColorButton, fontColor);
 }
 
-void AppearancePage::openFontShadowColorDialog(){
+void AppearancePage::openFontShadowColorDialog() {
     fontShadowColor = openColorDialog(fontShadowColor);
     paintColorButton(fontShadowColorButton, fontShadowColor);
 }
 
-void AppearancePage::load(){
+void AppearancePage::load() {
     /* Window */
-    bool isRememberWindowPosAndSize = settings.value("appearance/rememberWindowPosAndSize", QVariant::fromValue(PrefConstants::REMEMBER_WINDOW_POS_AND_SIZE)).toBool();
+    bool isRememberWindowPosAndSize =
+        settings
+            .value("appearance/rememberWindowPosAndSize",
+                   QVariant::fromValue(
+                       PrefConstants::REMEMBER_WINDOW_POS_AND_SIZE))
+            .toBool();
     rememberWindowPosAndSizeCbx->setChecked(isRememberWindowPosAndSize);
-    bgColor = QColor::fromRgb(settings.value("appearance/bgColor", QVariant::fromValue(PrefConstants::BG_COLOR)).toUInt());
+    bgColor =
+        QColor::fromRgb(settings
+                            .value("appearance/bgColor",
+                                   QVariant::fromValue(PrefConstants::BG_COLOR))
+                            .toUInt());
     paintColorButton(bgColorButton, bgColor);
-    bgAlphaSlider->setValue(settings.value("appearance/bgAlpha", QVariant::fromValue(PrefConstants::BG_ALPHA)).toInt());
+    bgAlphaSlider->setValue(
+        settings
+            .value("appearance/bgAlpha",
+                   QVariant::fromValue(PrefConstants::BG_ALPHA))
+            .toInt());
 
     /* Font */
-    fontColor = QColor::fromRgb(settings.value("appearance/fontColor", QVariant::fromValue(PrefConstants::FONT_COLOR)).toUInt());
+    fontColor = QColor::fromRgb(
+        settings
+            .value("appearance/fontColor",
+                   QVariant::fromValue(PrefConstants::FONT_COLOR))
+            .toUInt());
     paintColorButton(fontColorButton, fontColor);
 
     QFont initial;
@@ -138,19 +159,39 @@ void AppearancePage::load(){
     fontDialog->setCurrentFont(initial);
 
     /* Font Shadow */
-    bool isFontShadowEnable = settings.value("appearance/fontShadowEnable", QVariant::fromValue(PrefConstants::FONT_SHADOW_ENABLE)).toBool();
+    bool isFontShadowEnable =
+        settings
+            .value("appearance/fontShadowEnable",
+                   QVariant::fromValue(PrefConstants::FONT_SHADOW_ENABLE))
+            .toBool();
     fontShadowEnableCbx->setChecked(isFontShadowEnable);
-    fontShadowColor = QColor::fromRgb(settings.value("appearance/fontShadowColor", QVariant::fromValue(PrefConstants::FONT_SHADOW_COLOR)).toUInt());
+    fontShadowColor = QColor::fromRgb(
+        settings
+            .value("appearance/fontShadowColor",
+                   QVariant::fromValue(PrefConstants::FONT_SHADOW_COLOR))
+            .toUInt());
     paintColorButton(fontShadowColorButton, fontShadowColor);
-    fontShadowBlurRadiusSpinBox->setValue(settings.value("appearance/fontShadowBlurRadius", QVariant::fromValue(PrefConstants::FONT_SHADOW_BLUR_RADIUS)).toInt());
-    fontShadowOffsetXSpinBox->setValue(settings.value("appearance/fontShadowOffsetX", QVariant::fromValue(PrefConstants::FONT_SHADOW_OFFSET_X)).toInt());
-    fontShadowOffsetYSpinBox->setValue(settings.value("appearance/fontShadowOffsetY", QVariant::fromValue(PrefConstants::FONT_SHADOW_OFFSET_Y)).toInt());
+    fontShadowBlurRadiusSpinBox->setValue(
+        settings
+            .value("appearance/fontShadowBlurRadius",
+                   QVariant::fromValue(PrefConstants::FONT_SHADOW_BLUR_RADIUS))
+            .toInt());
+    fontShadowOffsetXSpinBox->setValue(
+        settings
+            .value("appearance/fontShadowOffsetX",
+                   QVariant::fromValue(PrefConstants::FONT_SHADOW_OFFSET_X))
+            .toInt());
+    fontShadowOffsetYSpinBox->setValue(
+        settings
+            .value("appearance/fontShadowOffsetY",
+                   QVariant::fromValue(PrefConstants::FONT_SHADOW_OFFSET_Y))
+            .toInt());
 }
 
-
-void AppearancePage::save(){
+void AppearancePage::save() {
     /* Window */
-    settings.setValue("appearance/rememberWindowPosAndSize", rememberWindowPosAndSizeCbx->isChecked());
+    settings.setValue("appearance/rememberWindowPosAndSize",
+                      rememberWindowPosAndSizeCbx->isChecked());
     settings.setValue("appearance/bgColor", bgColor.rgb());
     settings.setValue("appearance/bgAlpha", bgAlphaSlider->value());
 
@@ -159,25 +200,27 @@ void AppearancePage::save(){
     settings.setValue("appearance/font", fontDialog->currentFont().toString());
 
     /* Font Shadow */
-    settings.setValue("appearance/fontShadowEnable", fontShadowEnableCbx->isChecked());
+    settings.setValue("appearance/fontShadowEnable",
+                      fontShadowEnableCbx->isChecked());
     settings.setValue("appearance/fontShadowColor", fontShadowColor.rgb());
-    settings.setValue("appearance/fontShadowBlurRadius", fontShadowBlurRadiusSpinBox->value());
-    settings.setValue("appearance/fontShadowOffsetX", fontShadowOffsetXSpinBox->value());
-    settings.setValue("appearance/fontShadowOffsetY", fontShadowOffsetYSpinBox->value());
+    settings.setValue("appearance/fontShadowBlurRadius",
+                      fontShadowBlurRadiusSpinBox->value());
+    settings.setValue("appearance/fontShadowOffsetX",
+                      fontShadowOffsetXSpinBox->value());
+    settings.setValue("appearance/fontShadowOffsetY",
+                      fontShadowOffsetYSpinBox->value());
 }
 
-AppearancePage::~AppearancePage(){
-
-}
+AppearancePage::~AppearancePage() {}
 
 AppearancePage::AppearancePage(QWidget *parent, ConfigDialog *configDialog)
-    : PrefPage(parent, configDialog)
-{
+    : PrefPage(parent, configDialog) {
 
     /* Window */
     QGroupBox *windowAppearanceGroup = new QGroupBox(tr("Window"));
 
-    rememberWindowPosAndSizeCbx = new QCheckBox(tr("Remember last position and size"));
+    rememberWindowPosAndSizeCbx =
+        new QCheckBox(tr("Remember last position and size"));
 
     QLabel *bgColorLabel = new QLabel(tr("Background Color: "));
     bgColorButton = new QPushButton();
@@ -203,13 +246,13 @@ AppearancePage::AppearancePage(QWidget *parent, ConfigDialog *configDialog)
     windowAppearanceLayout->addLayout(bgAlphaLayout);
     windowAppearanceGroup->setLayout(windowAppearanceLayout);
 
-
     /* Subtitle Font */
     QGroupBox *fontGroup = new QGroupBox(tr("Subtitle Font"));
 
     QLabel *fontColorLabel = new QLabel(tr("Font Color: "));
     fontColorButton = new QPushButton();
-    connect(fontColorButton, SIGNAL(clicked()), this, SLOT(openFontColorDialog()));
+    connect(fontColorButton, SIGNAL(clicked()), this,
+            SLOT(openFontColorDialog()));
 
     QHBoxLayout *fontColorLayout = new QHBoxLayout;
     fontColorLayout->addWidget(fontColorLabel);
@@ -218,16 +261,17 @@ AppearancePage::AppearancePage(QWidget *parent, ConfigDialog *configDialog)
 
     fontDialog = new QFontDialog();
     fontDialog->setWindowFlags(Qt::Widget);
-    fontDialog->setOptions(QFontDialog::NoButtons | QFontDialog::DontUseNativeDialog);
+    fontDialog->setOptions(QFontDialog::NoButtons |
+                           QFontDialog::DontUseNativeDialog);
 
     QVBoxLayout *fontLayout = new QVBoxLayout;
     fontLayout->addLayout(fontColorLayout);
     fontLayout->addWidget(fontDialog);
     fontGroup->setLayout(fontLayout);
 
-
     /* Subtitle Font Drop Shadow */
-    QGroupBox *fontShadowGroup = new QGroupBox(tr("Subtitle Font Shadow / Text Outline"));
+    QGroupBox *fontShadowGroup =
+        new QGroupBox(tr("Subtitle Font Shadow / Text Outline"));
 
     /* Enable */
     fontShadowEnableCbx = new QCheckBox(tr("Enable Shadow"));
@@ -239,7 +283,8 @@ AppearancePage::AppearancePage(QWidget *parent, ConfigDialog *configDialog)
     /* Color */
     QLabel *fontShadowColorLabel = new QLabel(tr("Shadow Color: "));
     fontShadowColorButton = new QPushButton();
-    connect(fontShadowColorButton, SIGNAL(clicked()), this, SLOT(openFontShadowColorDialog()));
+    connect(fontShadowColorButton, SIGNAL(clicked()), this,
+            SLOT(openFontShadowColorDialog()));
 
     QHBoxLayout *fontShadowColorLayout = new QHBoxLayout;
     fontShadowColorLayout->addWidget(fontShadowColorLabel);
@@ -249,8 +294,10 @@ AppearancePage::AppearancePage(QWidget *parent, ConfigDialog *configDialog)
     /* Blur Radius */
     QLabel *fontShadowBlurRadiusLabel = new QLabel(tr("Blur Radius: "));
     fontShadowBlurRadiusSpinBox = new QSpinBox();
-    fontShadowBlurRadiusSpinBox->setSingleStep(PrefConstants::FONT_SHADOW_BLUR_RADIUS_STEP);
-    fontShadowBlurRadiusSpinBox->setMaximum(PrefConstants::FONT_SHADOW_BLUR_RADIUS_MAX);
+    fontShadowBlurRadiusSpinBox->setSingleStep(
+        PrefConstants::FONT_SHADOW_BLUR_RADIUS_STEP);
+    fontShadowBlurRadiusSpinBox->setMaximum(
+        PrefConstants::FONT_SHADOW_BLUR_RADIUS_MAX);
 
     QHBoxLayout *fontShadowBlurRadiusLayout = new QHBoxLayout;
     fontShadowBlurRadiusLayout->addWidget(fontShadowBlurRadiusLabel);
@@ -260,11 +307,15 @@ AppearancePage::AppearancePage(QWidget *parent, ConfigDialog *configDialog)
     /* Offset */
     QLabel *fontShadowOffsetLabel = new QLabel(tr("Offset X, Y: "));
     fontShadowOffsetXSpinBox = new QSpinBox();
-    fontShadowOffsetXSpinBox->setMinimum(-PrefConstants::FONT_SHADOW_OFFSET_LIMIT);
-    fontShadowOffsetXSpinBox->setMaximum(PrefConstants::FONT_SHADOW_OFFSET_LIMIT);
+    fontShadowOffsetXSpinBox->setMinimum(
+        -PrefConstants::FONT_SHADOW_OFFSET_LIMIT);
+    fontShadowOffsetXSpinBox->setMaximum(
+        PrefConstants::FONT_SHADOW_OFFSET_LIMIT);
     fontShadowOffsetYSpinBox = new QSpinBox();
-    fontShadowOffsetYSpinBox->setMinimum(-PrefConstants::FONT_SHADOW_OFFSET_LIMIT);
-    fontShadowOffsetYSpinBox->setMaximum(PrefConstants::FONT_SHADOW_OFFSET_LIMIT);
+    fontShadowOffsetYSpinBox->setMinimum(
+        -PrefConstants::FONT_SHADOW_OFFSET_LIMIT);
+    fontShadowOffsetYSpinBox->setMaximum(
+        PrefConstants::FONT_SHADOW_OFFSET_LIMIT);
 
     QHBoxLayout *fontShadowOffsetLayout = new QHBoxLayout;
     fontShadowOffsetLayout->addWidget(fontShadowOffsetLabel);
@@ -290,10 +341,10 @@ AppearancePage::AppearancePage(QWidget *parent, ConfigDialog *configDialog)
     this->load();
 }
 
-void AppearancePage::paintColorButton(QPushButton *button, QColor color){
+void AppearancePage::paintColorButton(QPushButton *button, QColor color) {
     QPixmap px(64, 64);
     QPainter pt(&px);
     pt.setBrush(color);
-    pt.drawRect(0, 0, px.width()-1, px.height()-1);
+    pt.drawRect(0, 0, px.width() - 1, px.height() - 1);
     button->setIcon(color.isValid() ? px : QIcon());
 }

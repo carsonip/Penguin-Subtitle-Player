@@ -1,10 +1,9 @@
+#include "QObject"
+#include "QPushButton"
 #include "mainwindow.h"
 #include <QApplication>
-#include "QPushButton"
-#include "QObject"
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
     a.setApplicationDisplayName("Penguin Subtitle Player");
     QCoreApplication::setOrganizationName("Carsons Lab");

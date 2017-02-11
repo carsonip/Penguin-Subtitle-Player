@@ -1,38 +1,40 @@
 #include "ssaparser.h"
 
-#include<iostream>
-#include<algorithm>
-#include<QString>
-#include<vector>
-#include<fstream>
-#include<streambuf>
 #include "QDebug"
-#include<QFile>
-#include<QTextCodec>
+#include <QFile>
 #include <QRegularExpression>
+#include <QString>
+#include <QTextCodec>
+#include <algorithm>
+#include <fstream>
+#include <iostream>
+#include <streambuf>
+#include <vector>
 
-std::vector<Engine::SubtitleItem> SsaParser::parseFile(QFile &f, QString encoding) {
+std::vector<Engine::SubtitleItem> SsaParser::parseFile(QFile &f,
+                                                       QString encoding) {
     std::vector<Engine::SubtitleItem> subtitles;
 
     QTextStream in(&f);
 
     // Setting default encoding method to be UTF-8
-    if(encoding.isEmpty())
+    if (encoding.isEmpty())
         encoding = "UTF-8";
 
-    if(QTextCodec::codecForName(encoding.toUtf8()))
+    if (QTextCodec::codecForName(encoding.toUtf8()))
         in.setCodec(encoding.toUtf8());
     else
         throw std::invalid_argument("Unknown Encoding");
 
-    while (!in.atEnd() && in.readLine() != "[Events]");
+    while (!in.atEnd() && in.readLine() != "[Events]")
+        ;
 
     QString formatLine = in.readLine();
     formatLine = formatLine.remove(0, 8); // remove "Format: "
 
     QStringList headers = formatLine.split(",");
     QStringList trimmedHeaders;
-    for (QString h : headers){
+    for (QString h : headers) {
         trimmedHeaders << h.trimmed();
     }
     headers = trimmedHeaders;
@@ -42,7 +44,7 @@ std::vector<Engine::SubtitleItem> SsaParser::parseFile(QFile &f, QString encodin
     int textIndex = headers.indexOf("Text");
 
     QString line;
-    while (!in.atEnd() && (line = in.readLine()) != ""){
+    while (!in.atEnd() && (line = in.readLine()) != "") {
         line = line.remove(0, 10); // remove "Dialogue: "
         QStringList columns = line.split(",");
 
@@ -51,8 +53,6 @@ std::vector<Engine::SubtitleItem> SsaParser::parseFile(QFile &f, QString encodin
         QString text = formatText(columns.mid(textIndex).join(","));
         subtitles.push_back(Engine::SubtitleItem(0, start, end, text));
     }
-
-
 
     return subtitles;
 }

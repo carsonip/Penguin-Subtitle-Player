@@ -3,15 +3,13 @@
 
 #include "../parserinterface.h"
 
-class SrtParser : public ParserInterface{
+class SrtParser : public ParserInterface {
 
-public:
+  public:
     std::vector<Engine::SubtitleItem> parseFile(QFile &f, QString encoding);
-    QStringList getExtensions() {
-        return QStringList{".srt"};
-    }
+    QStringList getExtensions() { return QStringList{".srt"}; }
 
-private:
+  private:
     // Specifying new line character and tabs in regex
     const QString nl = "\\n";
     const QString sp = "[ \\t]*";

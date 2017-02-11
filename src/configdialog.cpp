@@ -1,30 +1,29 @@
 #include "configdialog.h"
 #include "pages.h"
-#include <QListWidget>
-#include <QStackedWidget>
-#include <QPushButton>
-#include <QHBoxLayout>
-#include <QListWidgetItem>
-#include <QSize>
 #include <QDebug>
+#include <QHBoxLayout>
+#include <QListWidget>
+#include <QListWidgetItem>
+#include <QPushButton>
+#include <QSize>
+#include <QStackedWidget>
 
-void ConfigDialog::load(){
-    QList<PrefPage*> list = pagesWidget->findChildren<PrefPage*>();
-    for (PrefPage *page : list){
+void ConfigDialog::load() {
+    QList<PrefPage *> list = pagesWidget->findChildren<PrefPage *>();
+    for (PrefPage *page : list) {
         page->load();
     }
 }
 
-void ConfigDialog::save(){
-    QList<PrefPage*> list = pagesWidget->findChildren<PrefPage*>();
-    for (PrefPage *page : list){
+void ConfigDialog::save() {
+    QList<PrefPage *> list = pagesWidget->findChildren<PrefPage *>();
+    for (PrefPage *page : list) {
         page->save();
     }
     close();
 }
 
-ConfigDialog::ConfigDialog()
-{
+ConfigDialog::ConfigDialog() {
     contentsWidget = new QListWidget;
     contentsWidget->setMovement(QListView::Static);
     contentsWidget->setMaximumWidth(128);
@@ -61,8 +60,7 @@ ConfigDialog::ConfigDialog()
     setWindowTitle(tr("Preferences"));
 }
 
-void ConfigDialog::createIcons()
-{
+void ConfigDialog::createIcons() {
     const int HEIGHT = 50;
     QListWidgetItem *configButton = new QListWidgetItem(contentsWidget);
     configButton->setText(tr("General"));
@@ -75,12 +73,12 @@ void ConfigDialog::createIcons()
     updateButton->setSizeHint(QSize(0, HEIGHT));
 
     connect(contentsWidget,
-            SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)),
-            this, SLOT(changePage(QListWidgetItem*,QListWidgetItem*)));
+            SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)),
+            this, SLOT(changePage(QListWidgetItem *, QListWidgetItem *)));
 }
 
-void ConfigDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
-{
+void ConfigDialog::changePage(QListWidgetItem *current,
+                              QListWidgetItem *previous) {
     if (!current)
         current = previous;
 

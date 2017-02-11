@@ -1,26 +1,24 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
-#include "engine.h"
 #include "QString"
-#include <QSystemTrayIcon>
+#include "engine.h"
+#include <QMainWindow>
 #include <QSettings>
+#include <QSystemTrayIcon>
 
 namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
     Q_OBJECT
 
-
-public:
+  public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-public slots:
+  public slots:
     void update();
     void sliderMoved(int val);
     void togglePlay();
@@ -30,13 +28,13 @@ public slots:
     void openSettingsWindow();
     void openFileDialog();
 
-protected:
+  protected:
     void paintEvent(QPaintEvent *event);
 
-private:
+  private:
     Ui::MainWindow *ui;
 
-private:
+  private:
     void dragEnterEvent(QDragEnterEvent *e);
     void dragMoveEvent();
     void dropEvent(QDropEvent *e);
@@ -57,8 +55,7 @@ private:
     void adjustTime(long long interval);
     long long getAdjustInterval();
 
-
-private:
+  private:
     int m_nMouseClick_X_Coordinate;
     int m_nMouseClick_Y_Coordinate;
     long long int currentTime = 0LL;

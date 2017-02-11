@@ -7,19 +7,18 @@ class QListWidget;
 class QListWidgetItem;
 class QStackedWidget;
 
-class ConfigDialog : public QDialog
-{
+class ConfigDialog : public QDialog {
     Q_OBJECT
 
-public:
+  public:
     void load();
     ConfigDialog();
 
-public slots:
+  public slots:
     void changePage(QListWidgetItem *current, QListWidgetItem *previous);
     void save();
 
-private:
+  private:
     void createIcons();
 
     QListWidget *contentsWidget;
