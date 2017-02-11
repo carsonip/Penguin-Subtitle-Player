@@ -10,7 +10,6 @@ class SsaParser : public ParserInterface {
     std::vector<Engine::SubtitleItem> parseFile(QFile &f, QString encoding);
     QStringList getExtensions() { return QStringList{".ssa", ".ass"}; }
 
-  private:
     static long long timeFromStr(QString timeStr) {
         QRegularExpression patternStr("(\\d):(\\d{2}):(\\d{2}).(\\d{2})");
         QRegularExpressionMatch m = patternStr.match(timeStr);
@@ -48,7 +47,7 @@ class SsaParser : public ParserInterface {
         text = text.replace(QRegularExpression("\\{\\\\s0\\}"), "</s>");
 
         // ignore and remove all other tags
-        text = text.replace(QRegularExpression("\\{\\\\*?\\}"), "");
+        text = text.replace(QRegularExpression("\\{\\\\.*?\\}"), "");
 
         return text;
     }
