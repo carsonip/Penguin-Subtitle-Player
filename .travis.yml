@@ -7,12 +7,12 @@ install:
 
 script:
   - qmake --version
-  - g++ --version
-  - qmake "CONFIG+=test" PenguinSubtitlePlayer.pro #we gonna compile for Unit test first
+  - $CXX --version
+  - qmake "CONFIG+=test" "QMAKE_CXX=$CXX" "QMAKE_CC=$CC" PenguinSubtitlePlayer.pro #we gonna compile for Unit test first
   - make
   - ./build/release/PenguinSubtitlePlayer #run unit test
   - make clean #remove files (which are generated from unit test) for next build
-  - qmake PenguinSubtitlePlayer.pro #we gonna compile for actual program
+  - qmake "QMAKE_CXX=$CXX" "QMAKE_CC=$CC" PenguinSubtitlePlayer.pro #we gonna compile for actual program
   - make
 
 env: COMPILER_NAME=gcc CXX=g++-5 CC=gcc-5
