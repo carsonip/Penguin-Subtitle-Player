@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include "configdialog.h"
 #include "prefconstants.h"
-#include "srtengine.h"
+#include "engine.h"
 #include "QMouseEvent"
 #include "QObject"
 #include "QDebug"
@@ -130,7 +130,7 @@ void MainWindow::update()
 
     currentTime += INTERVAL;
     ui->subtitleLabel->setText(getSubtitle(false));
-    ui->timeLabel->setText((SrtEngine::millisToTimeString(currentTime) + " / " + SrtEngine::millisToTimeString(engine->getFinishTime())));
+    ui->timeLabel->setText((Engine::millisToTimeString(currentTime) + " / " + Engine::millisToTimeString(engine->getFinishTime())));
     ui->horizontalSlider->setValue((int) (currentTime / SLIDER_RATIO));
 }
 
@@ -142,7 +142,7 @@ void MainWindow::sliderMoved(int val)
     currentTime = val * SLIDER_RATIO;
 
     ui->subtitleLabel->setText(getSubtitle(true));
-    ui->timeLabel->setText((SrtEngine::millisToTimeString(currentTime)+ " / " + SrtEngine::millisToTimeString(engine->getFinishTime())));
+    ui->timeLabel->setText((Engine::millisToTimeString(currentTime)+ " / " + Engine::millisToTimeString(engine->getFinishTime())));
 }
 
 void MainWindow::togglePlay()
@@ -343,7 +343,7 @@ void MainWindow::load(QString path)
     QString encoding = getEncoding(chardet);
 
     delete engine;
-    engine = new SrtEngine(path, encoding);
+    engine = new Engine(path, encoding);
 
     setup();
 }
@@ -352,7 +352,7 @@ void MainWindow::setup()
 {
     currentTime = 0;
     this->ui->subtitleLabel->setText(getSubtitle(false));
-    this->ui->timeLabel->setText((SrtEngine::millisToTimeString(currentTime) + " / " + SrtEngine::millisToTimeString(engine->getFinishTime())));
+    this->ui->timeLabel->setText((Engine::millisToTimeString(currentTime) + " / " + Engine::millisToTimeString(engine->getFinishTime())));
     this->ui->horizontalSlider->setRange(0, (int) (engine->getFinishTime() / SLIDER_RATIO));
     this->ui->horizontalSlider->setEnabled(true);
     setPlay(true);

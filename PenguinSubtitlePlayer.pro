@@ -20,7 +20,6 @@ SOURCES += src/configdialog.cpp \
     src/mainwindow.cpp \
     src/pages.cpp \
     src/prefpage.cpp \
-    src/srtengine.cpp \
     src/libcharsetdetect/charsetdetect.cpp \
     src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/CharDistribution.cpp \
     src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/JpCntx.cpp \
@@ -58,13 +57,13 @@ SOURCES += src/configdialog.cpp \
     src/chardet.cpp \
     src/parsers/srtparser.cpp \
     src/parsers/ssaparser.cpp \
-    src/parser.cpp
+    src/parser.cpp \
+    src/engine.cpp
 
 HEADERS  += src/configdialog.h \
     src/mainwindow.h \
     src/pages.h \
     src/prefpage.h \
-    src/srtengine.h \
     src/prefconstants.h \
     src/libcharsetdetect/charsetdetect.h \
     src/libcharsetdetect/charsetdetectPriv.h \
@@ -102,7 +101,8 @@ HEADERS  += src/configdialog.h \
     src/parsers/srtparser.h \
     src/parsers/ssaparser.h \
     src/parserinterface.h \
-    src/parser.h
+    src/parser.h \
+    src/engine.h
 
 FORMS    += \
     resource/ui/mainwindow.ui

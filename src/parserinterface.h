@@ -4,11 +4,11 @@
 #include <QString>
 #include <vector>
 #include <QFile>
-#include "srtengine.h"
+#include "engine.h"
 
 class ParserInterface {
    public:
-      virtual std::vector<SrtEngine::SubtitleItem> parseFile(QFile &f, QString encoding) = 0;
+      virtual std::vector<Engine::SubtitleItem> parseFile(QFile &f, QString encoding) = 0;
       virtual QStringList getExtensions() = 0;
 };
 

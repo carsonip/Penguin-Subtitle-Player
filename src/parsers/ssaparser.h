@@ -7,7 +7,7 @@
 class SsaParser : public ParserInterface{
 
 public:
-    std::vector<SrtEngine::SubtitleItem> parseFile(QFile &f, QString encoding);
+    std::vector<Engine::SubtitleItem> parseFile(QFile &f, QString encoding);
     QStringList getExtensions() {
         return QStringList{".ssa", ".ass"};
     }
@@ -18,7 +18,7 @@ private:
         QRegularExpressionMatch m = patternStr.match(timeStr);
         // the last match + "0" because time in SSA is expressed as h:mm:ss:xx (xx being hundredths of seconds)
         // need to multiply the xx by 10
-        return SrtEngine::calculateTime(m.captured(1), m.captured(2), m.captured(3), m.captured(4) + "0");
+        return Engine::calculateTime(m.captured(1), m.captured(2), m.captured(3), m.captured(4) + "0");
     }
     static QString formatText(QString text) {
         // ASS Tags:

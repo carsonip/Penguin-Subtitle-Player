@@ -1,4 +1,4 @@
-#include "srtengine.h"
+#include "engine.h"
 #include<iostream>
 #include<algorithm>
 #include<QString>
@@ -15,9 +15,9 @@
 
 using namespace std;
 
-SrtEngine::SrtEngine(QString path, QString encoding)
+Engine::Engine(QString path, QString encoding)
 {
-    // Constructing SrtEngine using the subtitle information of the path in specified encoding method
+    // Constructing Engine using the subtitle information of the path in specified encoding method
     if (path.isEmpty())
         return;
 
@@ -56,12 +56,12 @@ bool SrtEngine::validateItem(SubtitleItem currentItem, SubtitleItem previousItem
     return valid;
 }
 
-SrtEngine::~SrtEngine()
+Engine::~Engine()
 {
 
 }
 
-QString SrtEngine::currentSubtitle(long long time, bool sliderMoved)
+QString Engine::currentSubtitle(long long time, bool sliderMoved)
 {
     // Fetch the suitable subtitle content for current time
 
@@ -103,7 +103,7 @@ QString SrtEngine::currentSubtitle(long long time, bool sliderMoved)
     return "";
 }
 
-long long SrtEngine::getFinishTime()
+long long Engine::getFinishTime()
 {
     // Fetch the end time of last subtitle
     if (subtitles.size() == 0) return 0LL;

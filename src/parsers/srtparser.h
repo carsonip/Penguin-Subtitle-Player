@@ -6,7 +6,7 @@
 class SrtParser : public ParserInterface{
 
 public:
-    std::vector<SrtEngine::SubtitleItem> parseFile(QFile &f, QString encoding);
+    std::vector<Engine::SubtitleItem> parseFile(QFile &f, QString encoding);
     QStringList getExtensions() {
         return QStringList{".srt"};
     }

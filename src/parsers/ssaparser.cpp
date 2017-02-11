@@ -11,8 +11,8 @@
 #include<QTextCodec>
 #include <QRegularExpression>
 
-std::vector<SrtEngine::SubtitleItem> SsaParser::parseFile(QFile &f, QString encoding) {
-    std::vector<SrtEngine::SubtitleItem> subtitles;
+std::vector<Engine::SubtitleItem> SsaParser::parseFile(QFile &f, QString encoding) {
+    std::vector<Engine::SubtitleItem> subtitles;
 
     QTextStream in(&f);
 
@@ -49,7 +49,7 @@ std::vector<SrtEngine::SubtitleItem> SsaParser::parseFile(QFile &f, QString enco
         long long start = timeFromStr(columns[startIndex]);
         long long end = timeFromStr(columns[endIndex]);
         QString text = formatText(columns.mid(textIndex).join(","));
-        subtitles.push_back(SrtEngine::SubtitleItem(0, start, end, text));
+        subtitles.push_back(Engine::SubtitleItem(0, start, end, text));
     }
 
 

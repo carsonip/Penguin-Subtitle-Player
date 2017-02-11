@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "srtengine.h"
+#include "engine.h"
 #include "QString"
 #include <QSystemTrayIcon>
 #include <QSettings>
@@ -64,7 +64,7 @@ private:
     long long int currentTime = 0LL;
     const long long int INTERVAL = 200LL;
     const long long int SLIDER_RATIO = 1000LL;
-    SrtEngine *engine = 0;
+    Engine *engine = 0;
     QTimer *timer = 0;
     bool isPlaying = false;
     QSystemTrayIcon *trayIcon;

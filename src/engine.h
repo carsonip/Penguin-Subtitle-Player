@@ -1,17 +1,17 @@
-#ifndef SRTENGINE_H
-#define SRTENGINE_H
+#ifndef ENGINE_H
+#define ENGINE_H
 
 #include "string"
 #include "vector"
 #include "QString"
 
-class SrtEngine
+class Engine
 {
 
 public:
 
-    SrtEngine(QString path, QString encoding);
-    ~SrtEngine();
+    Engine(QString path, QString encoding);
+    ~Engine();
 
 public:
 
@@ -80,4 +80,4 @@ private:
 
 };
 
-#endif // SRTENGINE_H
+#endif // ENGINE_H

@@ -15,7 +15,7 @@ Parser::~Parser()
     // not deleting the parsers in static Parser::parsers
 }
 
-std::vector<SrtEngine::SubtitleItem> Parser::parseFile(QFile &f, QString encoding)
+std::vector<Engine::SubtitleItem> Parser::parseFile(QFile &f, QString encoding)
 {
     for (ParserInterface *p : Parser::parsers) {
         bool ok = false;
@@ -26,7 +26,7 @@ std::vector<SrtEngine::SubtitleItem> Parser::parseFile(QFile &f, QString encodin
 
         return p->parseFile(f, encoding);
     }
-    return std::vector<SrtEngine::SubtitleItem>();
+    return std::vector<Engine::SubtitleItem>();
 }
 
 QStringList Parser::getExtensions()
