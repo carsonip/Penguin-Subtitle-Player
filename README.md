@@ -1,4 +1,4 @@
-# Penguin Subtitle Player
+# Penguin Subtitle Player [![Build Status](https://travis-ci.org/carsonip/Penguin-Subtitle-Player.svg?branch=master)](https://travis-ci.org/carsonip/Penguin-Subtitle-Player)
 
 Penguin Subtitle Player is an open-source, cross-platform standalone subtitle player, as an alternative to [Greenfish Subtitle Player](http://greenfish-subtitle-player.en.softonic.com/), [SrtViewer (Mac)](https://sourceforge.net/projects/srtviewer/), [SRTPlayer](https://sourceforge.net/projects/subtitleplayer/), [JustSubsPlayer](https://justsubsplayer.codeplex.com/) and [Free Subtitle Player](http://sourceforge.net/projects/freesubtitleplayer/).
 
