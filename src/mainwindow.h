@@ -64,8 +64,6 @@ class MainWindow : public QMainWindow {
     Engine *engine = 0;
     QTimer *timer = 0;
     bool isPlaying = false;
-    QSystemTrayIcon *trayIcon;
-    QMenu *menu;
     QSettings settings;
 };
 
