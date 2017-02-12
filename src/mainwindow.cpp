@@ -260,15 +260,18 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event) {
 void MainWindow::enterEvent(QEvent *event) {
     // qDebug() << Q_FUNC_INFO << this->objectName();
     // QWidget::enterEvent(event);
-    ui->verticalSpacer->changeSize(0, 0);
+    //    ui->verticalSpacer->changeSize(0, 0);
+    ui->topWidgets->show();
     ui->bottomWidgets->show();
+    ui->subtitleLabel->raise();
 }
 
 void MainWindow::leaveEvent(QEvent *event) {
     // qDebug() << Q_FUNC_INFO << this->objectName();
     // QWidget::leaveEvent(event);
-    ui->verticalSpacer->changeSize(0, ui->bottomWidgets->height() +
-                                          ui->gridLayout->verticalSpacing());
+    //    ui->verticalSpacer->changeSize(0, ui->bottomWidgets->height() +
+    //                                          ui->gridLayout->verticalSpacing());
+    ui->topWidgets->hide();
     ui->bottomWidgets->hide();
 }
 
