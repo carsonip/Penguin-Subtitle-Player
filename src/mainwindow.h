@@ -24,6 +24,8 @@ class MainWindow : public QMainWindow {
     void togglePlay();
     void fastForward();
     void fastBackward();
+    void next();
+    void previous();
     void iconActivated(QSystemTrayIcon::ActivationReason reason);
     void openSettingsWindow();
     void openFileDialog();
@@ -67,6 +69,7 @@ class MainWindow : public QMainWindow {
     QSystemTrayIcon *trayIcon;
     QMenu *menu;
     QSettings settings;
+    bool skipped = false;
 };
 
 #endif // MAINWINDOW_H

@@ -60,6 +60,8 @@ class Engine {
 
     // Fetch the suitable subtitle content for current time
     QString currentSubtitle(long long time, bool sliderMoved);
+    long long getTimeWithSubtitleOffset(long long time, int offset);
+    int currentSubtitleIndex(long long time, bool sliderMoved);
 
     // Fetch the end time of last subtitle
     long long getFinishTime();

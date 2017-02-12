@@ -51,6 +51,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->backwardButton, SIGNAL(clicked()), this, SLOT(fastBackward()));
     connect(ui->forwardButton, SIGNAL(clicked()), this, SLOT(fastForward()));
 
+    connect(ui->prevButton, SIGNAL(clicked()), this, SLOT(previous()));
+    connect(ui->nextButton, SIGNAL(clicked()), this, SLOT(next()));
+
     connect(ui->toggleButton, SIGNAL(clicked()), this, SLOT(togglePlay()));
     connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(openFileDialog()));
     connect(ui->prefButton, SIGNAL(clicked()), this,
@@ -128,7 +131,11 @@ void MainWindow::update() {
     }
 
     currentTime += INTERVAL;
-    ui->subtitleLabel->setText(getSubtitle(false));
+
+    // to ensure it searches for all subtitles even after next / prev
+    ui->subtitleLabel->setText(getSubtitle(skipped));
+    skipped = false;
+
     ui->timeLabel->setText(
         (Engine::millisToTimeString(currentTime) + " / " +
          Engine::millisToTimeString(engine->getFinishTime())));
@@ -160,6 +167,18 @@ void MainWindow::togglePlay() {
 void MainWindow::fastForward() { adjustTime(getAdjustInterval()); }
 
 void MainWindow::fastBackward() { adjustTime(-getAdjustInterval()); }
+
+void MainWindow::next() {
+    long long time = engine->getTimeWithSubtitleOffset(currentTime, 1);
+    currentTime = time;
+    skipped = true;
+}
+
+void MainWindow::previous() {
+    long long time = engine->getTimeWithSubtitleOffset(currentTime, -1);
+    currentTime = time;
+    skipped = true;
+}
 
 void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason) {
     switch (reason) {

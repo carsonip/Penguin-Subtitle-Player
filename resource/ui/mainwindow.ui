@@ -268,6 +268,33 @@
           <number>0</number>
          </property>
          <item>
+          <widget class="QPushButton" name="prevButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>42</width>
+             <height>42</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../resource.qrc">
+             <normaloff>:/icons/ic_skipprevious_48px.png</normaloff>:/icons/ic_skipprevious_48px.png</iconset>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+
+         <item>
           <widget class="QPushButton" name="backwardButton">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -355,6 +382,33 @@
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="nextButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>42</width>
+             <height>42</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../resource.qrc">
+             <normaloff>:/icons/ic_skipnext_48px.png</normaloff>:/icons/ic_skipnext_48px.png</iconset>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+
+<item>
           <widget class="QSlider" name="horizontalSlider">
            <property name="enabled">
             <bool>false</bool>

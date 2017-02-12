@@ -8,6 +8,8 @@
         <file>icons/ic_play_48px.png</file>
         <file>icons/ic_preference_48px.png</file>
         <file>icons/ic_resize_48px.png</file>
+        <file>icons/ic_skipprevious_48px.png</file>
+        <file>icons/ic_skipnext_48px.png</file>
         <file>icon.ico</file>
         <file>icon.png</file>
     </qresource>

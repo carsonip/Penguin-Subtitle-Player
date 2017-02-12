@@ -40,13 +40,34 @@ Engine::Engine(QString path, QString encoding) {
 Engine::~Engine() {}
 
 QString Engine::currentSubtitle(long long time, bool sliderMoved) {
+    int index = currentSubtitleIndex(time, sliderMoved);
+    if (index != -1) {
+        lastIndex = index;
+        return subtitles[index].text;
+    }
+    return "";
+}
+
+long long Engine::getTimeWithSubtitleOffset(long long time, int offset) {
+    int index = currentSubtitleIndex(time, true);
+    int targetIndex = index + offset;
+
+    if (targetIndex >= subtitles.size())
+        return this->getFinishTime();
+    if (targetIndex < 0)
+        return 0LL;
+
+    return subtitles[targetIndex].start;
+}
+
+int Engine::currentSubtitleIndex(long long time, bool sliderMoved) {
     // Fetch the suitable subtitle content for current time
 
     if (subtitles.size() == 0)
-        return "";
+        return -1;
 
-    if (!sliderMoved && time >= this->getFinishTime())
-        return "";
+    if (time >= this->getFinishTime())
+        return subtitles.size() - 1;
 
     if (lastIndex != -1 && !sliderMoved) {
         //  Linear search for next subtitle from last subtitle if slide bar is
@@ -54,7 +75,7 @@ QString Engine::currentSubtitle(long long time, bool sliderMoved) {
         for (int i = lastIndex, len = subtitles.size(); i < len; i++) {
             SubtitleItem item = subtitles[i];
             if (time >= item.start && time <= item.end)
-                return item.text;
+                return i;
         }
     } else {
         // Binary Search for initialization or if slide bar is manually set
@@ -72,12 +93,10 @@ QString Engine::currentSubtitle(long long time, bool sliderMoved) {
             }
         }
         if (time >= subtitles[lo].start && time <= subtitles[lo].end) {
-            lastIndex = lo;
-            return subtitles[lo].text;
+            return lo;
         }
-        lastIndex = -1;
     }
-    return "";
+    return -1;
 }
 
 long long Engine::getFinishTime() {
