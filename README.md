@@ -4,7 +4,7 @@ Penguin Subtitle Player is an open-source, cross-platform standalone subtitle pl
 
 You download the subtitle file (`.srt`, `.ssa`, `.ass`) from any sites you like and load it into the subtitle player. The subtitle player provides a translucent window which always stays on the top so that subtitles can be shown on top of the video without blocking anything.
 
-With Penguin Subtitle Player, just open your favorite online streaming site, load the srt into the player, and enjoy.
+With Penguin Subtitle Player, just open your favorite online streaming site, load the subtitle file into the player, and enjoy.
 
 ![Screenshot 1](https://a.fsdn.com/con/app/proj/penguinsubtitleplayer/screenshots/Windows_03.png)
 ![Screenshot 2](https://a.fsdn.com/con/app/proj/penguinsubtitleplayer/screenshots/Windows_00.png)
