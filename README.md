@@ -1,8 +1,8 @@
-# Penguin Subtitle Player [![Build Status](https://travis-ci.org/carsonip/Penguin-Subtitle-Player.svg?branch=master)](https://travis-ci.org/carsonip/Penguin-Subtitle-Player)
+# Penguin Subtitle Player [![GitHub release](https://img.shields.io/github/release/carsonip/Penguin-Subtitle-Player.svg)]() [![Build Status](https://travis-ci.org/carsonip/Penguin-Subtitle-Player.svg?branch=master)](https://travis-ci.org/carsonip/Penguin-Subtitle-Player) [![SourceForge](https://img.shields.io/sourceforge/dt/PenguinSubtitlePlayer.svg)]()
 
 Penguin Subtitle Player is an open-source, cross-platform standalone subtitle player, as an alternative to [Greenfish Subtitle Player](http://greenfish-subtitle-player.en.softonic.com/), [SrtViewer (Mac)](https://sourceforge.net/projects/srtviewer/), [SRTPlayer](https://sourceforge.net/projects/subtitleplayer/), [JustSubsPlayer](https://justsubsplayer.codeplex.com/) and [Free Subtitle Player](http://sourceforge.net/projects/freesubtitleplayer/).
 
-You download the .srt file from any sites you like and load it into the subtitle player. The subtitle player provides a translucent window which always stays on the top so that subtitles can be shown on top of the video without blocking anything.
+You download the subtitle file (`.srt`, `.ssa`, `.ass`) from any sites you like and load it into the subtitle player. The subtitle player provides a translucent window which always stays on the top so that subtitles can be shown on top of the video without blocking anything.
 
 With Penguin Subtitle Player, just open your favorite online streaming site, load the srt into the player, and enjoy.
 
@@ -14,9 +14,11 @@ With Penguin Subtitle Player, just open your favorite online streaming site, loa
 
 * 700+ encoding supported (default: UTF8)
 * Auto encoding detection
-* Drag & drop SRT file
+* Multiple subtitle formats supported (`.srt`, `.ssa`, `.ass`)
+* Drag & drop file
 * Customizable layout (Frame size, Background color & Opacity, Font style)
 * Time fine tuning (Fast forward / backward with customizable time interval)
+* Skip to previous / next subtitle
 
 ## Download
 
