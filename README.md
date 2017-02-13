@@ -27,6 +27,10 @@ Current Version: 1.0.0
 * [Linux](https://sourceforge.net/projects/penguinsubtitleplayer/files/Penguin%20Subtitle%20Player/0.3.0/PenguinSubtitlePlayer-Linux.tar.gz/download)
 * [Mac OS X](https://sourceforge.net/projects/penguinsubtitleplayer/files/Penguin%20Subtitle%20Player/1.0.0/PenguinSubtitlePlayer-OSX.zip/download)
 
+## Release Notes
+
+See [GitHub Release](https://github.com/carsonip/Penguin-Subtitle-Player/releases).
+
 ## Installation
 
 No installation required.
@@ -91,23 +95,6 @@ CONFIG += static \
 3. Commit your changes: `git commit -am 'Add some feature'`
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request :D
-
-## History
-
-0.3.0:
-* Added customizable subtitle shadow (text outline)
-* Customizable subtitle font color
-* Remember window position and size
-* Minor bug fixes
-
-0.2.1:
-* Fixed subtitle delay problem
-
-0.2.0:
-* Added Charset Detection
-
-0.1.0:
-* First beta release
 
 ## Credits
 
