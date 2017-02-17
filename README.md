@@ -24,8 +24,23 @@ With Penguin Subtitle Player, just open your favorite online streaming site, loa
 
 Current Version: 1.0.0
 * [Windows](https://sourceforge.net/projects/penguinsubtitleplayer/files/Penguin%20Subtitle%20Player/1.0.0/PenguinSubtitlePlayer-Windows.zip/download)
-* [Linux](https://sourceforge.net/projects/penguinsubtitleplayer/files/Penguin%20Subtitle%20Player/1.0.0/PenguinSubtitlePlayer-Linux.tar.gz/download)
 * [Mac OS X](https://sourceforge.net/projects/penguinsubtitleplayer/files/Penguin%20Subtitle%20Player/1.0.0/PenguinSubtitlePlayer-OSX.zip/download)
+* Linux
+  * Ubuntu
+
+  ```
+  sudo add-apt-repository ppa:nilarimogard/webupd8
+  sudo apt update
+  sudo apt install penguin-subtitle-player
+  ```
+  * [Arch Linux](https://aur.archlinux.org/packages/penguin-subtitle-player-git/)
+  * [Fedora](https://copr.fedorainfracloud.org/coprs/davidva/penguin-subtitle-player/)
+
+  ```
+  su
+  dnf -y copr enable davidva/penguin-subtitle-player && dnf -y install penguin-subtitle-player
+  ```
+  * [Standalone version](https://sourceforge.net/projects/penguinsubtitleplayer/files/Penguin%20Subtitle%20Player/1.0.0/PenguinSubtitlePlayer-Linux.tar.gz/download) (not recommended)
 
 ## Release Notes
 
