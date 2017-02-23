@@ -103,6 +103,14 @@ CONFIG += static \
           c++11
 ```
 
+## Testing
+
+1. Run `qmake "CONFIG+=test" PenguinSubtitlePlayer.pro`
+2. Build from the makefile as described in the Building part
+3. Run the executable
+
+Note: This project is using [TravisCI](https://travis-ci.org/carsonip/Penguin-Subtitle-Player) for testing.
+
 ## Contributing
 
 1. Fork it!
