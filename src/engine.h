@@ -30,6 +30,10 @@ class Engine {
             this->end = end;
             this->text = text;
         }
+        bool operator==(const SubtitleItem &rhs) const {
+            return this->section == rhs.section && this->start == rhs.start &&
+                   this->end == rhs.end && this->text == rhs.text;
+        }
     };
 
     static QString millisToTimeString(long long ms) {

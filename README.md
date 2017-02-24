@@ -1,6 +1,6 @@
-# Penguin Subtitle Player [![GitHub release](https://img.shields.io/github/release/carsonip/Penguin-Subtitle-Player.svg)]() [![Build Status](https://travis-ci.org/carsonip/Penguin-Subtitle-Player.svg?branch=master)](https://travis-ci.org/carsonip/Penguin-Subtitle-Player) [![SourceForge](https://img.shields.io/sourceforge/dt/PenguinSubtitlePlayer.svg)]() [![Github All Releases](https://img.shields.io/github/downloads/carsonip/Penguin-Subtitle-Player/total.svg)]()
+# Penguin Subtitle Player [![GitHub release](https://img.shields.io/github/release/carsonip/Penguin-Subtitle-Player.svg)](https://github.com/carsonip/Penguin-Subtitle-Player/releases) [![Build Status](https://travis-ci.org/carsonip/Penguin-Subtitle-Player.svg?branch=master)](https://travis-ci.org/carsonip/Penguin-Subtitle-Player) [![SourceForge](https://img.shields.io/sourceforge/dt/PenguinSubtitlePlayer.svg)](https://sourceforge.net/projects/penguinsubtitleplayer/) [![Github All Releases](https://img.shields.io/github/downloads/carsonip/Penguin-Subtitle-Player/total.svg)](https://github.com/carsonip/Penguin-Subtitle-Player/releases)
 
-Penguin Subtitle Player is an open-source, cross-platform standalone subtitle player, as an alternative to [Greenfish Subtitle Player](http://greenfish-subtitle-player.en.softonic.com/), [SrtViewer (Mac)](https://sourceforge.net/projects/srtviewer/), [SRTPlayer](https://sourceforge.net/projects/subtitleplayer/), [JustSubsPlayer](https://justsubsplayer.codeplex.com/) and [Free Subtitle Player](http://sourceforge.net/projects/freesubtitleplayer/).
+Penguin Subtitle Player is an open-source, cross-platform standalone subtitle player, as an alternative to [Greenfish Subtitle Player](http://www.softpedia.com/get/Multimedia/Video/Other-VIDEO-Tools/Greenfish-Subtitle-Player.shtml), [SrtViewer (Mac)](https://sourceforge.net/projects/srtviewer/), [SRTPlayer](https://sourceforge.net/projects/subtitleplayer/), [JustSubsPlayer](https://justsubsplayer.codeplex.com/) and [Free Subtitle Player](http://sourceforge.net/projects/freesubtitleplayer/).
 
 You download the subtitle file (`.srt`, `.ssa`, `.ass`) from any sites you like and load it into the subtitle player. The subtitle player provides a translucent window which always stays on the top so that subtitles can be shown on top of the video without blocking anything.
 
@@ -24,8 +24,23 @@ With Penguin Subtitle Player, just open your favorite online streaming site, loa
 
 Current Version: 1.0.0
 * [Windows](https://sourceforge.net/projects/penguinsubtitleplayer/files/Penguin%20Subtitle%20Player/1.0.0/PenguinSubtitlePlayer-Windows.zip/download)
-* [Linux](https://sourceforge.net/projects/penguinsubtitleplayer/files/Penguin%20Subtitle%20Player/1.0.0/PenguinSubtitlePlayer-Linux.tar.gz/download)
 * [Mac OS X](https://sourceforge.net/projects/penguinsubtitleplayer/files/Penguin%20Subtitle%20Player/1.0.0/PenguinSubtitlePlayer-OSX.zip/download)
+* Linux
+  * Ubuntu
+
+  ```
+  sudo add-apt-repository ppa:nilarimogard/webupd8
+  sudo apt update
+  sudo apt install penguin-subtitle-player
+  ```
+  * [Arch Linux](https://aur.archlinux.org/packages/penguin-subtitle-player-git/)
+  * [Fedora](https://copr.fedorainfracloud.org/coprs/davidva/penguin-subtitle-player/)
+
+  ```
+  su
+  dnf -y copr enable davidva/penguin-subtitle-player && dnf -y install penguin-subtitle-player
+  ```
+  * [Standalone version](https://sourceforge.net/projects/penguinsubtitleplayer/files/Penguin%20Subtitle%20Player/1.0.0/PenguinSubtitlePlayer-Linux.tar.gz/download) (not recommended)
 
 ## Release Notes
 
@@ -87,6 +102,14 @@ In case you would like to deploy a version which does not require Qt libraries i
 CONFIG += static \
           c++11
 ```
+
+## Testing
+
+1. Run `qmake "CONFIG+=test" PenguinSubtitlePlayer.pro`
+2. Build from the makefile as described in the Building part
+3. Run the executable
+
+Note: This project is using [TravisCI](https://travis-ci.org/carsonip/Penguin-Subtitle-Player) for testing.
 
 ## Contributing
 
