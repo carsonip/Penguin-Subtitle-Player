@@ -11,7 +11,7 @@ class SsaParser : public ParserInterface {
     QStringList getExtensions() { return QStringList{".ssa", ".ass"}; }
 
     static long long timeFromStr(QString timeStr) {
-        QRegularExpression patternStr("(\\d):(\\d{2}):(\\d{2}).(\\d{2})");
+        QRegularExpression patternStr(R"((\d):(\d{2}):(\d{2}).(\d{2}))");
         QRegularExpressionMatch m = patternStr.match(timeStr);
         // the last match + "0" because time in SSA is expressed as h:mm:ss:xx
         // (xx being hundredths of seconds)
@@ -24,30 +24,38 @@ class SsaParser : public ParserInterface {
         // http://docs.aegisub.org/3.2/ASS_Tags/
 
         // soft line break and hard line break
-        text = text.replace(QRegularExpression("\\\\n"), "<br>");
-        text = text.replace(QRegularExpression("\\\\N"), "<br>");
+        text = text.replace(R"(\n)", "<br>");
+        text = text.replace(R"(\N)", "<br>");
 
         // ignore hard space
-        text = text.replace(QRegularExpression("\\\\h"), "");
+        text = text.replace(R"(\h)", "");
 
         // italics
-        text = text.replace(QRegularExpression("\\{\\\\i1\\}"), "<i>");
-        text = text.replace(QRegularExpression("\\{\\\\i0\\}"), "</i>");
+        text = text.replace(R"({\i1})", "<i>");
+        text = text.replace(R"({\i0})", "</i>");
 
         // bold
-        text = text.replace(QRegularExpression("\\{\\\\b0\\}"), "</b>");
-        text = text.replace(QRegularExpression("\\{\\\\b\\d+?\\}"), "<b>");
+        // pattern: \{\\b\d+?\}
+        text = text.replace(R"({\b0})", "</b>");
+        text = text.replace(
+            QRegularExpression(QRegularExpression::escape(R"({\b)") +
+                               R"(\d+?)" + QRegularExpression::escape(R"(})")),
+            "<b>");
 
         // underline
-        text = text.replace(QRegularExpression("\\{\\\\u1\\}"), "<u>");
-        text = text.replace(QRegularExpression("\\{\\\\u0\\}"), "</u>");
+        text = text.replace(R"({\u1})", "<u>");
+        text = text.replace(R"({\u0})", "</u>");
 
         // strikeout
-        text = text.replace(QRegularExpression("\\{\\\\s1\\}"), "<s>");
-        text = text.replace(QRegularExpression("\\{\\\\s0\\}"), "</s>");
+        text = text.replace(R"({\s1})", "<s>");
+        text = text.replace(R"({\s0})", "</s>");
 
         // ignore and remove all other tags
-        text = text.replace(QRegularExpression("\\{\\\\.*?\\}"), "");
+        // pattern: \{\.*?\}
+        text = text.replace(
+            QRegularExpression(QRegularExpression::escape(R"({\)") + R"(.*?)" +
+                               QRegularExpression::escape(R"(})")),
+            "");
 
         return text;
     }
