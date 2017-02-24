@@ -20,6 +20,7 @@ class TestSsaParser : public QObject {
 
   private slots:
     void testFormatText();
+    void testParseFile();
 };
 
 #endif // TESTSSAPARSER_H
