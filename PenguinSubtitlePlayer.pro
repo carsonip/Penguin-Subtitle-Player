@@ -141,12 +141,14 @@ test { # the following files will be included for Unit test build
 
     HEADERS += \
     src/test/parsers/testssaparser.h \
-    src/test/tests.h
+    src/test/tests.h \
+    src/test/parsers/testsrtparser.h
 
     SOURCES += \
     src/test/parsers/testssaparser.cpp \
     src/test/main.cpp \
-    src/test/tests.cpp
+    src/test/tests.cpp \
+    src/test/parsers/testsrtparser.cpp
 } else {
     message(Normal build) #we will just show this message for Debug/Release build
 }
