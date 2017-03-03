@@ -22,6 +22,9 @@ Engine::Engine(QString path, QString encoding) {
         return;
 
     QFile f(path);
+
+    // Description of flag QIODevice::Text
+    // When reading, the end-of-line terminators are translated to '\n'.
     if (!f.open(QIODevice::ReadOnly | QIODevice::Text))
         throw std::invalid_argument("File IO Error");
 

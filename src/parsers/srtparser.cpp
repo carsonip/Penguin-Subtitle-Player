@@ -29,13 +29,9 @@ std::vector<Engine::SubtitleItem> SrtParser::parseFile(QFile &f,
 
     QString content = in.readAll();
 
-    // Converting from CR-LF to LF line breaking
-    content.remove(QChar('\r'));
     // Regex for capturing time information and subtitle content
     QRegularExpression patternStr(
-        "(\\d+)" + sp + nl + "(\\d{2}):(\\d{2}):(\\d{2}),(\\d{3})" + sp +
-        "-->" + sp + "(\\d{2}):(\\d{2}):(\\d{2}),(\\d{3})" + sp +
-        "(X1:\\d.*?)??" + nl + "([\\s\\S]*?)" + nl + nl);
+        R"((\d+).*?\n(\d{2}):(\d{2}):(\d{2}),(\d{3}) --> (\d{2}):(\d{2}):(\d{2}),(\d{3}).*?\n([\s\S]*?)\n\n)");
 
     QRegularExpressionMatchIterator it = patternStr.globalMatch(content);
     // Fetching subtitle information one by one
@@ -46,8 +42,7 @@ std::vector<Engine::SubtitleItem> SrtParser::parseFile(QFile &f,
                                                 m.captured(4), m.captured(5));
         long long end = Engine::calculateTime(m.captured(6), m.captured(7),
                                               m.captured(8), m.captured(9));
-        QString text = m.captured(11);
-
+        QString text = m.captured(10);
         // Validate current subtitle section against previous:
         Engine::SubtitleItem currentItem =
             Engine::SubtitleItem(section, start, end, text);

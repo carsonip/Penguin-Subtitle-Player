@@ -95,10 +95,6 @@ class Engine {
     }
 
   private:
-    // Specifying new line character and tabs in regex
-    const QString nl = "\\n";
-    const QString sp = "[ \\t]*";
-
     std::vector<SubtitleItem> subtitles;
     std::vector<SubtitleItem> subtitles_invalid;
     int lastIndex = -1;
