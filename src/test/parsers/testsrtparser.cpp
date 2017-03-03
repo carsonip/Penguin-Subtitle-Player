@@ -50,7 +50,7 @@ void TestSrtParser::testString(QString content) {
     tmpFile.close();
 
     QFile file(filename);
-    if (!file.open(QFile::ReadOnly | QFile::Text)) {
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QFAIL("Cannot read temp file");
     }
 

@@ -43,7 +43,7 @@ Dialogue: 0,0:03:45.15,1:59:59.99,Default,,0000,0000,0000,,{\i1}Italics{\i0}\n{\
     tmpFile.close();
 
     QFile file(filename);
-    if (!file.open(QFile::ReadOnly | QFile::Text)) {
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QFAIL("Cannot read temp file");
     }
 
