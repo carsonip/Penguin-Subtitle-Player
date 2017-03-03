@@ -22,7 +22,7 @@ Engine::Engine(QString path, QString encoding) {
         return;
 
     QFile f(path);
-    if (!f.open(QFile::ReadOnly | QFile::Text))
+    if (!f.open(QIODevice::ReadOnly | QIODevice::Text))
         throw std::invalid_argument("File IO Error");
 
     try {
