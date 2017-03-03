@@ -18,8 +18,12 @@ class TestSrtParser : public QObject {
   public:
     TestSrtParser();
 
+  private:
+    void testString(QString content);
+
   private slots:
-    void testParseFile();
+    void testParseFileLf();
+    void testParseFileCrLf();
 };
 
 #endif // TESTSRTPARSER_H
