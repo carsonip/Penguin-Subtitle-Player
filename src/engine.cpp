@@ -55,7 +55,7 @@ long long Engine::getTimeWithSubtitleOffset(long long time, int offset) {
     int index = currentSubtitleIndex(time, true);
     int targetIndex = index + offset;
 
-    if (targetIndex >= subtitles.size())
+    if (targetIndex >= (int)subtitles.size())
         return this->getFinishTime();
     if (targetIndex < 0)
         return 0LL;
