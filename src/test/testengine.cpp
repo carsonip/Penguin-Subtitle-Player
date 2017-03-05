@@ -50,6 +50,25 @@ void TestEngine::testGetFinishTime() {
     QCOMPARE(engine.getFinishTime(), 7199990LL);
 }
 
+void TestEngine::testGetTimeWithSubtitleOffset() {
+    Engine engine = Engine(tmpFileName, "");
+
+    QCOMPARE(engine.getTimeWithSubtitleOffset(50LL, 1), 60300LL);  // 0 + 1 = 1
+    QCOMPARE(engine.getTimeWithSubtitleOffset(50LL, 2), 225150LL); // 0 + 2 = 2
+    QCOMPARE(engine.getTimeWithSubtitleOffset(50LL, 3),
+             7199990LL); // greater than end
+    QCOMPARE(engine.getTimeWithSubtitleOffset(0LL, 1), 50LL); // -1 + 1 = 0
+
+    QCOMPARE(engine.getTimeWithSubtitleOffset(7199990LL, -2),
+             50LL); // 2 - 2 = 0
+    QCOMPARE(engine.getTimeWithSubtitleOffset(7199990LL, -3),
+             0LL); // before start
+
+    QCOMPARE(engine.getTimeWithSubtitleOffset(0LL, 0), 0LL);   // -1 + 0 = -1
+    QCOMPARE(engine.getTimeWithSubtitleOffset(0LL, -1), 0LL);  // -1 - 1 = -1
+    QCOMPARE(engine.getTimeWithSubtitleOffset(50LL, -1), 0LL); // 0 - 1 = -1
+}
+
 void TestEngine::cleanupTestCase() {
     QFile tmpFile(tmpFileName);
     tmpFile.remove();

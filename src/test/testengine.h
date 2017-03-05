@@ -15,6 +15,7 @@ class TestEngine : public QObject {
     void initTestCase();
     void testGetFinishTime();
     void testCurrentSubtitleIndex();
+    void testGetTimeWithSubtitleOffset();
     void cleanupTestCase();
 };
 
