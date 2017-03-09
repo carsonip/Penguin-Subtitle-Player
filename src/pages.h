@@ -70,4 +70,13 @@ class AppearancePage : public PrefPage {
     QSpinBox *fontShadowOffsetYSpinBox;
 };
 
+class AboutPage : public PrefPage {
+    Q_OBJECT
+  public:
+    AboutPage(QWidget *parent = 0, ConfigDialog *configDialog = 0);
+    ~AboutPage();
+    void load();
+    void save();
+};
+
 #endif

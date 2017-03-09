@@ -7,6 +7,7 @@
 #include <QCheckBox>
 #include <QColorDialog>
 #include <QComboBox>
+#include <QCoreApplication>
 #include <QDateTimeEdit>
 #include <QDebug>
 #include <QFileDialog>
@@ -348,3 +349,60 @@ void AppearancePage::paintColorButton(QPushButton *button, QColor color) {
     pt.drawRect(0, 0, px.width() - 1, px.height() - 1);
     button->setIcon(color.isValid() ? px : QIcon());
 }
+
+AboutPage::AboutPage(QWidget *parent, ConfigDialog *configDialog)
+    : PrefPage(parent, configDialog) {
+
+    QLabel *nameLabel = new QLabel(tr("Penguin Subtitle Player"));
+    QFont font = nameLabel->font();
+    font.setPointSize(20);
+    font.setBold(true);
+    nameLabel->setFont(font);
+    QPixmap iconPixmap(":/icon.png");
+    iconPixmap = iconPixmap.scaled(QSize(50, 50), Qt::KeepAspectRatio,
+                                   Qt::SmoothTransformation);
+    QLabel *iconLabel = new QLabel();
+    iconLabel->setPixmap(iconPixmap);
+
+    QHBoxLayout *nameLayout = new QHBoxLayout;
+    nameLayout->addWidget(iconLabel);
+    nameLayout->addWidget(nameLabel);
+    nameLayout->addStretch(1);
+
+    QLabel *versionLabel = new QLabel(tr("Version: "));
+    QLabel *versionValueLabel =
+        new QLabel(QString(QCoreApplication::applicationVersion()));
+
+    QHBoxLayout *versionLayout = new QHBoxLayout;
+    versionLayout->addWidget(versionLabel);
+    versionLayout->addWidget(versionValueLabel);
+    versionLayout->addStretch(1);
+
+    QLabel *websiteLabel = new QLabel(tr("Website: "));
+    QLabel *websiteValueLabel =
+        new QLabel("<a "
+                   "href=\"https://github.com/carsonip/"
+                   "Penguin-Subtitle-Player\">github.com/carsonip/"
+                   "Penguin-Subtitle-Player</a>");
+    websiteValueLabel->setTextFormat(Qt::RichText);
+    websiteValueLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    websiteValueLabel->setOpenExternalLinks(true);
+
+    QHBoxLayout *websiteLayout = new QHBoxLayout;
+    websiteLayout->addWidget(websiteLabel);
+    websiteLayout->addWidget(websiteValueLabel);
+    websiteLayout->addStretch(1);
+
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    mainLayout->addLayout(nameLayout);
+    mainLayout->addLayout(versionLayout);
+    mainLayout->addLayout(websiteLayout);
+    mainLayout->addStretch(1);
+
+    setLayout(mainLayout);
+}
+
+AboutPage::~AboutPage() {}
+
+void AboutPage::load() {}
+void AboutPage::save() {}

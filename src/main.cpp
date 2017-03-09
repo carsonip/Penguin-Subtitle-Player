@@ -9,6 +9,7 @@ int main(int argc, char *argv[]) {
     QCoreApplication::setOrganizationName("Carson Ip");
     QCoreApplication::setOrganizationDomain("carsonip.github.io");
     QCoreApplication::setApplicationName("Penguin Subtitle Player");
+    a.setApplicationVersion(APP_VERSION);
     MainWindow w;
     w.show();
     return a.exec();

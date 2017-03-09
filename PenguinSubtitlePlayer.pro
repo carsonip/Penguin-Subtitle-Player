@@ -124,6 +124,7 @@ RCC_DIR = $$DESTDIR/.qrc
 UI_DIR = $$DESTDIR/.ui
 
 VERSION = 1.0.0
+DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 DISTFILES += \
     src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/Big5Freq.tab \
