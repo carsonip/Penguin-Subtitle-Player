@@ -63,15 +63,15 @@ ConfigDialog::ConfigDialog() {
 
 void ConfigDialog::createIcons() {
     const int HEIGHT = 50;
-    QListWidgetItem *configButton = new QListWidgetItem(contentsWidget);
-    configButton->setText(tr("General"));
-    configButton->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-    configButton->setSizeHint(QSize(0, HEIGHT));
+    QListWidgetItem *generalItem = new QListWidgetItem(contentsWidget);
+    generalItem->setText(tr("General"));
+    generalItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+    generalItem->setSizeHint(QSize(0, HEIGHT));
 
-    QListWidgetItem *updateButton = new QListWidgetItem(contentsWidget);
-    updateButton->setText(tr("Appearance"));
-    updateButton->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-    updateButton->setSizeHint(QSize(0, HEIGHT));
+    QListWidgetItem *appearanceItem = new QListWidgetItem(contentsWidget);
+    appearanceItem->setText(tr("Appearance"));
+    appearanceItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+    appearanceItem->setSizeHint(QSize(0, HEIGHT));
 
     QListWidgetItem *aboutItem = new QListWidgetItem(contentsWidget);
     aboutItem->setText(tr("About"));
