@@ -165,20 +165,28 @@ void MainWindow::togglePlay() {
         setPlay(!isPlaying);
 }
 
-void MainWindow::fastForward() { adjustTime(getAdjustInterval()); }
+void MainWindow::fastForward() {
+    adjustTime(getAdjustInterval());
+    update();
+}
 
-void MainWindow::fastBackward() { adjustTime(-getAdjustInterval()); }
+void MainWindow::fastBackward() {
+    adjustTime(-getAdjustInterval());
+    update();
+}
 
 void MainWindow::next() {
     long long time = engine->getTimeWithSubtitleOffset(currentTime, 1);
     currentTime = time;
     skipped = true;
+    update();
 }
 
 void MainWindow::previous() {
     long long time = engine->getTimeWithSubtitleOffset(currentTime, -1);
     currentTime = time;
     skipped = true;
+    update();
 }
 
 void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason) {
