@@ -65,10 +65,10 @@ A: You need to have a [compositing window manager](https://github.com/carsonip/P
 
 Penguin Subtitle Player is a Qt5 project. The executables include statically compiled Qt libraries.
 
-####Libraries
+#### Libraries
 * [uchardet-enhanced](https://bitbucket.org/medoc/uchardet-enhanced): Auto charset detection. 
 
-####Compilers
+#### Compilers
 
 * Windows: VC++ 2012
 * Linux: G++
@@ -78,13 +78,13 @@ Check [here](http://doc.qt.io/qt-5/deployment.html) for deployment details.
 
 ## Building
 
-####The easy way
+#### The easy way
 
 1. Download Qt with Qt Creator [here](http://www.qt.io/download-open-source/)
 2. Open the .pro file in Qt Creator
 3. You should be good to go (In case of some weird compilation errors, turn off the shadow build option in projects build settings)
 
-####The hard way
+#### The hard way
 
 1. Download Qt (Qt Creator is not required) [here](http://www.qt.io/download-open-source/)
 2. Run qmake
