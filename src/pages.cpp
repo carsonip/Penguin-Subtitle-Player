@@ -170,7 +170,8 @@ void AppearancePage::load() {
     paintColorButton(fontColorButton, fontColor);
 
     QFont initial;
-    initial.fromString(settings.value("appearance/font").toString());
+    initial.fromString(
+        settings.value("appearance/font", PrefConstants::FONT).toString());
     fontDialog->setCurrentFont(initial);
 
     /* Font Shadow */

@@ -362,7 +362,8 @@ void MainWindow::loadPref() {
                  QString::number(fontColor.blue())));
 
     QFont f;
-    f.fromString(settings.value("appearance/font").toString());
+    f.fromString(
+        settings.value("appearance/font", PrefConstants::FONT).toString());
     ui->subtitleLabel->setFont(f);
 
     bool fontShadowEnable =

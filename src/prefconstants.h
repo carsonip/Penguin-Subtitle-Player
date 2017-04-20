@@ -15,6 +15,7 @@ const static int ADJUST_INTERVAL_STEP = 50;
 const QString ENCODING = "UTF-8";
 const static bool USE_DETECTED_ENCODING = true;
 
+const QString FONT = "Noto Sans,22,-1,5,75,0,0,0,0,0,Bold";
 const static bool FONT_SHADOW_ENABLE = true;
 const static int FONT_SHADOW_BLUR_RADIUS = 8;
 const static int FONT_SHADOW_BLUR_RADIUS_MAX = 100;
