@@ -29,6 +29,11 @@
 
 void GeneralPage::load() {
     dirEdit->setPlainText(settings.value("gen/dir").toString());
+    useDetectedEncodingCbx->setChecked(
+        settings
+            .value("gen/useDetectedEncoding",
+                   QVariant::fromValue(PrefConstants::USE_DETECTED_ENCODING))
+            .toBool());
     adjustIntervalSpinBox->setValue(
         settings
             .value("gen/adjust",
@@ -39,6 +44,8 @@ void GeneralPage::load() {
 void GeneralPage::save() {
     // qDebug() << "configsave";
     settings.setValue("gen/dir", dirEdit->toPlainText());
+    settings.setValue("gen/useDetectedEncoding",
+                      useDetectedEncodingCbx->isChecked());
     settings.setValue("gen/adjust", adjustIntervalSpinBox->value());
 }
 
@@ -57,12 +64,16 @@ GeneralPage::GeneralPage(QWidget *parent, ConfigDialog *configDialog)
     : PrefPage(parent, configDialog) {
     QGroupBox *filesGroup = new QGroupBox(tr("Files"));
 
+    QGroupBox *encodingGroup = new QGroupBox(tr("Encoding"));
+
     QGroupBox *adjustGroup = new QGroupBox(tr("Adjustment"));
 
     QLabel *defaultDirLabel = new QLabel(tr("Default Directory:"));
     dirEdit = new QPlainTextEdit();
     QPushButton *dirBrowseButton = new QPushButton(tr("Browse"));
     connect(dirBrowseButton, SIGNAL(clicked()), this, SLOT(openDirDialog()));
+
+    useDetectedEncodingCbx = new QCheckBox(tr("Use Detected Encoding"));
 
     QLabel *adjustIntervalLabel =
         new QLabel(tr("Time Adjustment Interval (ms): "));
@@ -87,12 +98,18 @@ GeneralPage::GeneralPage(QWidget *parent, ConfigDialog *configDialog)
     configLayout->addLayout(defaultDirLayout);
     filesGroup->setLayout(configLayout);
 
+    QVBoxLayout *encodingLayout = new QVBoxLayout;
+    encodingLayout->addWidget(useDetectedEncodingCbx);
+    encodingGroup->setLayout(encodingLayout);
+
     QVBoxLayout *adjustLayout = new QVBoxLayout;
     adjustLayout->addLayout(adjustIntervalLayout);
     adjustGroup->setLayout(adjustLayout);
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(filesGroup);
+    mainLayout->addStretch(1);
+    mainLayout->addWidget(encodingGroup);
     mainLayout->addStretch(1);
     mainLayout->addWidget(adjustGroup);
     mainLayout->addStretch(1);

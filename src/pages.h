@@ -36,7 +36,7 @@ class GeneralPage : public PrefPage {
 
   private:
     QPlainTextEdit *dirEdit;
-    // QLineEdit *adjustIntervalEdit;
+    QCheckBox *useDetectedEncodingCbx;
     QSpinBox *adjustIntervalSpinBox;
 };
 

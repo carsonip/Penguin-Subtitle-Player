@@ -405,7 +405,13 @@ void MainWindow::loadPref() {
 void MainWindow::load(QString path) {
     QString chardet = charsetDetect(path);
 
-    QString encoding = getEncoding(chardet);
+    QString encoding = chardet;
+    if (!settings
+             .value("gen/useDetectedEncoding",
+                    QVariant::fromValue(PrefConstants::USE_DETECTED_ENCODING))
+             .toBool()) {
+        encoding = getEncoding(chardet);
+    }
 
     delete engine;
     engine = new Engine(path, encoding);

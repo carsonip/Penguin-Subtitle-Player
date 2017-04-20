@@ -13,6 +13,7 @@ const static int ADJUST_INTERVAL_MAX = 3600000;
 const static int ADJUST_INTERVAL_STEP = 50;
 
 const QString ENCODING = "UTF-8";
+const static bool USE_DETECTED_ENCODING = true;
 
 const static bool FONT_SHADOW_ENABLE = true;
 const static int FONT_SHADOW_BLUR_RADIUS = 8;
