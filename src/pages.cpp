@@ -42,7 +42,6 @@ void GeneralPage::load() {
 }
 
 void GeneralPage::save() {
-    // qDebug() << "configsave";
     settings.setValue("gen/dir", dirEdit->toPlainText());
     settings.setValue("gen/useDetectedEncoding",
                       useDetectedEncodingCbx->isChecked());

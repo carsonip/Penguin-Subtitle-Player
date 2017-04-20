@@ -192,15 +192,12 @@ void MainWindow::previous() {
 void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason) {
     switch (reason) {
     case QSystemTrayIcon::Trigger:
-    // qDebug() << "trigger";
+        break;
     case QSystemTrayIcon::DoubleClick:
-        // qDebug() << "double";
         break;
     case QSystemTrayIcon::MiddleClick:
-        // qDebug() << "middle";
         break;
     case QSystemTrayIcon::Context:
-        // qDebug() << "context";
         break;
     default:;
     }
@@ -247,20 +244,15 @@ void MainWindow::paintEvent(QPaintEvent *event) {
 */
 
 void MainWindow::dragEnterEvent(QDragEnterEvent *e) {
-    // qDebug() << "dragEnterEvent";
     if (e->mimeData()->hasUrls() && e->mimeData()->urls().size() == 1)
         e->acceptProposedAction();
 }
 
-void MainWindow::dragMoveEvent() {
-    // qDebug() << "dragEvent";
-}
+void MainWindow::dragMoveEvent() {}
 
 void MainWindow::dropEvent(QDropEvent *e) {
     this->hide();
-    // qDebug() << "dropEvent";
     QString path = e->mimeData()->urls()[0].toLocalFile();
-    // qDebug() << "Dropped file:" << path;
     int index = path.lastIndexOf(".");
     QString ext = index == -1 ? "" : path.mid(index);
 
@@ -286,19 +278,12 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event) {
 }
 
 void MainWindow::enterEvent(QEvent *event) {
-    // qDebug() << Q_FUNC_INFO << this->objectName();
-    // QWidget::enterEvent(event);
-    //    ui->verticalSpacer->changeSize(0, 0);
     ui->topWidgets->show();
     ui->bottomWidgets->show();
     ui->subtitleLabel->raise();
 }
 
 void MainWindow::leaveEvent(QEvent *event) {
-    // qDebug() << Q_FUNC_INFO << this->objectName();
-    // QWidget::leaveEvent(event);
-    //    ui->verticalSpacer->changeSize(0, ui->bottomWidgets->height() +
-    //                                          ui->gridLayout->verticalSpacing());
     ui->topWidgets->hide();
     ui->bottomWidgets->hide();
 }
@@ -329,8 +314,6 @@ void MainWindow::loadPosAndSize() {
 }
 
 void MainWindow::loadPref() {
-    // qDebug() << settings.value("general/dir").toString();
-
     QColor bgColor =
         QColor::fromRgb(settings
                             .value("appearance/bgColor",
@@ -346,7 +329,6 @@ void MainWindow::loadPref() {
             .arg(QString::number(bgColor.red()),
                  QString::number(bgColor.green()),
                  QString::number(bgColor.blue()), QString::number(bgAlpha));
-    // qDebug() << bgColorStr;
     this->setStyleSheet(bgColorStr);
 
     QColor fontColor = QColor::fromRgb(
@@ -499,7 +481,6 @@ void MainWindow::adjustTime(long long interval) {
 }
 
 long long MainWindow::getAdjustInterval() {
-    // qDebug() << settings.value("gen/adjust").toInt();
     return settings
         .value("gen/adjust",
                QVariant::fromValue(PrefConstants::ADJUST_INTERVAL))

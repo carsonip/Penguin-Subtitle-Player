@@ -96,7 +96,6 @@ class Engine {
 
   private:
     std::vector<SubtitleItem> subtitles;
-    std::vector<SubtitleItem> subtitles_invalid;
     int lastIndex = -1;
 };
 

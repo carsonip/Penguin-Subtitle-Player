@@ -34,10 +34,6 @@ Engine::Engine(QString path, QString encoding) {
     }
 
     qDebug() << "Number of subtitle items imported: " << subtitles.size();
-    if (subtitles_invalid.size() > 0)
-        qDebug()
-            << "Number of subtitle items skipped due to validation errors: "
-            << subtitles_invalid.size();
 }
 
 Engine::~Engine() {}
