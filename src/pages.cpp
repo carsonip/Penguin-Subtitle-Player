@@ -108,11 +108,8 @@ GeneralPage::GeneralPage(QWidget *parent, ConfigDialog *configDialog)
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(filesGroup);
-    mainLayout->addStretch(1);
     mainLayout->addWidget(encodingGroup);
-    mainLayout->addStretch(1);
     mainLayout->addWidget(adjustGroup);
-    mainLayout->addStretch(1);
     mainLayout->addWidget(resetButton);
     mainLayout->addStretch(1);
     setLayout(mainLayout);
