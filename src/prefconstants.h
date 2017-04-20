@@ -5,7 +5,7 @@
 
 namespace PrefConstants {
 const static int BG_COLOR = 0;
-const static int BG_ALPHA = 100;
+const static int BG_ALPHA = 30;
 const static int BG_ALPHA_MIN = 2;
 
 const static int ADJUST_INTERVAL = 1000;
