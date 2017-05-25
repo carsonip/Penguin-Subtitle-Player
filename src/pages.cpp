@@ -407,10 +407,25 @@ AboutPage::AboutPage(QWidget *parent, ConfigDialog *configDialog)
     websiteLayout->addWidget(websiteValueLabel);
     websiteLayout->addStretch(1);
 
+    QLabel *issuesLabel = new QLabel(tr("Issue tracker: "));
+    QLabel *issuesValueLabel = new QLabel(
+        "<a "
+        "href=\"https://github.com/carsonip/Penguin-Subtitle-Player/"
+        "issues\">github.com/carsonip/Penguin-Subtitle-Player/issues</a>");
+    issuesValueLabel->setTextFormat(Qt::RichText);
+    issuesValueLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    issuesValueLabel->setOpenExternalLinks(true);
+
+    QHBoxLayout *issuesLayout = new QHBoxLayout;
+    issuesLayout->addWidget(issuesLabel);
+    issuesLayout->addWidget(issuesValueLabel);
+    issuesLayout->addStretch(1);
+
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addLayout(nameLayout);
     mainLayout->addLayout(versionLayout);
     mainLayout->addLayout(websiteLayout);
+    mainLayout->addLayout(issuesLayout);
     mainLayout->addStretch(1);
 
     setLayout(mainLayout);
