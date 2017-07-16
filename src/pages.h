@@ -20,7 +20,7 @@
 #include <QPushButton>
 #include <QSettings>
 #include <QSpinBox>
-#include <QSpinBox>
+#include <QDoubleSpinBox>
 #include <QVBoxLayout>
 #include <QVBoxLayout>
 
@@ -38,6 +38,7 @@ class GeneralPage : public PrefPage {
     QPlainTextEdit *dirEdit;
     QCheckBox *useDetectedEncodingCbx;
     QSpinBox *adjustIntervalSpinBox;
+    QDoubleSpinBox *speedFactorSpinBox;
 };
 
 class AppearancePage : public PrefPage {
