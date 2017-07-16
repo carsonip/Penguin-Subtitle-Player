@@ -113,6 +113,10 @@ MainWindow::~MainWindow() {
     settings.setValue("appearance/windowY", this->y());
     settings.setValue("appearance/windowWidth", this->width());
     settings.setValue("appearance/windowHeight", this->height());
+
+    //speed factor : reinit at 1.
+    settings.setValue("gen/speedFactor", 1.);
+
     delete menu;
     delete engine;
     delete ui;
@@ -131,7 +135,7 @@ void MainWindow::update() {
         return;
     }
 
-    currentTime += INTERVAL;
+    currentTime += (int) speedFactor*INTERVAL;
 
     // to ensure it searches for all subtitles even after next / prev
     ui->subtitleLabel->setText(getSubtitle(skipped));
@@ -314,6 +318,10 @@ void MainWindow::loadPosAndSize() {
 }
 
 void MainWindow::loadPref() {
+    speedFactor = (float) settings
+            .value("gen/speedFactor",
+                   QVariant::fromValue(PrefConstants::SPEED_FACTOR))
+            .toDouble();
     QColor bgColor =
         QColor::fromRgb(settings
                             .value("appearance/bgColor",
