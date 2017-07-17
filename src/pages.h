@@ -39,6 +39,7 @@ class GeneralPage : public PrefPage {
     QCheckBox *useDetectedEncodingCbx;
     QSpinBox *adjustIntervalSpinBox;
     QDoubleSpinBox *speedFactorSpinBox;
+    QCheckBox * resetSpeedFactorOnLaunchCbx;
 };
 
 class AppearancePage : public PrefPage {

@@ -26,6 +26,7 @@
 #include <QDoubleSpinBox>
 #include <QTextEdit>
 #include <QVBoxLayout>
+#include <QSpacerItem>
 
 void GeneralPage::load() {
     dirEdit->setPlainText(settings.value("gen/dir").toString());
@@ -45,6 +46,16 @@ void GeneralPage::load() {
                     .value("gen/speedFactor",
                            QVariant::fromValue(PrefConstants::SPEED_FACTOR))
                     .toDouble());
+
+
+
+    bool isResetSpeedFactorOnLaunch = settings
+            .value("gen/resetSpeedFactorOnLaunch",
+                   QVariant::fromValue(
+                       PrefConstants::RESET_SPEED_FACTOR_ON_LAUNCH))
+            .toBool();
+    resetSpeedFactorOnLaunchCbx->setChecked(isResetSpeedFactorOnLaunch);
+
 }
 
 void GeneralPage::save() {
@@ -53,6 +64,8 @@ void GeneralPage::save() {
                       useDetectedEncodingCbx->isChecked());
     settings.setValue("gen/adjust", adjustIntervalSpinBox->value());
     settings.setValue("gen/speedFactor", speedFactorSpinBox->value());
+    settings.setValue("gen/resetSpeedFactorOnLaunch",
+                      resetSpeedFactorOnLaunchCbx->isChecked());
 }
 
 void GeneralPage::openDirDialog() {
@@ -96,6 +109,8 @@ GeneralPage::GeneralPage(QWidget *parent, ConfigDialog *configDialog)
     speedFactorSpinBox->setSingleStep(PrefConstants::SPEED_FACTOR_STEP);
     speedFactorSpinBox->setMaximum(PrefConstants::SPEED_FACTOR_MAX);
     speedFactorSpinBox->setMinimum(PrefConstants::SPEED_FACTOR_MIN);
+    resetSpeedFactorOnLaunchCbx = new QCheckBox(tr("Resets to 1,00 on launch"));
+    QSpacerItem* spacerItem = new QSpacerItem(10, 1, QSizePolicy::Preferred, QSizePolicy::Preferred);
 
     QHBoxLayout *defaultDirLayout = new QHBoxLayout;
     defaultDirLayout->addWidget(defaultDirLabel);
@@ -110,6 +125,8 @@ GeneralPage::GeneralPage(QWidget *parent, ConfigDialog *configDialog)
     QHBoxLayout * speedFactorLayout = new QHBoxLayout;
     speedFactorLayout->addWidget(speedFactorLabel);
     speedFactorLayout->addWidget(speedFactorSpinBox);
+    speedFactorLayout->addItem(spacerItem);
+    speedFactorLayout->addWidget(resetSpeedFactorOnLaunchCbx);
     speedFactorLayout->addStretch(1);
 
 

@@ -62,6 +62,8 @@ class MainWindow : public QMainWindow {
     int m_nMouseClick_Y_Coordinate;
     long long int currentTime = 0LL;
     float speedFactor = 1.f;
+    const int intervalModCounterBase = 8;
+    int intervalModCounter = 0;
     const long long int INTERVAL = 200LL;
     const long long int SLIDER_RATIO = 1000LL;
     Engine *engine = 0;
