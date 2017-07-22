@@ -15,7 +15,7 @@ const static int ADJUST_INTERVAL_STEP = 50;
 const static double SPEED_FACTOR = 1.;
 const static double SPEED_FACTOR_MAX = 10.;
 const static double SPEED_FACTOR_MIN = 0.1;
-const static double SPEED_FACTOR_STEP = 0.005;
+const static double SPEED_FACTOR_STEP = 0.002;
 const static bool RESET_SPEED_FACTOR_ON_LAUNCH = true;
 
 const QString ENCODING = "UTF-8";
