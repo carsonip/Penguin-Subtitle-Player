@@ -146,7 +146,8 @@ void MainWindow::update() {
     intervalModCounter = (intervalModCounter < intervalModCounterBase) ? intervalModCounter : intervalModCounter-intervalModCounterBase;
     float correction =  (intervalModCounter < intervalModCounterBase/2) ? intervalModCounter*1.f/intervalModCounterBase : (intervalModCounter-intervalModCounterBase+1)*1.f/intervalModCounterBase;
 
-    currentTime += (int) (0.5+speedFactor*INTERVAL+correction); //round float
+    int currentTimeIncr = (int) (0.5+speedFactor*INTERVAL+correction); //round float
+    currentTime += currentTimeIncr;
 
     // to ensure it searches for all subtitles even after next / prev
     ui->subtitleLabel->setText(getSubtitle(skipped));
