@@ -141,13 +141,18 @@ void MainWindow::update() {
         return;
     }
 
-    //the interval mod counter makes it possible to have finer time resolution with speed factor near 1 (in average)
-    intervalModCounter++;
-    intervalModCounter = (intervalModCounter < intervalModCounterBase) ? intervalModCounter : intervalModCounter-intervalModCounterBase;
-    float correction =  (intervalModCounter < intervalModCounterBase/2) ? intervalModCounter*1.f/intervalModCounterBase : (intervalModCounter-intervalModCounterBase+1)*1.f/intervalModCounterBase;
+    double add = speedFactor * INTERVAL;
+    double intpart;
+    double fracpart = modf(add, &intpart);
 
-    int currentTimeIncr = (int) (0.5+speedFactor*INTERVAL+correction); //round float
-    currentTime += currentTimeIncr;
+    // accumulate error
+    intervalRemainder += fracpart;
+
+    double remainderIntpart;
+    intervalRemainder = modf(intervalRemainder, &remainderIntpart);
+
+    // add integer part of error to currentTime
+    currentTime += (int) intpart + (int) remainderIntpart;
 
     // to ensure it searches for all subtitles even after next / prev
     ui->subtitleLabel->setText(getSubtitle(skipped));
