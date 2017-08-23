@@ -335,7 +335,7 @@ void MainWindow::loadPosAndSize() {
 }
 
 void MainWindow::loadPref() {
-    speedFactor = (float) settings
+    speedFactor = settings
             .value("gen/speedFactor",
                    QVariant::fromValue(PrefConstants::SPEED_FACTOR))
             .toDouble();
