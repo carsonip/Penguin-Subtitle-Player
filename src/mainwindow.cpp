@@ -21,6 +21,7 @@
 #include "QString"
 #include "QTextCodec"
 #include "QTimer"
+#include "cmath"
 #include "chardet.h"
 #include "configdialog.h"
 #include "engine.h"
