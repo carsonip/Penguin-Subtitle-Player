@@ -21,6 +21,7 @@
 #include "QString"
 #include "QTextCodec"
 #include "QTimer"
+#include "cmath"
 #include "chardet.h"
 #include "configdialog.h"
 #include "engine.h"
@@ -104,6 +105,15 @@ MainWindow::MainWindow(QWidget *parent)
                                 qApp->desktop()->availableGeometry()));
     }
 
+    bool resetSpeedFactorOnLaunch = settings
+            .value("gen/resetSpeedFactorOnLaunch",
+                   QVariant::fromValue(
+                       PrefConstants::RESET_SPEED_FACTOR_ON_LAUNCH))
+            .toBool();
+    if(resetSpeedFactorOnLaunch){
+        settings.setValue("gen/speedFactor", PrefConstants::SPEED_FACTOR);
+     }
+
     this->loadPref();
     setAcceptDrops(true);
 }
@@ -113,6 +123,7 @@ MainWindow::~MainWindow() {
     settings.setValue("appearance/windowY", this->y());
     settings.setValue("appearance/windowWidth", this->width());
     settings.setValue("appearance/windowHeight", this->height());
+
     delete menu;
     delete engine;
     delete ui;
@@ -131,7 +142,18 @@ void MainWindow::update() {
         return;
     }
 
-    currentTime += INTERVAL;
+    double add = speedFactor * INTERVAL;
+    double intpart;
+    double fracpart = modf(add, &intpart);
+
+    // accumulate error
+    intervalRemainder += fracpart;
+
+    double remainderIntpart;
+    intervalRemainder = modf(intervalRemainder, &remainderIntpart);
+
+    // add integer part of error to currentTime
+    currentTime += (int) intpart + (int) remainderIntpart;
 
     // to ensure it searches for all subtitles even after next / prev
     ui->subtitleLabel->setText(getSubtitle(skipped));
@@ -314,6 +336,10 @@ void MainWindow::loadPosAndSize() {
 }
 
 void MainWindow::loadPref() {
+    speedFactor = settings
+            .value("gen/speedFactor",
+                   QVariant::fromValue(PrefConstants::SPEED_FACTOR))
+            .toDouble();
     QColor bgColor =
         QColor::fromRgb(settings
                             .value("appearance/bgColor",

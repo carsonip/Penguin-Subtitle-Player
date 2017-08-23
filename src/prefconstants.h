@@ -12,6 +12,12 @@ const static int ADJUST_INTERVAL = 1000;
 const static int ADJUST_INTERVAL_MAX = 3600000;
 const static int ADJUST_INTERVAL_STEP = 50;
 
+const static double SPEED_FACTOR = 1.0;
+const static double SPEED_FACTOR_MAX = 10.0;
+const static double SPEED_FACTOR_MIN = 0.1;
+const static double SPEED_FACTOR_STEP = 0.002;
+const static bool RESET_SPEED_FACTOR_ON_LAUNCH = true;
+
 const QString ENCODING = "UTF-8";
 const static bool USE_DETECTED_ENCODING = true;
 
