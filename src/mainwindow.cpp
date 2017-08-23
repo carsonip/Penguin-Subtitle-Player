@@ -104,6 +104,15 @@ MainWindow::MainWindow(QWidget *parent)
                                 qApp->desktop()->availableGeometry()));
     }
 
+    bool resetSpeedFactorOnLaunch = settings
+            .value("gen/resetSpeedFactorOnLaunch",
+                   QVariant::fromValue(
+                       PrefConstants::RESET_SPEED_FACTOR_ON_LAUNCH))
+            .toBool();
+    if(resetSpeedFactorOnLaunch){
+        settings.setValue("gen/speedFactor", PrefConstants::SPEED_FACTOR);
+     }
+
     this->loadPref();
     setAcceptDrops(true);
 }
@@ -113,6 +122,7 @@ MainWindow::~MainWindow() {
     settings.setValue("appearance/windowY", this->y());
     settings.setValue("appearance/windowWidth", this->width());
     settings.setValue("appearance/windowHeight", this->height());
+
     delete menu;
     delete engine;
     delete ui;
@@ -131,7 +141,13 @@ void MainWindow::update() {
         return;
     }
 
-    currentTime += INTERVAL;
+    //the interval mod counter makes it possible to have finer time resolution with speed factor near 1 (in average)
+    intervalModCounter++;
+    intervalModCounter = (intervalModCounter < intervalModCounterBase) ? intervalModCounter : intervalModCounter-intervalModCounterBase;
+    float correction =  (intervalModCounter < intervalModCounterBase/2) ? intervalModCounter*1.f/intervalModCounterBase : (intervalModCounter-intervalModCounterBase+1)*1.f/intervalModCounterBase;
+
+    int currentTimeIncr = (int) (0.5+speedFactor*INTERVAL+correction); //round float
+    currentTime += currentTimeIncr;
 
     // to ensure it searches for all subtitles even after next / prev
     ui->subtitleLabel->setText(getSubtitle(skipped));
@@ -314,6 +330,10 @@ void MainWindow::loadPosAndSize() {
 }
 
 void MainWindow::loadPref() {
+    speedFactor = (float) settings
+            .value("gen/speedFactor",
+                   QVariant::fromValue(PrefConstants::SPEED_FACTOR))
+            .toDouble();
     QColor bgColor =
         QColor::fromRgb(settings
                             .value("appearance/bgColor",

@@ -23,9 +23,10 @@
 #include <QPushButton>
 #include <QSettings>
 #include <QSpinBox>
-#include <QSpinBox>
+#include <QDoubleSpinBox>
 #include <QTextEdit>
 #include <QVBoxLayout>
+#include <QSpacerItem>
 
 void GeneralPage::load() {
     dirEdit->setPlainText(settings.value("gen/dir").toString());
@@ -39,6 +40,22 @@ void GeneralPage::load() {
             .value("gen/adjust",
                    QVariant::fromValue(PrefConstants::ADJUST_INTERVAL))
             .toInt());
+
+    speedFactorSpinBox->setValue(
+                settings
+                    .value("gen/speedFactor",
+                           QVariant::fromValue(PrefConstants::SPEED_FACTOR))
+                    .toDouble());
+
+
+
+    bool isResetSpeedFactorOnLaunch = settings
+            .value("gen/resetSpeedFactorOnLaunch",
+                   QVariant::fromValue(
+                       PrefConstants::RESET_SPEED_FACTOR_ON_LAUNCH))
+            .toBool();
+    resetSpeedFactorOnLaunchCbx->setChecked(isResetSpeedFactorOnLaunch);
+
 }
 
 void GeneralPage::save() {
@@ -46,6 +63,9 @@ void GeneralPage::save() {
     settings.setValue("gen/useDetectedEncoding",
                       useDetectedEncodingCbx->isChecked());
     settings.setValue("gen/adjust", adjustIntervalSpinBox->value());
+    settings.setValue("gen/speedFactor", speedFactorSpinBox->value());
+    settings.setValue("gen/resetSpeedFactorOnLaunch",
+                      resetSpeedFactorOnLaunchCbx->isChecked());
 }
 
 void GeneralPage::openDirDialog() {
@@ -67,6 +87,8 @@ GeneralPage::GeneralPage(QWidget *parent, ConfigDialog *configDialog)
 
     QGroupBox *adjustGroup = new QGroupBox(tr("Adjustment"));
 
+    QGroupBox *speedGroup = new QGroupBox(tr("Speed"));
+
     QLabel *defaultDirLabel = new QLabel(tr("Default Directory:"));
     dirEdit = new QPlainTextEdit();
     QPushButton *dirBrowseButton = new QPushButton(tr("Browse"));
@@ -80,6 +102,16 @@ GeneralPage::GeneralPage(QWidget *parent, ConfigDialog *configDialog)
     adjustIntervalSpinBox->setSingleStep(PrefConstants::ADJUST_INTERVAL_STEP);
     adjustIntervalSpinBox->setMaximum(PrefConstants::ADJUST_INTERVAL_MAX);
 
+    QLabel *speedFactorLabel =
+        new QLabel(tr("Speed factor : "));
+    speedFactorSpinBox = new QDoubleSpinBox();
+    speedFactorSpinBox->setDecimals(3);
+    speedFactorSpinBox->setSingleStep(PrefConstants::SPEED_FACTOR_STEP);
+    speedFactorSpinBox->setMaximum(PrefConstants::SPEED_FACTOR_MAX);
+    speedFactorSpinBox->setMinimum(PrefConstants::SPEED_FACTOR_MIN);
+    resetSpeedFactorOnLaunchCbx = new QCheckBox(tr("Resets to 1,00 on launch"));
+    QSpacerItem* spacerItem = new QSpacerItem(10, 1, QSizePolicy::Preferred, QSizePolicy::Preferred);
+
     QHBoxLayout *defaultDirLayout = new QHBoxLayout;
     defaultDirLayout->addWidget(defaultDirLabel);
     defaultDirLayout->addWidget(dirEdit);
@@ -89,6 +121,14 @@ GeneralPage::GeneralPage(QWidget *parent, ConfigDialog *configDialog)
     adjustIntervalLayout->addWidget(adjustIntervalLabel);
     adjustIntervalLayout->addWidget(adjustIntervalSpinBox);
     adjustIntervalLayout->addStretch(1);
+
+    QHBoxLayout * speedFactorLayout = new QHBoxLayout;
+    speedFactorLayout->addWidget(speedFactorLabel);
+    speedFactorLayout->addWidget(speedFactorSpinBox);
+    speedFactorLayout->addItem(spacerItem);
+    speedFactorLayout->addWidget(resetSpeedFactorOnLaunchCbx);
+    speedFactorLayout->addStretch(1);
+
 
     QPushButton *resetButton = new QPushButton(tr("Reset All Preferences"));
     connect(resetButton, SIGNAL(clicked()), this, SLOT(resetSettings()));
@@ -105,10 +145,15 @@ GeneralPage::GeneralPage(QWidget *parent, ConfigDialog *configDialog)
     adjustLayout->addLayout(adjustIntervalLayout);
     adjustGroup->setLayout(adjustLayout);
 
+    QVBoxLayout *speedLayout = new QVBoxLayout;
+    speedLayout->addLayout(speedFactorLayout);
+    speedGroup->setLayout(speedLayout);
+
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(filesGroup);
     mainLayout->addWidget(encodingGroup);
     mainLayout->addWidget(adjustGroup);
+    mainLayout->addWidget(speedGroup);
     mainLayout->addWidget(resetButton);
     mainLayout->addStretch(1);
     setLayout(mainLayout);
