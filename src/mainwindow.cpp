@@ -413,14 +413,13 @@ void MainWindow::loadPref() {
 
 void MainWindow::load(QString path) {
     QString chardet = charsetDetect(path);
-
-    QString encoding = chardet;
-    if (!settings
-             .value("gen/useDetectedEncoding",
-                    QVariant::fromValue(PrefConstants::USE_DETECTED_ENCODING))
-             .toBool()) {
-        encoding = getEncoding(chardet);
+    if (chardet == "ascii") {
+        chardet = "utf-8";
+        qDebug() << "Chardet returns ascii, use utf-8 instead.";
     }
+
+    // validates chardet result
+    QString encoding = getEncoding(chardet);
 
     delete engine;
     engine = new Engine(path, encoding);
@@ -460,9 +459,6 @@ QString MainWindow::getSubtitle(bool sliderMoved) {
 }
 
 QString MainWindow::getEncoding(QString preset) {
-    const QString AUTO_DETECT = " (Auto Detect)";
-
-    bool ok;
     QStringList codecNames;
 
     QList<QByteArray> codecs = QTextCodec::availableCodecs();
@@ -474,27 +470,53 @@ QString MainWindow::getEncoding(QString preset) {
     codecNames.sort();
     codecNames.removeDuplicates();
 
-    int encodingIndex = 0;
+    int recommendIndex = -1;
 
     QString defaultEncoding = PrefConstants::ENCODING;
-    int defaultEncodingIndex = codecNames.indexOf(defaultEncoding);
-    if (defaultEncodingIndex >= 0)
-        encodingIndex = defaultEncodingIndex;
+    QStringList defaultEncodingList = codecNames.filter(defaultEncoding, Qt::CaseInsensitive);
+    if (defaultEncodingList.size() > 0)
+        recommendIndex = codecNames.indexOf(defaultEncodingList[0]);
 
-    if (!preset.isNull() && !preset.isEmpty()) {
+    if (!preset.isEmpty()) {
         // find index of case insensitive search of preset encoding
         QStringList list = codecNames.filter(preset, Qt::CaseInsensitive);
-        if (list.size() > 0) {
-            encodingIndex = codecNames.indexOf(list[0]);
-            codecNames[encodingIndex] += AUTO_DETECT;
-        }
+        if (list.size() > 0)
+            recommendIndex = codecNames.indexOf(list[0]);
     }
 
+    if (!settings
+             .value("gen/useDetectedEncoding",
+                    QVariant::fromValue(PrefConstants::USE_DETECTED_ENCODING))
+             .toBool()) {
+        QString chosenEncoding = promptForEncoding(codecNames, recommendIndex);
+        if (!chosenEncoding.isEmpty())
+            return chosenEncoding;
+    }
+
+    if (codecNames.size() == 0) {
+        qDebug() << "No available codec";
+        return "";
+    }
+
+    if (recommendIndex == -1) {
+        qDebug() << "No recommended charset";
+        recommendIndex = 0;
+    }
+
+    return codecNames[recommendIndex];
+}
+
+QString MainWindow::promptForEncoding(QStringList codecNames, int recommendIndex) {
+    const QString RECOMMEND = " (Recommended)";
+    if (recommendIndex != -1)
+        codecNames[recommendIndex] += RECOMMEND;
+
+    bool ok;
     QString encoding =
         QInputDialog::getItem(0, tr("Select Encoding"), tr("Select Encoding"),
-                              codecNames, encodingIndex, false, &ok);
+                              codecNames, recommendIndex, false, &ok);
     if (ok)
-        return encoding.replace(AUTO_DETECT, "");
+        return encoding.replace(RECOMMEND, "");
 
     return "";
 }

@@ -54,6 +54,7 @@ class MainWindow : public QMainWindow {
     void setPlay(bool play);
     QString getSubtitle(bool sliderMoved);
     QString getEncoding(QString preset);
+    QString promptForEncoding(QStringList codecNames, int recommendIndex);
     void adjustTime(long long interval);
     long long getAdjustInterval();
 
