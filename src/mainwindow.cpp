@@ -413,9 +413,10 @@ void MainWindow::loadPref() {
 
 void MainWindow::load(QString path) {
     QString chardet = charsetDetect(path);
-    if (chardet == "ascii") {
-        chardet = "utf-8";
-        qDebug() << "Chardet returns ascii, use utf-8 instead.";
+    qDebug() << "Detected Charset:" << chardet;
+    if (chardet == "ASCII") {
+        chardet = "UTF-8";
+        qDebug() << "Chardet returns ASCII, use UTF-8 instead.";
     }
 
     // validates chardet result
