@@ -20,10 +20,8 @@ std::vector<Engine::SubtitleItem> Parser::parseFile(QFile &f,
         for (QString ext : p->getExtensions()) {
             ok = ok || f.fileName().endsWith(ext, Qt::CaseInsensitive);
         }
-        if (!ok)
-            continue;
-
-        return p->parseFile(f, encoding);
+        if (ok)
+            return p->parseFile(f, encoding);
     }
     return std::vector<Engine::SubtitleItem>();
 }
