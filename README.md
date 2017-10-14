@@ -22,24 +22,21 @@ With Penguin Subtitle Player, just open your favorite online streaming site, loa
 
 ## Download
 
-* [Windows](https://sourceforge.net/projects/penguinsubtitleplayer/files/Penguin%20Subtitle%20Player/1.0.1/PenguinSubtitlePlayer-Windows.zip/download)
-* [Mac OS X](https://sourceforge.net/projects/penguinsubtitleplayer/files/Penguin%20Subtitle%20Player/1.0.1/PenguinSubtitlePlayer-OSX.zip/download)
-* Linux
-  * Ubuntu
+To download the latest version of Penguin Subtitle Player for Windows, macOS (aka Mac OS X), and Linux, visit one of the download mirrors:
 
-  ```
-  sudo add-apt-repository ppa:nilarimogard/webupd8
-  sudo apt update
-  sudo apt install penguin-subtitle-player
-  ```
-  * [Arch Linux](https://aur.archlinux.org/packages/penguin-subtitle-player-git/)
-  * [Fedora](https://copr.fedorainfracloud.org/coprs/davidva/penguin-subtitle-player/)
+* [SourceForge](https://sourceforge.net/projects/penguinsubtitleplayer/)
+* [GitHub Release](https://github.com/carsonip/Penguin-Subtitle-Player/releases)
 
-  ```
-  su
-  dnf -y copr enable davidva/penguin-subtitle-player && dnf -y install penguin-subtitle-player
-  ```
-  * [Standalone version](https://sourceforge.net/projects/penguinsubtitleplayer/files/Penguin%20Subtitle%20Player/1.0.1/PenguinSubtitlePlayer-Linux.tar.gz/download) (not recommended)
+For Linux, it is recommended to download from your package manager instead of using the standalone version.
+
+* Ubuntu
+
+```
+sudo add-apt-repository ppa:nilarimogard/webupd8
+sudo apt update
+sudo apt install penguin-subtitle-player
+```
+* [Arch Linux](https://aur.archlinux.org/packages/penguin-subtitle-player-git/)
 
 ## Release Notes
 
