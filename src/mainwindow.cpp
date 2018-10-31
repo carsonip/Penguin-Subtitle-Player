@@ -19,6 +19,7 @@
 #include "QPainter"
 #include "QSizeGrip"
 #include "QString"
+#include "QStyle"
 #include "QTextCodec"
 #include "QTimer"
 #include "cmath"
