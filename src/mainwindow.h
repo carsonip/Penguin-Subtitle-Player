@@ -29,6 +29,7 @@ class MainWindow : public QMainWindow {
     void iconActivated(QSystemTrayIcon::ActivationReason reason);
     void openSettingsWindow();
     void openFileDialog();
+    void openSkipToTimeDialog();
 
   protected:
     void paintEvent(QPaintEvent *event);

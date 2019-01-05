@@ -293,7 +293,6 @@
            </property>
           </widget>
          </item>
-
          <item>
           <widget class="QPushButton" name="backwardButton">
            <property name="sizePolicy">
@@ -407,8 +406,7 @@
            </property>
           </widget>
          </item>
-
-<item>
+         <item>
           <widget class="QSlider" name="horizontalSlider">
            <property name="enabled">
             <bool>false</bool>
@@ -428,7 +426,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="timeLabel">
+          <widget class="ClickableLabel" name="timeLabel">
            <property name="font">
             <font>
              <pointsize>11</pointsize>
@@ -513,6 +511,11 @@ open-source, cross-platform</string>
    <extends>QWidget</extends>
    <header location="global">QSizeGrip</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ClickableLabel</class>
+   <extends>QLabel</extends>
+   <header>src/clickablelabel.h</header>
   </customwidget>
  </customwidgets>
  <resources>

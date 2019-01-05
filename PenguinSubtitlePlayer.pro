@@ -17,6 +17,7 @@ INCLUDEPATH += $$PWD/src/libcharsetdetect \
 
 SOURCES += src/configdialog.cpp \
     src/main.cpp \
+    src/clickablelabel.cpp \
     src/mainwindow.cpp \
     src/pages.cpp \
     src/prefpage.cpp \
@@ -61,6 +62,7 @@ SOURCES += src/configdialog.cpp \
     src/engine.cpp
 
 HEADERS  += src/configdialog.h \
+    src/clickablelabel.h \
     src/mainwindow.h \
     src/pages.h \
     src/prefpage.h \

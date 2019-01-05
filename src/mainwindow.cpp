@@ -22,6 +22,7 @@
 #include "QStyle"
 #include "QTextCodec"
 #include "QTimer"
+#include "QLineEdit"
 #include "cmath"
 #include "chardet.h"
 #include "configdialog.h"
@@ -63,6 +64,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->quitButton, SIGNAL(clicked()), qApp, SLOT(quit()));
     connect(ui->horizontalSlider, SIGNAL(sliderMoved(int)), this,
             SLOT(sliderMoved(int)));
+
+    connect(ui->timeLabel, SIGNAL(clicked()), this, SLOT(openSkipToTimeDialog()));
 
     if (QSystemTrayIcon::isSystemTrayAvailable()) {
         QSystemTrayIcon *trayIcon = new QSystemTrayIcon(this);
@@ -248,6 +251,30 @@ void MainWindow::openFileDialog() {
         load(path);
     }
 
+    this->show();
+}
+
+void MainWindow::openSkipToTimeDialog() {
+    if (!engine)
+        return;
+
+    this->hide();
+
+    bool ok;
+    QString timeStr = QInputDialog::getText(0, tr("Skip to Time"), tr("Skip to Time"),
+                                            QLineEdit::Normal, Engine::millisToTimeString(currentTime), &ok);
+    if (ok) {
+        QRegularExpression timeRegex(
+                    "^(\\d+):(\\d+):(\\d+)$");
+        QRegularExpressionMatchIterator it = timeRegex.globalMatch(timeStr);
+        if (it.hasNext()) {
+            QRegularExpressionMatch match = it.next();
+            QString h = match.captured(1), m = match.captured(2), s = match.captured(3);
+            long long time = Engine::calculateTime(h, m, s, "0");
+            currentTime = qMin(engine->getFinishTime(), qMax(0LL, time));
+            update();
+        }
+    }
     this->show();
 }
 
