@@ -18,6 +18,7 @@ With Penguin Subtitle Player, just open your favorite online streaming site, loa
 * Drag & drop file
 * Customizable layout (Frame size, Background color & Opacity, Font style)
 * Time fine tuning (Fast forward / backward with customizable time interval)
+* Skip to specified time (by clicking on the time display)
 * Skip to previous / next subtitle
 
 ## Download
