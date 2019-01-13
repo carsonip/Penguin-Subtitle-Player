@@ -330,7 +330,6 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event) {
 void MainWindow::enterEvent(QEvent *event) {
     ui->topWidgets->show();
     ui->bottomWidgets->show();
-    ui->subtitleLabel->raise();
 }
 
 void MainWindow::leaveEvent(QEvent *event) {
