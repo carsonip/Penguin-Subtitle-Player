@@ -123,3 +123,9 @@ Carson Ip, LMH, Kwanjai
 ## License
 
 Code released under the GNU General Public License version 3.
+
+## Alternatives
+
+If Penguin Subtitle Player does not work for you, feel free to try these alternatives:
+
+* [Subtitle Buddy](https://github.com/vincemann/Subtitle-Buddy)
