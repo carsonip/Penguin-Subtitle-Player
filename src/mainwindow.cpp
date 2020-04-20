@@ -456,6 +456,7 @@ void MainWindow::load(QString path) {
 }
 
 void MainWindow::setup() {
+  skipped = false;
   currentTime = 0;
   this->ui->subtitleLabel->setText(getSubtitle(false));
   this->ui->timeLabel->setText(

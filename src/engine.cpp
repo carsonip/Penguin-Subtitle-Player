@@ -13,8 +13,6 @@
 
 #include "parser.h"
 
-using namespace std;
-
 Engine::Engine(QString path, QString encoding) {
   // Constructing Engine using the subtitle information of the path in
   // specified encoding method
@@ -30,7 +28,7 @@ Engine::Engine(QString path, QString encoding) {
 
   try {
     subtitles = Parser().parseFile(f, encoding);
-  } catch (const exception &e) {
+  } catch (const std::exception &e) {
   }
 
   qDebug() << "Number of subtitle items imported: " << subtitles.size();
@@ -78,7 +76,7 @@ int Engine::currentSubtitleIndex(long long time, bool sliderMoved) {
   if (!sliderMoved) {
     //  Linear search for next subtitle from last subtitle if slide bar is
     //  not manually set
-    for (int i = max(0, lastIndex), len = subtitles.size(); i < len; i++) {
+    for (int i = qMax(0, lastIndex), len = subtitles.size(); i < len; i++) {
       SubtitleItem item = subtitles[i];
       if (time <= item.end) {
         if (time >= item.start)
