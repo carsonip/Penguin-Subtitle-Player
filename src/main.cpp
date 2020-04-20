@@ -18,5 +18,6 @@ int main(int argc, char *argv[]) {
     w.load(path);
     w.show();
   }
+  a.setQuitOnLastWindowClosed(false);
   return a.exec();
 }
