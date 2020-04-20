@@ -11,13 +11,11 @@ int main(int argc, char *argv[]) {
   a.setApplicationName("Penguin Subtitle Player");
   a.setApplicationVersion(APP_VERSION);
   MainWindow w;
-  w.show();
   if (argc > 1) {
-    w.hide();
     QString path = a.arguments().at(1);
     w.load(path);
-    w.show();
   }
+  w.show();
   a.setQuitOnLastWindowClosed(false);
   return a.exec();
 }
