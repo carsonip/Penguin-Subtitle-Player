@@ -200,6 +200,8 @@ void MainWindow::fastBackward() {
 }
 
 void MainWindow::next() {
+  if (!engine)
+    return;
   long long time = engine->getTimeWithSubtitleOffset(currentTime, 1);
   currentTime = time;
   skipped = true;
@@ -207,6 +209,8 @@ void MainWindow::next() {
 }
 
 void MainWindow::previous() {
+  if (!engine)
+    return;
   long long time = engine->getTimeWithSubtitleOffset(currentTime, -1);
   currentTime = time;
   skipped = true;
