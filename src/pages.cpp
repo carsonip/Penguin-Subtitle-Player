@@ -86,15 +86,16 @@ GeneralPage::GeneralPage(QWidget *parent, ConfigDialog *configDialog)
 
   QGroupBox *speedGroup = new QGroupBox(tr("Speed"));
 
-  QLabel *defaultDirLabel = new QLabel(tr("Default Directory:"));
+  QLabel *defaultDirLabel = new QLabel(tr("Default directory:"));
   dirEdit = new QPlainTextEdit();
   QPushButton *dirBrowseButton = new QPushButton(tr("Browse"));
   connect(dirBrowseButton, SIGNAL(clicked()), this, SLOT(openDirDialog()));
 
-  useDetectedEncodingCbx = new QCheckBox(tr("Use Detected Encoding"));
+  useDetectedEncodingCbx =
+      new QCheckBox(tr("Use detected encoding without prompt"));
 
   QLabel *adjustIntervalLabel =
-      new QLabel(tr("Time Adjustment Interval (ms): "));
+      new QLabel(tr("Time adjustment interval (ms): "));
   adjustIntervalSpinBox = new QSpinBox();
   adjustIntervalSpinBox->setSingleStep(PrefConstants::ADJUST_INTERVAL_STEP);
   adjustIntervalSpinBox->setMaximum(PrefConstants::ADJUST_INTERVAL_MAX);
@@ -105,7 +106,7 @@ GeneralPage::GeneralPage(QWidget *parent, ConfigDialog *configDialog)
   speedFactorSpinBox->setSingleStep(PrefConstants::SPEED_FACTOR_STEP);
   speedFactorSpinBox->setMaximum(PrefConstants::SPEED_FACTOR_MAX);
   speedFactorSpinBox->setMinimum(PrefConstants::SPEED_FACTOR_MIN);
-  resetSpeedFactorOnLaunchCbx = new QCheckBox(tr("Resets to 1,00 on launch"));
+  resetSpeedFactorOnLaunchCbx = new QCheckBox(tr("Resets to 1.00 on launch"));
   QSpacerItem *spacerItem =
       new QSpacerItem(10, 1, QSizePolicy::Preferred, QSizePolicy::Preferred);
 
@@ -126,7 +127,7 @@ GeneralPage::GeneralPage(QWidget *parent, ConfigDialog *configDialog)
   speedFactorLayout->addWidget(resetSpeedFactorOnLaunchCbx);
   speedFactorLayout->addStretch(1);
 
-  QPushButton *resetButton = new QPushButton(tr("Reset All Preferences"));
+  QPushButton *resetButton = new QPushButton(tr("Reset all preferences"));
   connect(resetButton, SIGNAL(clicked()), this, SLOT(resetSettings()));
 
   QVBoxLayout *configLayout = new QVBoxLayout;
@@ -158,7 +159,7 @@ GeneralPage::GeneralPage(QWidget *parent, ConfigDialog *configDialog)
 }
 
 QColor AppearancePage::openColorDialog(QColor initial) {
-  QColor color = QColorDialog::getColor(initial, 0, tr("Select Color"));
+  QColor color = QColorDialog::getColor(initial, 0, tr("Select color"));
   if (color.isValid()) {
     return color;
   }
@@ -278,7 +279,7 @@ AppearancePage::AppearancePage(QWidget *parent, ConfigDialog *configDialog)
   rememberWindowPosAndSizeCbx =
       new QCheckBox(tr("Remember last position and size"));
 
-  QLabel *bgColorLabel = new QLabel(tr("Background Color: "));
+  QLabel *bgColorLabel = new QLabel(tr("Background color: "));
   bgColorButton = new QPushButton();
 
   connect(bgColorButton, SIGNAL(clicked()), this, SLOT(openBgColorDialog()));
@@ -305,7 +306,7 @@ AppearancePage::AppearancePage(QWidget *parent, ConfigDialog *configDialog)
   /* Subtitle Font */
   QGroupBox *fontGroup = new QGroupBox(tr("Subtitle Font"));
 
-  QLabel *fontColorLabel = new QLabel(tr("Font Color: "));
+  QLabel *fontColorLabel = new QLabel(tr("Font color: "));
   fontColorButton = new QPushButton();
   connect(fontColorButton, SIGNAL(clicked()), this,
           SLOT(openFontColorDialog()));
@@ -326,18 +327,17 @@ AppearancePage::AppearancePage(QWidget *parent, ConfigDialog *configDialog)
   fontGroup->setLayout(fontLayout);
 
   /* Subtitle Font Drop Shadow */
-  QGroupBox *fontShadowGroup =
-      new QGroupBox(tr("Subtitle Font Shadow / Text Outline"));
+  QGroupBox *fontShadowGroup = new QGroupBox(tr("Subtitle Text Outline"));
 
   /* Enable */
-  fontShadowEnableCbx = new QCheckBox(tr("Enable Shadow"));
+  fontShadowEnableCbx = new QCheckBox(tr("Enable shadow"));
 
   QHBoxLayout *fontShadowEnableLayout = new QHBoxLayout;
   fontShadowEnableLayout->addWidget(fontShadowEnableCbx);
   fontShadowEnableLayout->addStretch(1);
 
   /* Color */
-  QLabel *fontShadowColorLabel = new QLabel(tr("Shadow Color: "));
+  QLabel *fontShadowColorLabel = new QLabel(tr("Shadow color: "));
   fontShadowColorButton = new QPushButton();
   connect(fontShadowColorButton, SIGNAL(clicked()), this,
           SLOT(openFontShadowColorDialog()));
@@ -348,7 +348,7 @@ AppearancePage::AppearancePage(QWidget *parent, ConfigDialog *configDialog)
   fontShadowColorLayout->addStretch(1);
 
   /* Blur Radius */
-  QLabel *fontShadowBlurRadiusLabel = new QLabel(tr("Blur Radius: "));
+  QLabel *fontShadowBlurRadiusLabel = new QLabel(tr("Blur radius: "));
   fontShadowBlurRadiusSpinBox = new QSpinBox();
   fontShadowBlurRadiusSpinBox->setSingleStep(
       PrefConstants::FONT_SHADOW_BLUR_RADIUS_STEP);
