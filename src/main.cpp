@@ -12,5 +12,11 @@ int main(int argc, char *argv[]) {
   a.setApplicationVersion(APP_VERSION);
   MainWindow w;
   w.show();
+  if (argc > 1) {
+    w.hide();
+    QString path = a.arguments().at(1);
+    w.load(path);
+    w.show();
+  }
   return a.exec();
 }

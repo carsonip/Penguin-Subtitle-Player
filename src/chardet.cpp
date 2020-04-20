@@ -16,6 +16,8 @@ QString charsetDetect(QString path) {
     file.close();
     csd_consider(csd, contents, size);
     delete[] contents;
+  } else {
+    throw std::invalid_argument("File IO Error");
   }
   return QString(csd_close(csd));
 }

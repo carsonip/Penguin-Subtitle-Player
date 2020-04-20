@@ -17,6 +17,7 @@ class MainWindow : public QMainWindow {
 public:
   explicit MainWindow(QWidget *parent = 0);
   ~MainWindow();
+  void load(QString path);
 
 public slots:
   void update();
@@ -50,7 +51,6 @@ private:
 
   void loadPosAndSize();
   void loadPref();
-  void load(QString path);
   void setup();
   void setPlay(bool play);
   QString getSubtitle(bool sliderMoved);

@@ -14,6 +14,7 @@
 #include "QLineEdit"
 #include "QList"
 #include "QMenu"
+#include "QMessageBox"
 #include "QMimeData"
 #include "QMouseEvent"
 #include "QObject"
@@ -434,20 +435,24 @@ void MainWindow::loadPref() {
 }
 
 void MainWindow::load(QString path) {
-  QString chardet = charsetDetect(path);
-  qDebug() << "Detected Charset:" << chardet;
-  if (chardet == "ASCII") {
-    chardet = "UTF-8";
-    qDebug() << "Chardet returns ASCII, use UTF-8 instead.";
+  try {
+    QString chardet = charsetDetect(path);
+    qDebug() << "Detected Charset:" << chardet;
+    if (chardet == "ASCII") {
+      chardet = "UTF-8";
+      qDebug() << "Chardet returns ASCII, use UTF-8 instead.";
+    }
+
+    // validates chardet result
+    QString encoding = getEncoding(chardet);
+
+    delete engine;
+    engine = new Engine(path, encoding);
+    setup();
+  } catch (const std::exception &e) {
+    QMessageBox::critical(NULL, "Error loading subtitle", e.what(),
+                          QMessageBox::Ok, QMessageBox::Ok);
   }
-
-  // validates chardet result
-  QString encoding = getEncoding(chardet);
-
-  delete engine;
-  engine = new Engine(path, encoding);
-
-  setup();
 }
 
 void MainWindow::setup() {
