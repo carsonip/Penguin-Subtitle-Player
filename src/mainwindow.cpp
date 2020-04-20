@@ -143,6 +143,7 @@ void MainWindow::update() {
 
   if (currentTime >= engine->getFinishTime()) {
     setPlay(false);
+    setup();
     return;
   }
 
@@ -183,10 +184,7 @@ void MainWindow::togglePlay() {
   if (!engine)
     return;
 
-  if (currentTime >= engine->getFinishTime())
-    setup();
-  else
-    setPlay(!isPlaying);
+  setPlay(!isPlaying);
 }
 
 void MainWindow::fastForward() {
@@ -453,6 +451,7 @@ void MainWindow::load(QString path) {
     delete engine;
     engine = new Engine(path, encoding);
     setup();
+    setPlay(true);
   } catch (const std::exception &e) {
     QMessageBox::critical(NULL, "Error loading subtitle", e.what(),
                           QMessageBox::Ok, QMessageBox::Ok);
@@ -460,16 +459,17 @@ void MainWindow::load(QString path) {
 }
 
 void MainWindow::setup() {
-  skipped = false;
+  skipped = true;
   currentTime = 0;
-  this->ui->subtitleLabel->setText(getSubtitle(false));
+  intervalRemainder = 0;
+  this->ui->subtitleLabel->setText("");
   this->ui->timeLabel->setText(
       (Engine::millisToTimeString(currentTime) + " / " +
        Engine::millisToTimeString(engine->getFinishTime())));
   this->ui->horizontalSlider->setRange(
       0, (int)(engine->getFinishTime() / SLIDER_RATIO));
+  ui->horizontalSlider->setValue((int)(currentTime / SLIDER_RATIO));
   this->ui->horizontalSlider->setEnabled(true);
-  setPlay(true);
 }
 
 void MainWindow::setPlay(bool play) {
