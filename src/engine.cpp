@@ -40,16 +40,18 @@ Engine::~Engine() {}
 
 QString Engine::currentSubtitle(long long time, bool sliderMoved) {
     int index = currentSubtitleIndex(time, sliderMoved);
-    if (index != -1) {
-        lastIndex = index;
-        return subtitles[index].text;
+    if (index < 0) {
+        return "";
     }
-    return "";
+    lastIndex = index;
+    return subtitles[index].text;
 }
 
 long long Engine::getTimeWithSubtitleOffset(long long time, int offset) {
     int index = currentSubtitleIndex(time, true);
-    int targetIndex = index + offset;
+    int targetIndex;
+    if (index >= 0) targetIndex = index + offset;
+    else targetIndex = -(index+1) + (offset>0?offset-1:offset);
 
     if (targetIndex >= (int)subtitles.size())
         return this->getFinishTime();
@@ -61,6 +63,9 @@ long long Engine::getTimeWithSubtitleOffset(long long time, int offset) {
 
 int Engine::currentSubtitleIndex(long long time, bool sliderMoved) {
     // Fetch the suitable subtitle content for current time
+    // This function may return a negative value
+    // -x-1 denotes the gap between x-1 and x
+    // e.g. -1 is the gap between 0:00 and subtitles[0].start
 
     if (subtitles.size() == 0)
         return -1;
@@ -68,13 +73,15 @@ int Engine::currentSubtitleIndex(long long time, bool sliderMoved) {
     if (time >= this->getFinishTime())
         return subtitles.size() - 1;
 
-    if (lastIndex != -1 && !sliderMoved) {
+    if (!sliderMoved) {
         //  Linear search for next subtitle from last subtitle if slide bar is
         //  not manually set
-        for (int i = lastIndex, len = subtitles.size(); i < len; i++) {
+        for (int i = max(0, lastIndex), len = subtitles.size(); i < len; i++) {
             SubtitleItem item = subtitles[i];
-            if (time >= item.start && time <= item.end)
-                return i;
+            if (time <= item.end) {
+                if (time >= item.start) return i;
+                else return -i-1;
+            }
         }
     } else {
         // Binary Search for initialization or if slide bar is manually set
@@ -82,10 +89,7 @@ int Engine::currentSubtitleIndex(long long time, bool sliderMoved) {
         while (lo < hi) {
             int mid = lo + (hi - lo) / 2;
             SubtitleItem item = subtitles[mid];
-            if (time >= item.start && time <= item.end) {
-                lo = mid;
-                break;
-            } else if (time > item.end) {
+            if (time > item.end) {
                 lo = mid + 1;
             } else {
                 hi = mid;
@@ -93,6 +97,8 @@ int Engine::currentSubtitleIndex(long long time, bool sliderMoved) {
         }
         if (time >= subtitles[lo].start && time <= subtitles[lo].end) {
             return lo;
+        } else {
+            return -lo-1;
         }
     }
     return -1;
