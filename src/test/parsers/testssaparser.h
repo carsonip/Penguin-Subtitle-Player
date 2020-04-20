@@ -13,14 +13,14 @@
  */
 
 class TestSsaParser : public QObject {
-    Q_OBJECT
+  Q_OBJECT
 
-  public:
-    TestSsaParser();
+public:
+  TestSsaParser();
 
-  private slots:
-    void testFormatText();
-    void testParseFile();
+private slots:
+  void testFormatText();
+  void testParseFile();
 };
 
 #endif // TESTSSAPARSER_H

@@ -62,6 +62,14 @@ A: You need to have a [compositing window manager](https://github.com/carsonip/P
 
 Penguin Subtitle Player is a Qt5 project. The executables include statically compiled Qt libraries.
 
+#### Code formatting
+
+This project uses ClangFormat. To format the code in this project, run:
+
+```bash
+find . -path "./src/libcharsetdetect" -prune -o \( -name '*.h' -o -name '*.cpp' \) -print | xargs clang-format -i -style=llvm
+```
+
 #### Libraries
 * [uchardet-enhanced](https://bitbucket.org/medoc/uchardet-enhanced): Auto charset detection. 
 

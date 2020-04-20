@@ -4,19 +4,19 @@
 #include <QtTest>
 
 class TestEngine : public QObject {
-    Q_OBJECT
+  Q_OBJECT
 
-  public:
-    TestEngine();
+public:
+  TestEngine();
 
-  private:
-    QString tmpFileName;
-  private slots:
-    void initTestCase();
-    void testGetFinishTime();
-    void testCurrentSubtitleIndex();
-    void testGetTimeWithSubtitleOffset();
-    void cleanupTestCase();
+private:
+  QString tmpFileName;
+private slots:
+  void initTestCase();
+  void testGetFinishTime();
+  void testCurrentSubtitleIndex();
+  void testGetTimeWithSubtitleOffset();
+  void cleanupTestCase();
 };
 
 #endif // TESTENGINE_H

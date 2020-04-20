@@ -10,16 +10,16 @@
 #include <vector>
 
 class Parser {
-  public:
-    Parser();
-    ~Parser();
-    std::vector<Engine::SubtitleItem> parseFile(QFile &f, QString encoding);
-    QStringList getExtensions();
-    QString getFileDialogExt();
-    bool hasParser(QString ext);
+public:
+  Parser();
+  ~Parser();
+  std::vector<Engine::SubtitleItem> parseFile(QFile &f, QString encoding);
+  QStringList getExtensions();
+  QString getFileDialogExt();
+  bool hasParser(QString ext);
 
-  private:
-    static std::vector<ParserInterface *> parsers;
+private:
+  static std::vector<ParserInterface *> parsers;
 };
 
 #endif // PARSER_H

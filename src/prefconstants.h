@@ -38,6 +38,6 @@ const static int WINDOW_X = 0;
 const static int WINDOW_Y = 0;
 const static int WINDOW_WIDTH = 700;
 const static int WINDOW_HEIGHT = 200;
-}
+} // namespace PrefConstants
 
 #endif // PREFCONSTANTS_H

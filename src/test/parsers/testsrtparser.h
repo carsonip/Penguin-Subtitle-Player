@@ -13,17 +13,17 @@
  */
 
 class TestSrtParser : public QObject {
-    Q_OBJECT
+  Q_OBJECT
 
-  public:
-    TestSrtParser();
+public:
+  TestSrtParser();
 
-  private:
-    void testString(QString content);
+private:
+  void testString(QString content);
 
-  private slots:
-    void testParseFileLf();
-    void testParseFileCrLf();
+private slots:
+  void testParseFileLf();
+  void testParseFileCrLf();
 };
 
 #endif // TESTSRTPARSER_H

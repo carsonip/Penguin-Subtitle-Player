@@ -6,12 +6,12 @@
 Tests::Tests() {}
 
 void Tests::run() {
-    TestSsaParser testSsaParser;
-    QTest::qExec(&testSsaParser);
+  TestSsaParser testSsaParser;
+  QTest::qExec(&testSsaParser);
 
-    TestSrtParser testSrtParser;
-    QTest::qExec(&testSrtParser);
+  TestSrtParser testSrtParser;
+  QTest::qExec(&testSrtParser);
 
-    TestEngine testEngine;
-    QTest::qExec(&testEngine);
+  TestEngine testEngine;
+  QTest::qExec(&testEngine);
 }
