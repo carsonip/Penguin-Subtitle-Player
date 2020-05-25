@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=Penguin Subtitle Player
+Exec=penguin-subtitle-player
+Icon=${SNAP}/meta/gui/penguin-subtitle-player.png
