@@ -28,7 +28,9 @@ To download the latest version of Penguin Subtitle Player for Windows, macOS (ak
 * [SourceForge](https://sourceforge.net/projects/penguinsubtitleplayer/)
 * [GitHub Release](https://github.com/carsonip/Penguin-Subtitle-Player/releases)
 
-For Linux, it is recommended to download from your package manager instead of using the standalone version.
+For Linux, it is recommended to download from your package manager instead of using the standalone version. There is also a snap available:
+
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/penguin-subtitle-player)
 
 * Ubuntu
 
