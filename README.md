@@ -1,4 +1,4 @@
-# Penguin Subtitle Player [![GitHub release](https://img.shields.io/github/release/carsonip/Penguin-Subtitle-Player.svg)](https://github.com/carsonip/Penguin-Subtitle-Player/releases) [![Build Status](https://travis-ci.org/carsonip/Penguin-Subtitle-Player.svg?branch=master)](https://travis-ci.org/carsonip/Penguin-Subtitle-Player) [![SourceForge](https://img.shields.io/sourceforge/dt/PenguinSubtitlePlayer.svg)](https://sourceforge.net/projects/penguinsubtitleplayer/) [![Github All Releases](https://img.shields.io/github/downloads/carsonip/Penguin-Subtitle-Player/total.svg)](https://github.com/carsonip/Penguin-Subtitle-Player/releases)
+# Penguin Subtitle Player [![GitHub release](https://img.shields.io/github/release/carsonip/Penguin-Subtitle-Player.svg)](https://github.com/carsonip/Penguin-Subtitle-Player/releases) [![Build Status](https://travis-ci.org/carsonip/Penguin-Subtitle-Player.svg?branch=master)](https://travis-ci.org/carsonip/Penguin-Subtitle-Player) [![SourceForge](https://img.shields.io/sourceforge/dt/PenguinSubtitlePlayer.svg)](https://sourceforge.net/projects/penguinsubtitleplayer/) [![Github All Releases](https://img.shields.io/github/downloads/carsonip/Penguin-Subtitle-Player/total.svg)](https://github.com/carsonip/Penguin-Subtitle-Player/releases) [![penguin-subtitle-player](https://snapcraft.io//penguin-subtitle-player/badge.svg)](https://snapcraft.io/penguin-subtitle-player)
 
 Penguin Subtitle Player is an open-source, cross-platform standalone subtitle player, as an alternative to [Greenfish Subtitle Player](http://www.softpedia.com/get/Multimedia/Video/Other-VIDEO-Tools/Greenfish-Subtitle-Player.shtml), [SrtViewer (Mac)](https://sourceforge.net/projects/srtviewer/), [SRTPlayer](https://sourceforge.net/projects/subtitleplayer/), [JustSubsPlayer](https://justsubsplayer.codeplex.com/) and [Free Subtitle Player](http://sourceforge.net/projects/freesubtitleplayer/).
 
@@ -28,7 +28,9 @@ To download the latest version of Penguin Subtitle Player for Windows, macOS (ak
 * [SourceForge](https://sourceforge.net/projects/penguinsubtitleplayer/)
 * [GitHub Release](https://github.com/carsonip/Penguin-Subtitle-Player/releases)
 
-For Linux, it is recommended to download from your package manager instead of using the standalone version.
+For Linux, it is recommended to download from your package manager instead of using the standalone version. There is also a snap available:
+
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/penguin-subtitle-player)
 
 * Ubuntu
 
