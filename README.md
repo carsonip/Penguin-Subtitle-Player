@@ -2,7 +2,7 @@
 
 Penguin Subtitle Player is an open-source, cross-platform standalone subtitle player, as an alternative to [Greenfish Subtitle Player](http://www.softpedia.com/get/Multimedia/Video/Other-VIDEO-Tools/Greenfish-Subtitle-Player.shtml), [SrtViewer (Mac)](https://sourceforge.net/projects/srtviewer/), [SRTPlayer](https://sourceforge.net/projects/subtitleplayer/), [JustSubsPlayer](https://justsubsplayer.codeplex.com/) and [Free Subtitle Player](http://sourceforge.net/projects/freesubtitleplayer/).
 
-You download the subtitle file (`.srt`, `.ssa`, `.ass`) from any sites you like and load it into the subtitle player. The subtitle player provides a translucent window which always stays on the top so that subtitles can be shown on top of the video without blocking anything.
+You download the subtitle file (`.srt`, `.ssa`, `.ass`, `.vtt`) from any sites you like and load it into the subtitle player. The subtitle player provides a translucent window which always stays on the top so that subtitles can be shown on top of the video without blocking anything.
 
 With Penguin Subtitle Player, just open your favorite online streaming site, load the subtitle file into the player, and enjoy.
 
@@ -14,7 +14,7 @@ With Penguin Subtitle Player, just open your favorite online streaming site, loa
 
 * 700+ encoding supported (default: UTF8)
 * Auto encoding detection
-* Multiple subtitle formats supported (`.srt`, `.ssa`, `.ass`)
+* Multiple subtitle formats supported (`.srt`, `.ssa`, `.ass`, `.vtt`)
 * Drag & drop file
 * Customizable layout (Frame size, Background color & Opacity, Font style)
 * Time fine tuning (Fast forward / backward with customizable time interval)
