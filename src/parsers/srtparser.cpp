@@ -45,7 +45,7 @@ std::vector<Engine::SubtitleItem> SrtParser::parseFile(QFile &f,
     QString text = m.captured(10);
     // Validate current subtitle section against previous:
     Engine::SubtitleItem currentItem =
-        Engine::SubtitleItem(section, start, end, text);
+        Engine::SubtitleItem(section, start, end, this->formatText(text));
     Engine::SubtitleItem previousItem = Engine::SubtitleItem(0, 0, 0, "");
     // get previous (valid) subtitle section
     if (subtitles.size() > 0)

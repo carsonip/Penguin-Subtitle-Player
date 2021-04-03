@@ -62,7 +62,7 @@ void TestSrtParser::testString(QString content) {
   Engine::SubtitleItem item0(1, 50LL, 30000LL, "Foo");
 
   // multi-line case, with subtitle coordinates that should be ignored
-  Engine::SubtitleItem item1(2, 60300LL, 120900LL, "Foo\nBar");
+  Engine::SubtitleItem item1(2, 60300LL, 120900LL, "Foo<br>Bar");
 
   // formatting inside text
   Engine::SubtitleItem item2(
