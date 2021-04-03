@@ -5,6 +5,7 @@
 #include "parserinterface.h"
 #include "parsers/srtparser.h"
 #include "parsers/ssaparser.h"
+#include "parsers/webvttparser.h"
 #include <QFile>
 #include <QString>
 #include <vector>

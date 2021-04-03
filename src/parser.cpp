@@ -6,6 +6,7 @@ Parser::Parser() {
   if (Parser::parsers.size() == 0) {
     Parser::parsers.push_back(new SrtParser);
     Parser::parsers.push_back(new SsaParser);
+    Parser::parsers.push_back(new WebVttParser);
   }
 }
 

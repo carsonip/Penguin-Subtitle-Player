@@ -58,6 +58,7 @@ SOURCES += src/configdialog.cpp \
     src/chardet.cpp \
     src/parsers/srtparser.cpp \
     src/parsers/ssaparser.cpp \
+    src/parsers/webvttparser.cpp \
     src/parser.cpp \
     src/engine.cpp
 
@@ -102,6 +103,7 @@ HEADERS  += src/configdialog.h \
     src/chardet.h \
     src/parsers/srtparser.h \
     src/parsers/ssaparser.h \
+    src/parsers/webvttparser.h \
     src/parserinterface.h \
     src/parser.h \
     src/engine.h
@@ -146,6 +148,7 @@ test { # the following files will be included for Unit test build
     src/test/parsers/testssaparser.h \
     src/test/tests.h \
     src/test/parsers/testsrtparser.h \
+    src/test/parsers/testwebvttparser.h \
     src/test/testengine.h
 
     SOURCES += \
@@ -153,6 +156,7 @@ test { # the following files will be included for Unit test build
     src/test/main.cpp \
     src/test/tests.cpp \
     src/test/parsers/testsrtparser.cpp \
+    src/test/parsers/testwebvttparser.cpp \
     src/test/testengine.cpp
 } else {
     message(Normal build) #we will just show this message for Debug/Release build
