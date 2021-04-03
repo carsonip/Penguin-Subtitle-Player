@@ -535,8 +535,10 @@
          <string notr="true"/>
         </property>
         <property name="text">
-         <string>Penguin Subtitle Player
-open-source, cross-platform</string>
+         <string>Penguin Subtitle Player&lt;br&gt;open-source, cross-platform</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::RichText</enum>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
