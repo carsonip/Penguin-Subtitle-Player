@@ -1,4 +1,4 @@
-name: penguin-subtitle-player # you probably want to 'snapcraft register <name>'
+name: penguin-subtitle-player
 base: core18
 version: '1.4.0'
 summary: An open-source, cross-platform standalone subtitle player # 79 char long summary
@@ -9,6 +9,14 @@ description: |
 
 grade: stable
 confinement: strict
+architectures:
+#  - build-on: s390x and below not available due to kde-neon extension not supporting them
+#  - build-on: ppc64el
+#  - build-on: arm64
+#  - build-on: armhf
+#  - build-on: i386
+  - build-on: amd64
+
 
 apps:
   penguin-subtitle-player:
