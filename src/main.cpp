@@ -1,6 +1,6 @@
+#include "QCommandLineParser"
 #include "QObject"
 #include "QPushButton"
-#include "QCommandLineParser"
 #include "mainwindow.h"
 #include <QApplication>
 
@@ -16,7 +16,10 @@ int main(int argc, char *argv[]) {
   parser.setApplicationDescription("Penguin Subtitle Player");
   parser.addHelpOption();
   parser.addVersionOption();
-  parser.addPositionalArgument("file", QCoreApplication::translate("main", "Subtitle file to play, optionally."), "[file]");
+  parser.addPositionalArgument(
+      "file",
+      QCoreApplication::translate("main", "Subtitle file to play, optionally."),
+      "[file]");
   parser.process(a);
   const QStringList args = parser.positionalArguments();
 

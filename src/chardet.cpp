@@ -1,12 +1,12 @@
 #include "charsetdetect.h"
-#include <QString>
 #include <QFile>
+#include <QString>
 #include <fstream>
 
 QString charsetDetect(QString path) {
   QFile file(path);
   if (!file.open(QIODevice::ReadOnly))
-      throw std::invalid_argument("File IO Error");
+    throw std::invalid_argument("File IO Error");
 
   QByteArray bytes = file.readAll();
   const char *contents = bytes.constData();
