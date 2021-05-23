@@ -1,4 +1,4 @@
-# Penguin Subtitle Player [![GitHub release](https://img.shields.io/github/release/carsonip/Penguin-Subtitle-Player.svg)](https://github.com/carsonip/Penguin-Subtitle-Player/releases) [![Build Status](https://travis-ci.org/carsonip/Penguin-Subtitle-Player.svg?branch=master)](https://travis-ci.org/carsonip/Penguin-Subtitle-Player) [![SourceForge](https://img.shields.io/sourceforge/dt/PenguinSubtitlePlayer.svg)](https://sourceforge.net/projects/penguinsubtitleplayer/) [![Github All Releases](https://img.shields.io/github/downloads/carsonip/Penguin-Subtitle-Player/total.svg)](https://github.com/carsonip/Penguin-Subtitle-Player/releases) [![penguin-subtitle-player](https://snapcraft.io//penguin-subtitle-player/badge.svg)](https://snapcraft.io/penguin-subtitle-player)
+# Penguin Subtitle Player [![GitHub release](https://img.shields.io/github/release/carsonip/Penguin-Subtitle-Player.svg)](https://github.com/carsonip/Penguin-Subtitle-Player/releases) [![Build Status](https://travis-ci.com/carsonip/Penguin-Subtitle-Player.svg?branch=master)](https://travis-ci.com/github/carsonip/Penguin-Subtitle-Player) [![SourceForge](https://img.shields.io/sourceforge/dt/PenguinSubtitlePlayer.svg)](https://sourceforge.net/projects/penguinsubtitleplayer/) [![Github All Releases](https://img.shields.io/github/downloads/carsonip/Penguin-Subtitle-Player/total.svg)](https://github.com/carsonip/Penguin-Subtitle-Player/releases) [![penguin-subtitle-player](https://snapcraft.io//penguin-subtitle-player/badge.svg)](https://snapcraft.io/penguin-subtitle-player)
 
 Penguin Subtitle Player is an open-source, cross-platform standalone subtitle player, as an alternative to [Greenfish Subtitle Player](http://www.softpedia.com/get/Multimedia/Video/Other-VIDEO-Tools/Greenfish-Subtitle-Player.shtml), [SrtViewer (Mac)](https://sourceforge.net/projects/srtviewer/), [SRTPlayer](https://sourceforge.net/projects/subtitleplayer/), [JustSubsPlayer](https://justsubsplayer.codeplex.com/) and [Free Subtitle Player](http://sourceforge.net/projects/freesubtitleplayer/).
 
@@ -132,7 +132,7 @@ Check [here](http://doc.qt.io/qt-5/deployment.html) for deployment details.
 2. Build from the makefile as described in the Building part
 3. Run the executable
 
-Note: This project is using [TravisCI](https://travis-ci.org/carsonip/Penguin-Subtitle-Player) for testing.
+Note: This project is using [TravisCI](https://travis-ci.com/github/carsonip/Penguin-Subtitle-Player) for testing.
 
 ## Contributing
 
