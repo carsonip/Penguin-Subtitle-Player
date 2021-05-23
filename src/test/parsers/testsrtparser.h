@@ -1,7 +1,7 @@
 #ifndef TESTSRTPARSER_H
 #define TESTSRTPARSER_H
 
-#include "../parsers/srtparser.h"
+#include "../../parsers/srtparser.h"
 #include <QtTest> //for unit testing
 
 /**

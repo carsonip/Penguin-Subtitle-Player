@@ -1,7 +1,7 @@
 #ifndef TESTWEBVTTPARSER_H
 #define TESTWEBVTTPARSER_H
 
-#include "../parsers/webvttparser.h"
+#include "../../parsers/webvttparser.h"
 #include <QtTest> //for unit testing
 
 /**

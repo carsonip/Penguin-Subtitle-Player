@@ -1,7 +1,7 @@
 #ifndef TESTSSAPARSER_H
 #define TESTSSAPARSER_H
 
-#include "../parsers/ssaparser.h"
+#include "../../parsers/ssaparser.h"
 #include <QtTest> //for unit testing
 
 /**
