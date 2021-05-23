@@ -44,14 +44,16 @@ std::vector<Engine::SubtitleItem> SsaParser::parseFile(QFile &f,
   int textIndex = headers.indexOf("Text");
 
   QString line;
+  long section = 0;
   while (!in.atEnd() && (line = in.readLine()) != "") {
     line = line.remove(0, 10); // remove "Dialogue: "
+
     QStringList columns = line.split(",");
 
     long long start = timeFromStr(columns[startIndex]);
     long long end = timeFromStr(columns[endIndex]);
     QString text = formatText(QStringList(columns.mid(textIndex)).join(","));
-    subtitles.push_back(Engine::SubtitleItem(0, start, end, text));
+    subtitles.push_back(Engine::SubtitleItem(++section, start, end, text));
   }
 
   return subtitles;

@@ -1,47 +1,6 @@
 #include "testwebvttparser.h"
-
+#include "parsertests.h"
 #include <QString>
-
-std::vector<Engine::SubtitleItem> getSubtitles(QString content) {
-  QTemporaryFile tmpFile;
-  if (!tmpFile.open()) {
-    return std::vector<Engine::SubtitleItem>();
-  }
-  QString filename = tmpFile.fileName();
-
-  QTextStream outStream(&tmpFile);
-  outStream << content;
-  tmpFile.close();
-
-  QFile file(filename);
-  if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-    return std::vector<Engine::SubtitleItem>();
-  }
-
-  std::vector<Engine::SubtitleItem> subtitles =
-      WebVttParser().parseFile(file, QString(""));
-  return subtitles;
-}
-
-void testString(QString content) {
-  std::vector<Engine::SubtitleItem> subtitles = getSubtitles(content);
-  QCOMPARE((int)subtitles.size(), 3);
-
-  // normal case
-  Engine::SubtitleItem item0(1, 50LL, 30000LL, "Foo");
-
-  // multi-line case, with subtitle coordinates that should be ignored
-  Engine::SubtitleItem item1(2, 60300LL, 120900LL, "Foo<br>Bar");
-
-  // formatting inside text
-  Engine::SubtitleItem item2(
-      3, 225150LL, 7199990LL,
-      "<i>Italics</i><br><b>Bold</b><br><u>Underline</u><s>Strikeout</s>");
-
-  QCOMPARE(item0, subtitles[0]);
-  QCOMPARE(item1, subtitles[1]);
-  QCOMPARE(item2, subtitles[2]);
-}
 
 TestWebVttParser::TestWebVttParser() {}
 
@@ -59,7 +18,9 @@ Bar
 <i>Italics</i><br><b>Bold</b><br><u>Underline</u><s>Strikeout</s>
 
 )";
-  testString(fileContent);
+  WebVttParser p;
+  std::vector<Engine::SubtitleItem> subtitles = getSubtitles(p, fileContent);
+  assertSubtitles(subtitles);
 }
 
 void TestWebVttParser::testCueIdentifier() {
@@ -79,7 +40,9 @@ Bar
 <i>Italics</i><br><b>Bold</b><br><u>Underline</u><s>Strikeout</s>
 
 )";
-  testString(fileContent);
+  WebVttParser p;
+  std::vector<Engine::SubtitleItem> subtitles = getSubtitles(p, fileContent);
+  assertSubtitles(subtitles);
 }
 
 void TestWebVttParser::testLongHours() {
@@ -90,7 +53,8 @@ void TestWebVttParser::testLongHours() {
 Foo
 
 )";
-  std::vector<Engine::SubtitleItem> subtitles = getSubtitles(fileContent);
+  WebVttParser p;
+  std::vector<Engine::SubtitleItem> subtitles = getSubtitles(p, fileContent);
   QCOMPARE((int)subtitles.size(), 1);
   QCOMPARE(Engine::SubtitleItem(1, 50LL, 3600030000LL, "Foo"), subtitles[0]);
 }
@@ -112,7 +76,9 @@ Bar
 <i>Italics</i><br><b>Bold</b><br><u>Underline</u><s>Strikeout</s>
 
 )";
-  testString(fileContent);
+  WebVttParser p;
+  std::vector<Engine::SubtitleItem> subtitles = getSubtitles(p, fileContent);
+  assertSubtitles(subtitles);
 }
 
 void TestWebVttParser::testStyleNote() {
@@ -140,5 +106,7 @@ Bar
 <i>Italics</i><br><b>Bold</b><br><u>Underline</u><s>Strikeout</s>
 
 )";
-  testString(fileContent);
+  WebVttParser p;
+  std::vector<Engine::SubtitleItem> subtitles = getSubtitles(p, fileContent);
+  assertSubtitles(subtitles);
 }

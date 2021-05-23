@@ -153,7 +153,8 @@ test { # the following files will be included for Unit test build
     src/test/tests.h \
     src/test/parsers/testsrtparser.h \
     src/test/parsers/testwebvttparser.h \
-    src/test/testengine.h
+    src/test/testengine.h \
+    src/test/parsers/parsertests.h
 
     SOURCES += \
     src/test/parsers/testssaparser.cpp \
@@ -161,7 +162,8 @@ test { # the following files will be included for Unit test build
     src/test/tests.cpp \
     src/test/parsers/testsrtparser.cpp \
     src/test/parsers/testwebvttparser.cpp \
-    src/test/testengine.cpp
+    src/test/testengine.cpp \
+    src/test/parsers/parsertests.cpp
 } else {
     message(Normal build) #we will just show this message for Debug/Release build
 }
