@@ -13,7 +13,7 @@ With Penguin Subtitle Player, just open your favorite online streaming site, loa
 ## Features
 
 * 700+ encoding supported (default: UTF8)
-* Auto encoding detection
+* Auto encoding detection (See [uchardet](https://www.freedesktop.org/wiki/Software/uchardet/) website for supported encodings)
 * Multiple subtitle formats supported (`.srt`, `.ssa`, `.ass`, `.vtt`)
 * Drag & drop file
 * Customizable layout (Frame size, Background color & Opacity, Font style)
@@ -60,38 +60,31 @@ A: It is tested and confirmed working in Windows, Linux and macOS for both HTML5
 #### Q: Why does the transparency/opacity feature not work for me on Linux?
 A: You need to have a [compositing window manager](https://github.com/carsonip/Penguin-Subtitle-Player/issues/19) set up and enabled.
 
-## Developing
-
-Penguin Subtitle Player is a Qt5 project. The executables include statically compiled Qt libraries.
-
-#### Code formatting
-
-This project uses ClangFormat. To format the code in this project, run:
-
-```bash
-find . -path "./src/libcharsetdetect" -prune -o \( -name '*.h' -o -name '*.cpp' \) -print | xargs clang-format -i -style=llvm
-```
-
-#### Libraries
-* [uchardet-enhanced](https://bitbucket.org/medoc/uchardet-enhanced): Auto charset detection. 
-
-#### Compilers
-
-* Windows: VC++ 2012
-* Linux: G++
-* macOS: G++
-
-Check [here](http://doc.qt.io/qt-5/deployment.html) for deployment details.
-
 ## Building
 
-#### The easy way
+#### 1. Clone the project & download dependencies
+
+```
+git clone --recurse-submodules https://github.com/carsonip/Penguin-Subtitle-Player
+```
+or
+```
+git clone https://github.com/carsonip/Penguin-Subtitle-Player
+cd Penguin-Subtitle-Player
+git submodule update --init --recursive
+```
+
+#### 2. Build
+
+Use one of the following ways:
+
+##### a. The easy way (GUI)
 
 1. Download Qt with Qt Creator [here](http://www.qt.io/download-open-source/)
 2. Open the .pro file in Qt Creator
 3. You should be good to go (In case of some weird compilation errors, turn off the shadow build option in projects build settings)
 
-#### The hard way
+##### b. The hard way (Command line)
 
 1. Download Qt (Qt Creator is not required) [here](http://www.qt.io/download-open-source/)
 2. Run qmake
@@ -109,6 +102,29 @@ In case you would like to deploy a version which does not require Qt libraries i
 CONFIG += static \
           c++11
 ```
+
+## Developing
+
+Penguin Subtitle Player is a Qt5 project. The executables include statically compiled Qt libraries.
+
+#### Code formatting
+
+This project uses ClangFormat. To format the code in this project, run:
+
+```bash
+find . -path "./src/uchardet" -prune -o \( -name '*.h' -o -name '*.cpp' \) -print | xargs clang-format -i -style=llvm
+```
+
+#### Libraries
+* [uchardet](https://gitlab.freedesktop.org/uchardet/uchardet): Encoding detector
+
+#### Compilers
+
+* Windows: VC++ 2012
+* Linux: G++
+* macOS: G++
+
+Check [here](http://doc.qt.io/qt-5/deployment.html) for deployment details.
 
 ## Testing
 

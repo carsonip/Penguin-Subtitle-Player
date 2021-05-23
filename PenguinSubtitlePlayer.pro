@@ -11,50 +11,93 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = PenguinSubtitlePlayer
 TEMPLATE = app
 
-INCLUDEPATH += $$PWD/src/libcharsetdetect \
-    $$PWD/src/libcharsetdetect/nspr-emu \
-    $$PWD/src/libcharsetdetect/mozilla/extensions/universalchardet/src/base
+SOURCES += \
+    src/uchardet/src/LangModels/LangArabicModel.cpp \
+    src/uchardet/src/LangModels/LangBulgarianModel.cpp \
+    src/uchardet/src/LangModels/LangCroatianModel.cpp \
+    src/uchardet/src/LangModels/LangCzechModel.cpp \
+    src/uchardet/src/LangModels/LangDanishModel.cpp \
+    src/uchardet/src/LangModels/LangEsperantoModel.cpp \
+    src/uchardet/src/LangModels/LangEstonianModel.cpp \
+    src/uchardet/src/LangModels/LangFinnishModel.cpp \
+    src/uchardet/src/LangModels/LangFrenchModel.cpp \
+    src/uchardet/src/LangModels/LangGermanModel.cpp \
+    src/uchardet/src/LangModels/LangGreekModel.cpp \
+    src/uchardet/src/LangModels/LangHebrewModel.cpp \
+    src/uchardet/src/LangModels/LangHungarianModel.cpp \
+    src/uchardet/src/LangModels/LangIrishModel.cpp \
+    src/uchardet/src/LangModels/LangItalianModel.cpp \
+    src/uchardet/src/LangModels/LangLatvianModel.cpp \
+    src/uchardet/src/LangModels/LangLithuanianModel.cpp \
+    src/uchardet/src/LangModels/LangMalteseModel.cpp \
+    src/uchardet/src/LangModels/LangPolishModel.cpp \
+    src/uchardet/src/LangModels/LangPortugueseModel.cpp \
+    src/uchardet/src/LangModels/LangRomanianModel.cpp \
+    src/uchardet/src/LangModels/LangRussianModel.cpp \
+    src/uchardet/src/LangModels/LangSlovakModel.cpp \
+    src/uchardet/src/LangModels/LangSloveneModel.cpp \
+    src/uchardet/src/LangModels/LangSpanishModel.cpp \
+    src/uchardet/src/LangModels/LangSwedishModel.cpp \
+    src/uchardet/src/LangModels/LangThaiModel.cpp \
+    src/uchardet/src/LangModels/LangTurkishModel.cpp \
+    src/uchardet/src/LangModels/LangVietnameseModel.cpp \
+    src/uchardet/src/CharDistribution.cpp \
+    src/uchardet/src/JpCntx.cpp \
+    src/uchardet/src/nsBig5Prober.cpp \
+    src/uchardet/src/nsCharSetProber.cpp \
+    src/uchardet/src/nsEscCharsetProber.cpp \
+    src/uchardet/src/nsEscSM.cpp \
+    src/uchardet/src/nsEUCJPProber.cpp \
+    src/uchardet/src/nsEUCKRProber.cpp \
+    src/uchardet/src/nsEUCTWProber.cpp \
+    src/uchardet/src/nsGB2312Prober.cpp \
+    src/uchardet/src/nsHebrewProber.cpp \
+    src/uchardet/src/nsLatin1Prober.cpp \
+    src/uchardet/src/nsMBCSGroupProber.cpp \
+    src/uchardet/src/nsMBCSSM.cpp \
+    src/uchardet/src/nsSBCharSetProber.cpp \
+    src/uchardet/src/nsSBCSGroupProber.cpp \
+    src/uchardet/src/nsSJISProber.cpp \
+    src/uchardet/src/nsUniversalDetector.cpp \
+    src/uchardet/src/nsUTF8Prober.cpp \
+    src/uchardet/src/uchardet.cpp
 
-SOURCES += src/configdialog.cpp \
+HEADERS += \
+    src/uchardet/src/CharDistribution.h \
+    src/uchardet/src/JpCntx.h \
+    src/uchardet/src/nsBig5Prober.h \
+    src/uchardet/src/nsCharSetProber.h \
+    src/uchardet/src/nsCodingStateMachine.h \
+    src/uchardet/src/nscore.h \
+    src/uchardet/src/nsEscCharsetProber.h \
+    src/uchardet/src/nsEUCJPProber.h \
+    src/uchardet/src/nsEUCKRProber.h \
+    src/uchardet/src/nsEUCTWProber.h \
+    src/uchardet/src/nsGB2312Prober.h \
+    src/uchardet/src/nsHebrewProber.h \
+    src/uchardet/src/nsLatin1Prober.h \
+    src/uchardet/src/nsMBCSGroupProber.h \
+    src/uchardet/src/nsPkgInt.h \
+    src/uchardet/src/nsSBCharSetProber.h \
+    src/uchardet/src/nsSBCSGroupProber.h \
+    src/uchardet/src/nsSJISProber.h \
+    src/uchardet/src/nsUniversalDetector.h \
+    src/uchardet/src/nsUTF8Prober.h \
+    src/uchardet/src/prmem.h \
+    src/uchardet/src/uchardet.h \
+    src/uchardet/src/Big5Freq.tab \
+    src/uchardet/src/EUCKRFreq.tab \
+    src/uchardet/src/EUCTWFreq.tab \
+    src/uchardet/src/GB2312Freq.tab \
+    src/uchardet/src/JISFreq.tab
+
+SOURCES += \
+    src/configdialog.cpp \
     src/main.cpp \
     src/clickablelabel.cpp \
     src/mainwindow.cpp \
     src/pages.cpp \
     src/prefpage.cpp \
-    src/libcharsetdetect/charsetdetect.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/CharDistribution.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/JpCntx.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/LangBulgarianModel.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/LangCyrillicModel.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/LangCzechModel.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/LangFinnishModel.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/LangFrenchModel.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/LangGermanModel.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/LangGreekModel.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/LangHebrewModel.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/LangHungarianModel.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/LangPolishModel.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/LangSpanishModel.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/LangSwedishModel.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/LangThaiModel.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/LangTurkishModel.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsBig5Prober.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsCharSetProber.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsEscCharsetProber.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsEscSM.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsEUCJPProber.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsEUCKRProber.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsEUCTWProber.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsGB2312Prober.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsHebrewProber.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsLatin1Prober.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsMBCSGroupProber.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsMBCSSM.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsSBCharSetProber.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsSBCSGroupProber.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsSJISProber.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsUniversalDetector.cpp \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsUTF8Prober.cpp \
     src/chardet.cpp \
     src/parsers/srtparser.cpp \
     src/parsers/ssaparser.cpp \
@@ -62,44 +105,13 @@ SOURCES += src/configdialog.cpp \
     src/parser.cpp \
     src/engine.cpp
 
-HEADERS  += src/configdialog.h \
+HEADERS += \
+    src/configdialog.h \
     src/clickablelabel.h \
     src/mainwindow.h \
     src/pages.h \
     src/prefpage.h \
     src/prefconstants.h \
-    src/libcharsetdetect/charsetdetect.h \
-    src/libcharsetdetect/charsetdetectPriv.h \
-    src/libcharsetdetect/nscore.h \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/CharDistribution.h \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/JpCntx.h \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsBig5Prober.h \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsCharSetProber.h \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsCodingStateMachine.h \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsEscCharsetProber.h \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsEUCJPProber.h \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsEUCKRProber.h \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsEUCTWProber.h \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsGB2312Prober.h \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsHebrewProber.h \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsLatin1Prober.h \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsMBCSGroupProber.h \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsPkgInt.h \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsSBCharSetProber.h \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsSBCSGroupProber.h \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsSJISProber.h \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsUniversalDetector.h \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/nsUTF8Prober.h \
-    src/libcharsetdetect/nspr-emu/nsDebug.h \
-    src/libcharsetdetect/nspr-emu/prcpucfg.h \
-    src/libcharsetdetect/nspr-emu/prcpucfg_freebsd.h \
-    src/libcharsetdetect/nspr-emu/prcpucfg_linux.h \
-    src/libcharsetdetect/nspr-emu/prcpucfg_mac.h \
-    src/libcharsetdetect/nspr-emu/prcpucfg_openbsd.h \
-    src/libcharsetdetect/nspr-emu/prcpucfg_win.h \
-    src/libcharsetdetect/nspr-emu/prmem.h \
-    src/libcharsetdetect/nspr-emu/prtypes.h \
-    src/libcharsetdetect/nspr-emu/obsolete/protypes.h \
     src/chardet.h \
     src/parsers/srtparser.h \
     src/parsers/ssaparser.h \
@@ -129,14 +141,6 @@ UI_DIR = $$DESTDIR/.ui
 
 VERSION = 1.4.0
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
-
-DISTFILES += \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/Big5Freq.tab \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/EUCKRFreq.tab \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/EUCTWFreq.tab \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/GB2312Freq.tab \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/JISFreq.tab \
-    src/libcharsetdetect/mozilla/extensions/universalchardet/src/base/Makefile.in
 
 test { # the following files will be included for Unit test build
     message(Test build)
