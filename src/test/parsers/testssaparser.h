@@ -21,6 +21,13 @@ public:
 private slots:
   void testFormatText();
   void testParseFile();
+  void testParseFileComma();
+  void testParseFileExtraWhitespace();
+  void testParseFileExtraNewline();
+  void testParseFileTrimmedHeaders();
+  void testParseFileMissingFormat();
+  void testParseFileSkipUselessLines();
+  void testParseFileInvalidInput();
 };
 
 #endif // TESTSSAPARSER_H

@@ -26,34 +26,46 @@ std::vector<Engine::SubtitleItem> SsaParser::parseFile(QFile &f,
   else
     throw std::invalid_argument("Unknown Encoding");
 
-  while (!in.atEnd() && in.readLine() != "[Events]")
+  while (!in.atEnd() && in.readLine().trimmed() != "[Events]")
     ;
 
-  QString formatLine = in.readLine();
-  formatLine = formatLine.remove(0, 8); // remove "Format: "
+  QString line, formatLine;
+  while (!in.atEnd()) {
+    line = in.readLine().trimmed();
+    if (line.startsWith("Format:")) {
+      formatLine = line.remove(0, 7).trimmed();
+      break;
+    }
+  }
+
+  if (formatLine.isNull()) {
+    return subtitles;
+  }
 
   QStringList headers = formatLine.split(",");
-  QStringList trimmedHeaders;
-  for (QString h : headers) {
-    trimmedHeaders << h.trimmed();
+  for (QString &h : headers) {
+    h = h.trimmed();
   }
-  headers = trimmedHeaders;
 
   int startIndex = headers.indexOf("Start");
   int endIndex = headers.indexOf("End");
   int textIndex = headers.indexOf("Text");
+  if (startIndex == -1 || endIndex == -1 || textIndex == -1)
+    throw std::runtime_error("Missing format for .ssa");
 
-  QString line;
   long section = 0;
-  while (!in.atEnd() && (line = in.readLine()) != "") {
-    line = line.remove(0, 10); // remove "Dialogue: "
+  while (!in.atEnd()) {
+    line = in.readLine().trimmed();
+    if (line.startsWith("Dialogue:")) {
+      line = line.remove(0, 9).trimmed();
 
-    QStringList columns = line.split(",");
+      QStringList columns = line.split(",");
 
-    long long start = timeFromStr(columns[startIndex]);
-    long long end = timeFromStr(columns[endIndex]);
-    QString text = formatText(QStringList(columns.mid(textIndex)).join(","));
-    subtitles.push_back(Engine::SubtitleItem(++section, start, end, text));
+      long long start = timeFromStr(columns[startIndex]);
+      long long end = timeFromStr(columns[endIndex]);
+      QString text = formatText(QStringList(columns.mid(textIndex)).join(","));
+      subtitles.push_back(Engine::SubtitleItem(++section, start, end, text));
+    }
   }
 
   return subtitles;
