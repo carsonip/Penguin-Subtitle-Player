@@ -167,3 +167,11 @@ test { # the following files will be included for Unit test build
 } else {
     message(Normal build) #we will just show this message for Debug/Release build
 }
+
+win32 {
+    RC_ICONS=resource\icon.ico
+}
+
+macx {
+    ICON=resource/icon.icns
+}
