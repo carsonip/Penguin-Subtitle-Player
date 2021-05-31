@@ -1,6 +1,6 @@
 name: penguin-subtitle-player # you probably want to 'snapcraft register <name>'
 base: core18
-version: '1.4.0'
+version: '1.5.0'
 summary: An open-source, cross-platform standalone subtitle player # 79 char long summary
 description: |
   You download the subtitle file (.srt, .ssa, .ass, .vtt) file from any sites you like and load it into the subtitle player.

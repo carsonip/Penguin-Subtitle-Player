@@ -139,7 +139,7 @@ MOC_DIR = $$DESTDIR/.moc
 RCC_DIR = $$DESTDIR/.qrc
 UI_DIR = $$DESTDIR/.ui
 
-VERSION = 1.4.0
+VERSION = 1.5.0
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 test { # the following files will be included for Unit test build
