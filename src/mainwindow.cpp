@@ -314,18 +314,22 @@ void MainWindow::dropEvent(QDropEvent *e) {
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event) {
-  this->setCursor(Qt::ClosedHandCursor);
-  m_nMouseClick_X_Coordinate = event->x();
-  m_nMouseClick_Y_Coordinate = event->y();
+  if (ui->topSpacer->underMouse()) {
+    ui->topSpacer->setCursor(Qt::ClosedHandCursor);
+    m_nMouseClick_X_Coordinate = event->x();
+    m_nMouseClick_Y_Coordinate = event->y();
+  }
 }
 
 void MainWindow::mouseReleaseEvent(QMouseEvent *event) {
-  this->setCursor(Qt::OpenHandCursor);
+  ui->topSpacer->setCursor(Qt::OpenHandCursor);
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent *event) {
-  move(event->globalX() - m_nMouseClick_X_Coordinate,
-       event->globalY() - m_nMouseClick_Y_Coordinate);
+  if (ui->topSpacer->underMouse()) {
+    move(event->globalX() - m_nMouseClick_X_Coordinate,
+         event->globalY() - m_nMouseClick_Y_Coordinate);
+  }
 }
 
 void MainWindow::enterEvent(QEvent *event) {
