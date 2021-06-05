@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Penguin Subtitle Player
+GenericName=Subtitle Player
+Comment=Standalone subtitle player
+Icon=PenguinSubtitlePlayer
+TryExec=PenguinSubtitlePlayer
+Exec=PenguinSubtitlePlayer
+Terminal=false
+Categories=Qt;AudioVideo;Player;

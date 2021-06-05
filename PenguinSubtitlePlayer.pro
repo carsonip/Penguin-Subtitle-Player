@@ -175,3 +175,28 @@ win32 {
 macx {
     ICON=resource/icon.icns
 }
+
+unix:!macx {
+    isEmpty(PREFIX) {
+        PREFIX = /usr/local
+    }
+    isEmpty(BINDIR) {
+        BINDIR = $$PREFIX/bin
+    }
+    isEmpty(DATADIR) {
+        DATADIR = $$PREFIX/share
+    }
+
+    target.path = $$BINDIR
+
+    icon.files = resource/icons/hicolor/*
+    icon.path = $$DATADIR/icons/hicolor
+
+    desktop.files = resource/PenguinSubtitlePlayer.desktop
+    desktop.path = $$DATADIR/applications/
+
+    appdata.files = resource/PenguinSubtitlePlayer.appdata.xml
+    appdata.path = $$DATADIR/metainfo/
+
+    INSTALLS += target icon desktop appdata
+}
