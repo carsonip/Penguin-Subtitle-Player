@@ -1,27 +1,50 @@
-# The Trusty beta Build Environment
-sudo: required
-dist: trusty
+language: cpp
 
-install:
-  - sudo apt-get install -y qt5-default qttools5-dev-tools #install necessary Qt files
+jobs:
+  include:
+    - os: linux
+      arch: amd64
+      compiler: gcc
+      env:
+        - EXECUTABLE="./build/release/PenguinSubtitlePlayer"
+      addons:
+        apt:
+          packages:
+            - qt5-default
+            - qttools5-dev-tools
+            - clang-format
+    - os: osx
+      osx_image: xcode11.6
+      arch: amd64
+      compiler: clang
+      env:
+        - HOMEBREW_NO_AUTO_UPDATE=1
+        - EXECUTABLE="./build/release/PenguinSubtitlePlayer.app/Contents/MacOS/PenguinSubtitlePlayer"
+      addons:
+        homebrew:
+          packages:
+            - qt5
+            - clang-format
+
+cache:
+  directories:
+    - $HOME/Library/Caches/Homebrew
+
+before_cache:
+  - brew cleanup
+
+before_install:
+  - if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew link qt5 --force; fi
+  - if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew link clang-format --force; fi
 
 script:
-  - find . -path "./src/uchardet" -prune -o -path "./build" -prune -o \( -name '*.h' -o -name '*.cpp' \) -print | xargs clang-format -style=llvm -output-replacements-xml | grep -q '<replacement '; test $? -eq 1
+  - clang-format -version
+  - find . -path "./src/uchardet" -prune -o -path "./build" -prune -o \( -name '*.h' -o -name '*.cpp' \) -print | xargs clang-format -style=file -output-replacements-xml | grep -q '<replacement '; test $? -eq 1
   - qmake --version
   - $CXX --version
-  - qmake "CONFIG+=test" "QMAKE_CXX=$CXX" "QMAKE_CC=$CC" PenguinSubtitlePlayer.pro #we gonna compile for Unit test first
-  - make
-  - ./build/release/PenguinSubtitlePlayer #run unit test
-  - make clean #remove files (which are generated from unit test) for next build
-  - qmake "QMAKE_CXX=$CXX" "QMAKE_CC=$CC" PenguinSubtitlePlayer.pro #we gonna compile for actual program
-  - make
-
-env: COMPILER_NAME=gcc CXX=g++-5 CC=gcc-5
-
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - gcc-5
-    - g++-5
+  - qmake "CONFIG+=test" "QMAKE_CXX=$CXX" "QMAKE_CC=$CC" PenguinSubtitlePlayer.pro # compile for unit test first
+  - make -j2
+  - $EXECUTABLE # run unit test
+  - make clean
+  - qmake "QMAKE_CXX=$CXX" "QMAKE_CC=$CC" PenguinSubtitlePlayer.pro # compile for actual program
+  - make -j2
