@@ -6,6 +6,7 @@ install:
   - sudo apt-get install -y qt5-default qttools5-dev-tools #install necessary Qt files
 
 script:
+  - find . -path "./src/uchardet" -prune -o -path "./build" -prune -o \( -name '*.h' -o -name '*.cpp' \) -print | xargs clang-format -style=llvm -output-replacements-xml | grep -q '<replacement '; test $? -eq 1
   - qmake --version
   - $CXX --version
   - qmake "CONFIG+=test" "QMAKE_CXX=$CXX" "QMAKE_CC=$CC" PenguinSubtitlePlayer.pro #we gonna compile for Unit test first
