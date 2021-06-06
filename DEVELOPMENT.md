@@ -47,10 +47,12 @@ Penguin Subtitle Player is a Qt5 project. The executables include statically com
 
 #### Code formatting
 
-This project uses ClangFormat. To format the code in this project, run:
+This project uses [ClangFormat](https://clang.llvm.org/docs/ClangFormat.html) version 7 or higher. 
+
+To format the code in this project, run:
 
 ```bash
-find . -path "./src/uchardet" -prune -o \( -name '*.h' -o -name '*.cpp' \) -print | xargs clang-format -i -style=llvm
+find . -path "./src/uchardet" -prune -o \( -name '*.h' -o -name '*.cpp' \) -print | xargs clang-format -i -style=file
 ```
 
 #### Libraries
