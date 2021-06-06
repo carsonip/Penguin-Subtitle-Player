@@ -4,7 +4,7 @@
 #include "QString"
 
 namespace PrefConstants {
-const static int BG_COLOR = 0;
+const static unsigned int BG_COLOR = 0x00000000;
 const static int BG_ALPHA = 30;
 const static int BG_ALPHA_MIN = 2;
 
@@ -26,12 +26,12 @@ const static bool FONT_SHADOW_ENABLE = true;
 const static int FONT_SHADOW_BLUR_RADIUS = 8;
 const static int FONT_SHADOW_BLUR_RADIUS_MAX = 100;
 const static int FONT_SHADOW_BLUR_RADIUS_STEP = 1;
-const static int FONT_SHADOW_COLOR = 0;
+const static unsigned int FONT_SHADOW_COLOR = 0x00000000;
 const static int FONT_SHADOW_OFFSET_X = 0;
 const static int FONT_SHADOW_OFFSET_Y = 0;
 const static int FONT_SHADOW_OFFSET_LIMIT = 100;
 
-const static int FONT_COLOR = 4294967295; // white
+const static unsigned int FONT_COLOR = 0xffffffff; // white
 
 const static bool REMEMBER_WINDOW_POS_AND_SIZE = true;
 const static int WINDOW_X = 0;
