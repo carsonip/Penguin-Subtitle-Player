@@ -38,8 +38,8 @@ public:
     // pattern: \{\\b\d+?\}
     text = text.replace(R"({\b0})", "</b>");
     text = text.replace(
-        QRegularExpression(QRegularExpression::escape(R"({\b)") +
-                           R"(\d+?)" + QRegularExpression::escape(R"(})")),
+        QRegularExpression(QRegularExpression::escape(R"({\b)") + R"(\d+?)" +
+                           QRegularExpression::escape(R"(})")),
         "<b>");
 
     // underline
