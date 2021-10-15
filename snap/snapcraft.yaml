@@ -9,19 +9,20 @@ description: |
 
 grade: stable
 confinement: strict
+compression: lzo
 
 apps:
   penguin-subtitle-player:
     extensions:
       - kde-neon
-    command: bin/PenguinSubtitlePlayer
+    command: usr/local/bin/PenguinSubtitlePlayer
     plugs: [home]
     
 parts:
   penguin-subtitle-player:
     source: https://github.com/carsonip/Penguin-Subtitle-Player.git
     options:
-     - "target.path=/bin"
+     - "target.path=/usr/local/bin"
      - "INSTALLS+=target"
     plugin: qmake
     project-files: [PenguinSubtitlePlayer.pro]
