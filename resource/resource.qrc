@@ -12,5 +12,6 @@
         <file>icons/ic_skipnext_48px.png</file>
         <file>icon.ico</file>
         <file>icon.png</file>
+        <file>icons/ic_play_opt_48px.png</file>
     </qresource>
 </RCC>

@@ -23,6 +23,7 @@ public slots:
   void update();
   void sliderMoved(int val);
   void togglePlay();
+  void showToggleContextMenu(const QPoint &pos);
   void fastForward();
   void fastBackward();
   void next();
@@ -31,6 +32,7 @@ public slots:
   void openSettingsWindow();
   void openFileDialog();
   void openSkipToTimeDialog();
+  void activateNextClickCounts();
 
 protected:
   void paintEvent(QPaintEvent *event);

@@ -103,7 +103,8 @@ SOURCES += \
     src/parsers/ssaparser.cpp \
     src/parsers/webvttparser.cpp \
     src/parser.cpp \
-    src/engine.cpp
+    src/engine.cpp \
+    src/nccdialog.cpp
 
 HEADERS += \
     src/configdialog.h \
@@ -118,7 +119,8 @@ HEADERS += \
     src/parsers/webvttparser.h \
     src/parserinterface.h \
     src/parser.h \
-    src/engine.h
+    src/engine.h \
+    src/nccdialog.h
 
 FORMS    += \
     resource/ui/mainwindow.ui

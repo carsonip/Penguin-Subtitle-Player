@@ -28,6 +28,7 @@
 #include "cmath"
 #include "configdialog.h"
 #include "engine.h"
+#include "nccdialog.h"
 #include "parser.h"
 #include "prefconstants.h"
 #include "string"
@@ -59,6 +60,10 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui->nextButton, SIGNAL(clicked()), this, SLOT(next()));
 
   connect(ui->toggleButton, SIGNAL(clicked()), this, SLOT(togglePlay()));
+  ui->toggleButton->setContextMenuPolicy(Qt::CustomContextMenu);
+  connect(ui->toggleButton, SIGNAL(customContextMenuRequested(const QPoint &)),
+          this, SLOT(showToggleContextMenu(const QPoint &)));
+
   connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(openFileDialog()));
   connect(ui->prefButton, SIGNAL(clicked()), this, SLOT(openSettingsWindow()));
   connect(ui->quitButton, SIGNAL(clicked()), qApp, SLOT(quit()));
@@ -187,6 +192,20 @@ void MainWindow::togglePlay() {
   setPlay(!isPlaying);
 }
 
+void MainWindow::showToggleContextMenu(const QPoint &pos) {
+  if (!isPlaying && ui->toggleButton->isEnabled()) {
+    QPoint globalPos = ui->toggleButton->mapToGlobal(pos);
+
+    QMenu menu;
+    menu.addAction(tr("Next Click Counts"));
+
+    QAction *selectedItem = menu.exec(globalPos);
+    if (selectedItem) {
+      activateNextClickCounts();
+    }
+  }
+}
+
 void MainWindow::fastForward() {
   adjustTime(getAdjustInterval());
   update();
@@ -277,6 +296,19 @@ void MainWindow::openSkipToTimeDialog() {
     }
   }
   this->show();
+}
+
+void MainWindow::activateNextClickCounts() {
+  this->hide();
+  NccDialog dialog;
+  dialog.exec();
+  this->show();
+  if (dialog.result() == QDialog::Accepted) {
+    if (!engine)
+      return;
+
+    setPlay(true);
+  }
 }
 
 /*
@@ -483,7 +515,7 @@ void MainWindow::setPlay(bool play) {
   else
     timer->stop();
   ui->toggleButton->setIcon(QIcon(isPlaying ? ":/icons/ic_pause_48px.png"
-                                            : ":/icons/ic_play_48px.png"));
+                                            : ":/icons/ic_play_opt_48px.png"));
 }
 
 QString MainWindow::getSubtitle(bool sliderMoved) {
