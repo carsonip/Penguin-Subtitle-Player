@@ -356,7 +356,7 @@
            </property>
            <property name="icon">
             <iconset resource="../resource.qrc">
-             <normaloff>:/icons/ic_play_48px.png</normaloff>:/icons/ic_play_48px.png</iconset>
+             <normaloff>:/icons/ic_play_opt_48px.png</normaloff>:/icons/ic_play_opt_48px.png</iconset>
            </property>
            <property name="flat">
             <bool>true</bool>
