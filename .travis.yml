@@ -13,6 +13,8 @@ jobs:
             - qt5-default
             - qttools5-dev-tools
             - clang-format
+        ssh_known_hosts:
+          - gitlab.freedesktop.org
     - os: osx
       osx_image: xcode11.6
       arch: amd64
@@ -25,6 +27,8 @@ jobs:
           packages:
             - qt5
             - clang-format
+        ssh_known_hosts:
+          - gitlab.freedesktop.org
 
 cache:
   directories:
