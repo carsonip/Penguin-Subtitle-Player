@@ -139,6 +139,12 @@
             <iconset resource="../resource.qrc">
              <normaloff>:/icons/ic_openfolder_48px.png</normaloff>:/icons/ic_openfolder_48px.png</iconset>
            </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
            <property name="flat">
             <bool>true</bool>
            </property>
@@ -187,6 +193,12 @@
             <iconset resource="../resource.qrc">
              <normaloff>:/icons/ic_preference_48px.png</normaloff>:/icons/ic_preference_48px.png</iconset>
            </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
            <property name="flat">
             <bool>true</bool>
            </property>
@@ -224,6 +236,12 @@
            <property name="icon">
             <iconset resource="../resource.qrc">
              <normaloff>:/icons/ic_close_48px.png</normaloff>:/icons/ic_close_48px.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -294,6 +312,12 @@
             <iconset resource="../resource.qrc">
              <normaloff>:/icons/ic_skipprevious_48px.png</normaloff>:/icons/ic_skipprevious_48px.png</iconset>
            </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
            <property name="flat">
             <bool>true</bool>
            </property>
@@ -322,6 +346,12 @@
            <property name="icon">
             <iconset resource="../resource.qrc">
              <normaloff>:/icons/ic_backrewind_48px.png</normaloff>:/icons/ic_backrewind_48px.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -358,6 +388,12 @@
             <iconset resource="../resource.qrc">
              <normaloff>:/icons/ic_play_opt_48px.png</normaloff>:/icons/ic_play_opt_48px.png</iconset>
            </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
            <property name="flat">
             <bool>true</bool>
            </property>
@@ -387,6 +423,12 @@
             <iconset resource="../resource.qrc">
              <normaloff>:/icons/ic_fastforward_48px.png</normaloff>:/icons/ic_fastforward_48px.png</iconset>
            </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
            <property name="flat">
             <bool>true</bool>
            </property>
@@ -415,6 +457,12 @@
            <property name="icon">
             <iconset resource="../resource.qrc">
              <normaloff>:/icons/ic_skipnext_48px.png</normaloff>:/icons/ic_skipnext_48px.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
            </property>
            <property name="flat">
             <bool>true</bool>
