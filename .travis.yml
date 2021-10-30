@@ -3,6 +3,7 @@ language: cpp
 jobs:
   include:
     - os: linux
+      dist: focal
       arch: amd64
       compiler: gcc
       env:
@@ -13,8 +14,9 @@ jobs:
             - qt5-default
             - qttools5-dev-tools
             - clang-format
+            - ca-certificates
     - os: osx
-      osx_image: xcode11.6
+      osx_image: xcode12.5
       arch: amd64
       compiler: clang
       env:
@@ -26,6 +28,9 @@ jobs:
             - qt5
             - clang-format
 
+git:
+  submodules: false
+
 cache:
   directories:
     - $HOME/Library/Caches/Homebrew
@@ -34,6 +39,8 @@ before_cache:
   - brew cleanup
 
 before_install:
+  - if [[ $TRAVIS_OS_NAME == "linux" ]]; then sudo update-ca-certificates; fi
+  - git submodule update --init --recursive
   - if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew link qt5 --force; fi
   - if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew link clang-format --force; fi
 
