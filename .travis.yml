@@ -6,7 +6,6 @@ jobs:
       arch: amd64
       compiler: gcc
       env:
-        - GIT_SSL_NO_VERIFY=1
         - EXECUTABLE="./build/release/PenguinSubtitlePlayer"
       addons:
         apt:
@@ -14,12 +13,13 @@ jobs:
             - qt5-default
             - qttools5-dev-tools
             - clang-format
+            - apt-transport-https
+            - ca-certificates
     - os: osx
       osx_image: xcode11.6
       arch: amd64
       compiler: clang
       env:
-        - GIT_SSL_NO_VERIFY=1
         - HOMEBREW_NO_AUTO_UPDATE=1
         - EXECUTABLE="./build/release/PenguinSubtitlePlayer.app/Contents/MacOS/PenguinSubtitlePlayer"
       addons:
@@ -27,6 +27,7 @@ jobs:
           packages:
             - qt5
             - clang-format
+            - ca-certificates
 
 cache:
   directories:
@@ -40,6 +41,7 @@ before_install:
   - if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew link clang-format --force; fi
 
 script:
+  - update-ca-certificates
   - clang-format -version
   - find . -path "./src/uchardet" -prune -o -path "./build" -prune -o \( -name '*.h' -o -name '*.cpp' \) -print | xargs clang-format -style=file -output-replacements-xml | grep -q '<replacement '; test $? -eq 1
   - qmake --version
