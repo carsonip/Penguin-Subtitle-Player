@@ -39,9 +39,9 @@ before_cache:
 before_install:
   - if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew link qt5 --force; fi
   - if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew link clang-format --force; fi
+  - update-ca-certificates
 
 script:
-  - update-ca-certificates
   - clang-format -version
   - find . -path "./src/uchardet" -prune -o -path "./build" -prune -o \( -name '*.h' -o -name '*.cpp' \) -print | xargs clang-format -style=file -output-replacements-xml | grep -q '<replacement '; test $? -eq 1
   - qmake --version
