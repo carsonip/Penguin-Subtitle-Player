@@ -3,7 +3,7 @@ language: cpp
 jobs:
   include:
     - os: linux
-      dist: bionic
+      dist: focal
       arch: amd64
       compiler: gcc
       env:
