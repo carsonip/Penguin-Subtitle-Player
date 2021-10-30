@@ -54,6 +54,7 @@ private:
   void loadPosAndSize();
   void loadPref();
   void setup();
+  void enableControls();
   void setPlay(bool play);
   QString getSubtitle(bool sliderMoved);
   QString getEncoding(QString preset);

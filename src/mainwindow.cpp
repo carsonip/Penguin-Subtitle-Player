@@ -505,7 +505,16 @@ void MainWindow::setup() {
   this->ui->horizontalSlider->setRange(
       0, (int)(engine->getFinishTime() / SLIDER_RATIO));
   ui->horizontalSlider->setValue((int)(currentTime / SLIDER_RATIO));
-  this->ui->horizontalSlider->setEnabled(true);
+  enableControls();
+}
+
+void MainWindow::enableControls() {
+  ui->backwardButton->setEnabled(true);
+  ui->forwardButton->setEnabled(true);
+  ui->prevButton->setEnabled(true);
+  ui->nextButton->setEnabled(true);
+  ui->toggleButton->setEnabled(true);
+  ui->horizontalSlider->setEnabled(true);
 }
 
 void MainWindow::setPlay(bool play) {
