@@ -7,7 +7,7 @@
 #include "QVBoxLayout"
 #include "QWidget"
 
-NccDialog::NccDialog() {
+NccDialog::NccDialog(bool toStart) {
   QPushButton *closeButton = new QPushButton(tr("Cancel"));
 
   connect(closeButton, SIGNAL(clicked()), this, SLOT(close()));
@@ -16,9 +16,13 @@ NccDialog::NccDialog() {
   buttonsLayout->addStretch(1);
   buttonsLayout->addWidget(closeButton);
 
-  QLabel *label =
-      new QLabel(tr("Next Click Counts feature activated.<br><b>Click outside "
-                    "this dialog to start the timer.</b>"));
+  QString text =
+      tr("Next Click Counts feature activated.") + "<br><b>" +
+      (toStart ? tr("Click outside this dialog to start the timer.")
+               : tr("Click outside this dialog to stop the timer.")) +
+      "</b>";
+
+  QLabel *label = new QLabel(text);
   label->setTextFormat(Qt::RichText);
 
   QVBoxLayout *mainLayout = new QVBoxLayout;

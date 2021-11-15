@@ -11,7 +11,7 @@ class NccDialog : public QDialog {
   Q_OBJECT
 
 public:
-  NccDialog();
+  NccDialog(bool toStart);
   bool event(QEvent *event);
 
 private:

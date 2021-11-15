@@ -193,7 +193,7 @@ void MainWindow::togglePlay() {
 }
 
 void MainWindow::showToggleContextMenu(const QPoint &pos) {
-  if (!isPlaying && ui->toggleButton->isEnabled()) {
+  if (ui->toggleButton->isEnabled()) {
     QPoint globalPos = ui->toggleButton->mapToGlobal(pos);
 
     QMenu menu;
@@ -300,14 +300,14 @@ void MainWindow::openSkipToTimeDialog() {
 
 void MainWindow::activateNextClickCounts() {
   this->hide();
-  NccDialog dialog;
+  NccDialog dialog(!isPlaying);
   dialog.exec();
   this->show();
   if (dialog.result() == QDialog::Accepted) {
     if (!engine)
       return;
 
-    setPlay(true);
+    setPlay(!isPlaying);
   }
 }
 
@@ -523,7 +523,7 @@ void MainWindow::setPlay(bool play) {
     timer->start(INTERVAL);
   else
     timer->stop();
-  ui->toggleButton->setIcon(QIcon(isPlaying ? ":/icons/ic_pause_48px.png"
+  ui->toggleButton->setIcon(QIcon(isPlaying ? ":/icons/ic_pause_opt_48px.png"
                                             : ":/icons/ic_play_opt_48px.png"));
 }
 

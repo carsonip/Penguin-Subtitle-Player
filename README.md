@@ -21,7 +21,7 @@ With Penguin Subtitle Player, just open your favorite online streaming site, loa
 * Skip to specified time (by clicking on the time display)
 * Skip to previous / next subtitle
 * "Next Click Counts" feature
-    * starts the timer after the first click outside of the subtitle player for easier sync between video player and subtitle player. Activate this feature by right clicking on the play button.
+    * starts/pauses the timer after the first click outside of the subtitle player for easier sync between video player and subtitle player. Activate this feature by right clicking on the play/pause button.
 
 ## Download
 
