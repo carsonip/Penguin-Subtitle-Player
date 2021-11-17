@@ -55,6 +55,9 @@ A: It is tested and confirmed working in Windows, Linux and macOS for both HTML5
 #### Q: Why does the transparency/opacity feature not work for me on Linux?
 A: You need to have a [compositing window manager](https://github.com/carsonip/Penguin-Subtitle-Player/issues/19) set up and enabled.
 
+#### Q: Does it work under macOS fullscreen mode?
+A: No. See [this issue](https://github.com/carsonip/Penguin-Subtitle-Player/issues/30).
+
 ## Developing
 
 To develop, see [DEVELOPMENT.md](DEVELOPMENT.md).
